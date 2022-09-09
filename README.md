@@ -33,6 +33,8 @@ npm run build
 
 ### Ссылка на Netlify
 
+https://gentle-axolotl-171506.netlify.app
+
 ### Используемые технологии
 
 #### Server
