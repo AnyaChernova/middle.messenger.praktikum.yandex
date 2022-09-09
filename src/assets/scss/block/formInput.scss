@@ -1,0 +1,16 @@
+.formInput {
+	display: block;
+	height: 48px;
+	width: 100%;
+	padding: 14px;
+	border: 1px solid var(--color-field-border);
+	border-radius: $border-radius;
+	color: var(--color-field);
+	font-size: 16px;
+
+	&:active,
+	&:focus {
+		outline: none;
+		border: 1px solid var(--color-field-border);
+	}
+}

@@ -1,0 +1,30 @@
+.fieldset {
+	max-width: 950px;
+}
+
+.fieldset__header {
+	margin-bottom: 30px;
+}
+
+.fieldset__caption {
+	font-size: 16px;
+	margin-top: 6px;
+}
+
+.fieldset__header--border {
+	border-bottom: 1px solid var(--color-border);
+	padding-bottom: 24px;
+}
+
+.fieldset__wrap {
+	max-width: 788px;
+}
+
+.fieldset__footer {
+	margin-top: 30px;
+}
+
+.fieldset__footer--border {
+	border-top: 1px solid var(--color-border);
+	padding-top: 24px;
+}

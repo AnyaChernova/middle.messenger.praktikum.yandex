@@ -1,0 +1,14 @@
+.formCard {
+	background-color: var(--color-light);
+	box-shadow: 0 10px 110px 1px rgba(59, 59, 59, 0.08);
+	border-radius: $border-radius;
+	padding: 20px 40px 20px 20px;
+
+	.formField + .formField {
+		margin-top: 20px;
+	}
+
+	.formField__label {
+		color: var(--color-text-main);
+	}
+}

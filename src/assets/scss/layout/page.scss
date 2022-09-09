@@ -1,0 +1,5 @@
+.page {
+	height: calc(var(--vh, 1vh)*100);
+	overflow: auto;
+	background-color: var(--color-page);
+}

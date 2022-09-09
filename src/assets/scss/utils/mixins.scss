@@ -1,0 +1,56 @@
+@mixin list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+@mixin link {
+	display: inline-block;
+	text-decoration: none;
+	color: $color-primary;
+	cursor: pointer;
+	background-color: transparent;
+	border: 0;
+	padding: 0;
+	font-family: $font-family;
+	line-height: $line-height;
+	font-weight: inherit;
+	box-shadow: none;
+}
+
+
+@mixin btn {
+	display: inline-block;
+	vertical-align: middle;
+	background-color: transparent;
+	border: none;
+	border-radius: 0;
+	box-shadow: none;
+	text-align: center;
+	text-decoration: none;
+	font-family: $font-family;
+	line-height: $line-height;
+	color: $color-light;
+	font-weight: 400;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+	cursor: pointer;
+	padding: 0;
+}
+
+@mixin title {
+	margin: 0;
+	color: var(--color-text-main);
+	font-size: 24px;
+	font-weight: 700;
+	line-height: $line-height;
+}
+
+@mixin img-cover {
+	width: 100%;
+	height: 100%;
+	vertical-align: middle;
+	object-fit: cover;
+}
+

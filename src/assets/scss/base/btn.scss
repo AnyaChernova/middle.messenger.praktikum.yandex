@@ -1,0 +1,27 @@
+.btn {
+	@include btn;
+	display: block;
+	height: 60px;
+	padding: 18px;
+	border-radius: $border-radius;
+	font-weight: 700;
+	font-size: 20px;
+	background-color: $color-primary;
+	transition: opacity .2s;
+
+	&:hover {
+		opacity: .8;
+	}
+	&[disabled] {
+		opacity: .4;
+		pointer-events: none;
+	}
+}
+
+.btn--icon {
+	height: unset;
+	padding: 0;
+	border-radius: 0;
+	background-color: unset;
+	color: var(--color-gray);
+}

@@ -1,0 +1,20 @@
+.title {
+	@include title;
+}
+
+.title--l {
+	font-size: 30px;
+}
+
+.title--m {
+	font-size: 20px;
+}
+
+.title--s {
+	font-size: 18px;
+}
+
+.title--xs {
+	font-size: 16px;
+	font-weight: 500;
+}
