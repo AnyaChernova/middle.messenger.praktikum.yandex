@@ -5,9 +5,9 @@ export function getTemplateProfile() {
 				<h3 class="title title--m">Profile</h3>
 				<div class="fieldset__caption text-gray">Update your photo and personal details here.</div>
 			</div>
-			<div class="cells cells--gap fieldset__wrap">
+			<div class="cells gaps fieldset__wrap">
 				{{#each fields}}
-					<div class="cell w-6/12">
+					<div class="cell gaps__item w-6/12">
 						{{> field }}
 					</div>
 				{{/each}}

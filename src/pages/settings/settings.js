@@ -72,7 +72,7 @@ const renderSettingsProfile = () => {
 	if (settingsProfilePage) {
 		const settingsProfileTemplate = Handlebars.compile(getTemplateProfile());
 		const avatarFormTemplate = Handlebars.compile(getTemplateAvatarForm());
-		const avatarFormEl = avatarFormTemplate({large: true, url: 'avatar.jpg'});
+		const avatarFormEl = avatarFormTemplate({large: true, url: 'avatar.jpg', size: 64});
 		const settingsProfileElem = settingsProfileTemplate({fields: fieldsProfileData, avatarForm: avatarFormEl});
 		const navElem = navTemplate({page: pageProfileData});
 		settingsProfilePage.innerHTML = mainTemplate({

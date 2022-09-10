@@ -1,10 +1,10 @@
 export function isEmpty(value) {
-	let noEmpty = false;
+	let empty = true;
 	if (typeof value === 'object') {
-		noEmpty = Boolean(value && (Object.keys(value).length || value.size));
+		empty = !Boolean(value && (Object.keys(value).length || value.size));
 	} else if (typeof value === 'string') {
-		noEmpty = Boolean(value.length);
+		empty = !value.length;
 	}
 
-	return !noEmpty;
+	return empty;
 }

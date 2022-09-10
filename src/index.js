@@ -1,5 +1,4 @@
 import Handlebars from "handlebars";
-import {calcScreenHeight} from "./utils/calc-screen-height";
 import {registerAvatar} from "./components/avatar/avatar";
 import {registerHeader} from "./components/header/header";
 import {registerAside} from "./components/aside/aside";
@@ -18,7 +17,6 @@ Handlebars.registerHelper("if", function(conditional, options) {
 	}
 });
 
-calcScreenHeight();
 registerAvatar();
 registerHeader();
 registerAside();

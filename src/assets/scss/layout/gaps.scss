@@ -1,0 +1,35 @@
+@use "sass:math";
+
+.gaps {
+	--y-gap: 30px;
+	--x-gap: 18px;
+	margin: 0 calc(var(--x-gap) * -1) calc(var(--y-gap) * -1) calc(var(--x-gap) * -1);
+}
+
+.gaps__item {
+	padding: 0 var(--x-gap) var(--y-gap) var(--x-gap);
+}
+
+$columns: 12;
+
+//w-[size]/[col]
+@each $column in $columns {
+	@for $i from 0 through $column {
+		.w-#{$i}\/#{$column} {
+			width: math.div(100%, $column) * $i;
+		}
+	}
+}
+
+// [media]:w-[size]/[col]
+@each $key, $val in $breakpoints-map {
+	@include media($key) {
+		@each $column in $columns {
+			@for $i from 0 through $column {
+				.#{$key}\:w-#{$i}\/#{$column} {
+					width: math.div(100%, $column) * $i;
+				}
+			}
+		}
+	}
+}

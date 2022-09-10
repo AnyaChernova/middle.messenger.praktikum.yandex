@@ -4,13 +4,13 @@
 	border-radius: 50%;
 	overflow: hidden;
 	flex-shrink: 0;
-
-	img {
-		@include img-cover;
-	}
 }
 
 .avatar--l {
 	width: 64px;
 	height: 64px;
+}
+
+.avatar__img {
+	@include img-cover;
 }

@@ -4,7 +4,7 @@ export function getTemplate() {
 			{{#if large}}
 				avatar--l
 			{{/if}}">
-			<img src="{{url}}" alt="avatar">
+			<img class="avatar__img" src="{{url}}" width="{{size}}" height="{{size}}" alt="avatar">
 		</div>
 	`;
 }

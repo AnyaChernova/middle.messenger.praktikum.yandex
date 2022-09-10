@@ -2,12 +2,19 @@ import Handlebars from "handlebars";
 import {getTemplateFull} from "../../layouts/full.tmpl";
 import {getTemplateAuth} from "../../components/auth/auth.tmpl";
 
+const fieldsClasses = {
+	inputClass: 'formCard__field',
+	labelClass: 'formCard__label',
+}
+
 const fieldsData = [
 	{
+		...fieldsClasses,
 		name: 'Login',
-		type: 'text'
+		type: 'text',
 	},
 	{
+		...fieldsClasses,
 		name: 'Password',
 		type: 'password'
 	},
