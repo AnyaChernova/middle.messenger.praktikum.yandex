@@ -1,4 +1,4 @@
-export function first<T>(list: T[]): T {
+export function first<T>(list: T[]): T | undefined {
 	if (!Array.isArray(list)) {
 		return undefined;
 	}

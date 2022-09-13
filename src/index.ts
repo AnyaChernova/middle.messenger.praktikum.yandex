@@ -11,7 +11,7 @@ import {renderLoginPage} from "./pages/login/login";
 import {renderRegisterPage} from "./pages/register/register";
 import {renderErrorPage} from "./pages/error/error";
 
-Handlebars.registerHelper("if", function(conditional, options) {
+Handlebars.registerHelper("if", function(this: any, conditional, options) {
 	if (conditional) {
 		return options.fn(this);
 	} else {

@@ -2,11 +2,11 @@
 	"extends": "@tsconfig/node16/tsconfig.json",
 	"compilerOptions": {
 		"noImplicitAny": true,
-		"noImplicitThis": false,
+		"noImplicitThis": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"sourceMap": true,
-		"strictNullChecks": false,
+		"strictNullChecks": true,
 		"lib": [
 			"es2018",
 			"dom"
