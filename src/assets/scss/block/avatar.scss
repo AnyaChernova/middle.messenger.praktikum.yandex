@@ -1,0 +1,16 @@
+.avatar {
+	width: 48px;
+	height: 48px;
+	border-radius: 50%;
+	overflow: hidden;
+	flex-shrink: 0;
+}
+
+.avatar--l {
+	width: 64px;
+	height: 64px;
+}
+
+.avatar__img {
+	@include img-cover;
+}

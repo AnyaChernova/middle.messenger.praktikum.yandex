@@ -1,0 +1,16 @@
+.cells {
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-start;
+	flex-wrap: wrap;
+}
+
+.cells--center {
+	align-items: center;
+}
+
+.cell {
+	display: block;
+	flex-shrink: 0;
+	flex-grow: 0;
+}
