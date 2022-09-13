@@ -9,19 +9,19 @@ const pageData = {
 	main: false,
 	settings: true,
 	title: 'Settings',
-}
+};
 
 const pageProfileData = {
 	...pageData,
 	profile: true,
 	password: false,
-}
+};
 
 const pagePasswordData = {
 	...pageData,
 	profile: false,
 	password: true,
-}
+};
 
 const fieldsProfileData = [
 	{
@@ -49,6 +49,7 @@ const fieldsProfileData = [
 		type: 'text'
 	},
 ];
+
 const fieldsPasswordData = [
 	{
 		name: 'Old password',
@@ -64,6 +65,12 @@ const fieldsPasswordData = [
 	},
 ];
 
+const avatarData = {
+	class: 'avatar--l',
+	url: 'avatar.jpg',
+	size: 64
+};
+
 const mainTemplate = Handlebars.compile(getTemplateMain());
 const navTemplate = Handlebars.compile(getTemplateNav());
 
@@ -72,7 +79,7 @@ const renderSettingsProfile = () => {
 	if (settingsProfilePage) {
 		const settingsProfileTemplate = Handlebars.compile(getTemplateProfile());
 		const avatarFormTemplate = Handlebars.compile(getTemplateAvatarForm());
-		const avatarFormEl = avatarFormTemplate({large: true, url: 'avatar.jpg', size: 64});
+		const avatarFormEl = avatarFormTemplate(avatarData);
 		const settingsProfileElem = settingsProfileTemplate({fields: fieldsProfileData, avatarForm: avatarFormEl});
 		const navElem = navTemplate({page: pageProfileData});
 		settingsProfilePage.innerHTML = mainTemplate({

@@ -1,6 +1,8 @@
 .btn {
 	@include btn;
-	display: block;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
 	height: 60px;
 	padding: 18px;
 	border-radius: $border-radius;
@@ -24,4 +26,17 @@
 	border-radius: 0;
 	background-color: unset;
 	color: var(--color-gray);
+}
+
+.btn--primary {
+	color: var(--color-primary);
+}
+
+.btn--round {
+	width: 44px;
+	height: 44px;
+	padding: 0;
+	border-radius: 50%;
+	background-color: var(--color-bg-btn);
+	color: var(--color-text-gray);
 }

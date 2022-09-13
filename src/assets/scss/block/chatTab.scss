@@ -1,0 +1,35 @@
+.chatTab {
+	@include btn;
+	width: 100%;
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	color: var(--color-text-main);
+	padding: 13px 34px 13px 30px;
+	position: relative;
+
+	&:hover {
+		background-color: var(--color-bg);
+	}
+}
+
+.chatTab--active {
+	background-color: var(--color-primary-rgb);
+}
+
+.chatTab__media {
+	max-width: calc(100% - 70px);
+}
+
+.chatTab__caption {
+	font-weight: 500;
+	font-size: 13px;
+	color: var(--color-text-light);
+}
+
+.chatTab__counter {
+	position: absolute;
+	right: 34px;
+	bottom: 18px;
+	z-index: 1;
+}

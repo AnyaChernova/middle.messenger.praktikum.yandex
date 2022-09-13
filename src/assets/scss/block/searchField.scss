@@ -1,0 +1,30 @@
+.searchField {
+	display: block;
+	position: relative;
+}
+
+.searchField__input {
+	height: 46px;
+	padding: 11px 14px 11px 53px;
+	background-color: var(--color-bg);
+	border-color: var(--color-bg);
+	border-radius: 8px;
+	color: var(--color-text);
+	caret-color: var(--color-accent);
+
+	&::placeholder {
+		color: var(--color-text-gray);
+	}
+
+	&:active,
+	&:focus {
+		border-color: var(--color-primary);
+	}
+}
+
+.searchField__icon {
+	position: absolute;
+	left: 17px;
+	top: 11px;
+	color: var(--color-text-gray);
+}

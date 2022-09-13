@@ -1,0 +1,31 @@
+.chat {
+	height: 100%;
+	display: flex;
+}
+
+.chat__aside {
+	width: 337px;
+}
+
+.chat__main {
+	width: calc(100% - 337px);
+	padding-right: 30px;
+}
+
+.chat__header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 34px 0 30px;
+	margin-bottom: 30px;
+}
+
+.chat__search {
+	padding: 0 34px 0 30px;
+	margin-bottom: 40px;
+}
+
+.chat__tabs {
+	max-height: calc(100% - 152px);
+	overflow-y: auto;
+}

@@ -36,6 +36,11 @@
 	background-color: var(--color-light);
 }
 
+.content__inner--full {
+	height: 100%;
+	padding: 30px 0;
+}
+
 .content__inner--center {
 	display: flex;
 	align-items: center;
