@@ -1,6 +1,6 @@
 import Handlebars from "handlebars";
 import {avatarType} from "../../utils/types";
-import {getTemplate} from "./header.tmpl";
+import {getTemplateHeader} from "./header.tmpl";
 
 const avatarData: avatarType = {
 	url: 'avatar.jpg',
@@ -8,6 +8,6 @@ const avatarData: avatarType = {
 };
 
 export function registerHeader(): void {
-	const headerTemplate: any = Handlebars.compile(getTemplate());
+	const headerTemplate: any = Handlebars.compile(getTemplateHeader());
 	Handlebars.registerPartial('header', headerTemplate(avatarData));
 }
