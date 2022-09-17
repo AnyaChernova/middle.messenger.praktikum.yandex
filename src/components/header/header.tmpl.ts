@@ -1,5 +1,4 @@
-export function getTemplateHeader(): string {
-	return `
+export const template: string = `
 		<header class="header">
 			<div class="header__wrap">
 				<div class="header__left"></div>
@@ -13,6 +12,4 @@ export function getTemplateHeader(): string {
 					{{{avatar}}}
 				</div>
 			</div>
-		</header>
-	`;
-}
+		</header>`;

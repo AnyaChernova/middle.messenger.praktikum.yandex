@@ -1,111 +1,42 @@
-import Handlebars from "handlebars";
-import {pageType, avatarType} from "../../utils/types";
-import {getTemplateMain} from "../../layouts/main.tmpl";
-import {getTemplateChat} from "../../components/chat/chat.tmpl";
+import {pageData, avatarData, avatarHeaderData, tabs, messages} from "./mocks";
+import Header from "../../components/header/header";
+import Avatar from "../../components/avatar/avatar";
+import Aside from "../../components/aside/aside";
+import User from "../../components/user/user";
+import Message from "../../components/message/message";
+import MessageTab from "../../components/messageTab/messageTab";
+import Chat from "../../components/chat/chat";
+import MainLayout from "../../layouts/main/main";
+import {avatarType, userType} from "../../utils/types";
 
-type tabType = {
-	name: string,
-	user: avatarType,
-	text: string,
-	time: string,
-	tabClass?: string,
-	newCounter?: number
-}
-
-type messageType = {
-	text: string,
-	itemClass?: string,
-	mainClass?: string,
-	mediaClass?: string,
-	messageClass?: string,
-	user?: avatarType
-}
-
-const pageData: pageType = {
-	main: true,
-	settings: false,
-};
-
-const avatarData: avatarType = {
-	class: 'avatar--s',
-	url: 'user1.jpg',
-	size: 44
-};
-
-const tabs: tabType[] = [
-	{
-		name: 'Milie Nose',
-		user: {
-			class: 'avatar--m',
-			url: 'user2.jpg',
-			size: 50
-		},
-		text: 'Nice',
-		time: '4:30 PM',
-		newCounter: 7
-	},
-	{
-		tabClass: 'chatTab--active',
-		name: 'Killan James',
-		user: {
-			class: 'avatar--m',
-			url: 'user1.jpg',
-			size: 50
-		},
-		text: 'Hello! Everyone',
-		time: '4:30 PM'
-	},
-	{
-		name: 'Desian Tam Desian Tam Desian Tam Desian Tam',
-		user: {
-			class: 'avatar--m',
-			url: 'avatar.jpg',
-			size: 50
-		},
-		text: 'Wow really Cool 🔥',
-		time: 'yesterday'
-	}
-];
-
-const messages: messageType[] = [
-	{
-		itemClass: 'chatPanel__item--bottom',
-		mainClass: 'media__main--left',
-		text: 'Hi, I hope you are doing well, yesterday you have gave a pen. This very nice, i am very happy for this.yesterday you have gave a pen This very nice',
-		user: {
-			class: 'avatar--s',
-			url: 'user1.jpg',
-			size: 44
-		}
-	},
-	{
-		itemClass: 'chatPanel__item--bottomL',
-		text: 'i am very happy for this.yesterday you have gave a pen This very nice',
-	},
-	{
-		itemClass: 'chatPanel__item--right',
-		mainClass: 'media__main--right',
-		mediaClass: 'media--reverse',
-		messageClass: 'message--reverse',
-		text: 'Hi, I hope you are doing well, yesterday you have gave a pen. This very nice, i am very happy for this.yesterday you have gave a pen This very nice',
-		user: {
-			class: 'avatar--s',
-			url: 'user1.jpg',
-			size: 44
-		}
-	},
-];
-
-export function renderMainPage(): void {
-	const mainPage: HTMLElement | null = document.querySelector('.page-main');
-	if (mainPage) {
-		const mainTemplate: any = Handlebars.compile(getTemplateMain());
-		const chatTemplate: any = Handlebars.compile(getTemplateChat());
-		const chatElem :HTMLElement | null = chatTemplate({user: avatarData, tabs, messages});
-		mainPage.innerHTML = mainTemplate({
-			page: pageData,
-			body: chatElem,
-			innerClass: 'content__inner--full'
+const asideBlock =  new Aside({page: pageData});
+const headerBlock = new Header({avatar: new Avatar(avatarHeaderData)});
+const userBlock = new User({name: 'User name', caption: 'Active Now', avatar: new Avatar(avatarData)});
+const messagesList = messages.map((message) => {
+	return new Message({
+		...message,
+		avatar: message.user ? new Avatar(message.user as avatarType) : undefined
+	});
+});
+const tabsList = tabs.map((tab) => {
+	let user: User | userType = tab.user;
+	if (!(tab.user instanceof User)) {
+		user = new User({
+			...tab.user,
+			avatar: new Avatar(tab.user.avatar as avatarType)
 		});
 	}
-}
+	return new MessageTab({...tab, user});
+});
+const chatBlock = new Chat({user: userBlock, messages: messagesList, tabs: tabsList});
+
+const mainPage = new MainLayout({
+	innerClass: 'content__inner--full',
+	aside: asideBlock,
+	header: headerBlock,
+	body: chatBlock
+});
+
+export default mainPage;
+
+

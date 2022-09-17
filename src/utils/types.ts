@@ -1,3 +1,6 @@
+import Block from "../modules/Block";
+import User from "../components/user/user";
+
 type avatarType = {
 	class?: string,
 	url: string,
@@ -19,4 +22,29 @@ type fieldType = {
 	type?: string,
 }
 
-export {avatarType, pageType, fieldType};
+type messageType = {
+	text: string,
+	itemClass?: string,
+	mainClass?: string,
+	mediaClass?: string,
+	messageClass?: string,
+	user?: avatarType | Block,
+	avatar?: avatarType | Block,
+}
+
+type userType = {
+	name: string,
+	caption: string,
+	avatar: avatarType | Block
+}
+
+type tabType = {
+	user: userType | User,
+	time: string,
+	tabClass?: string,
+	userClass?: string,
+	titleClass?: string,
+	newCounter?: number
+}
+
+export {avatarType, pageType, fieldType, messageType, userType, tabType};

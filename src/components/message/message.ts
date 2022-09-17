@@ -1,11 +1,15 @@
-import Handlebars from "handlebars";
-import {getTemplateMessage} from "./message.tmpl";
-import {getTemplateMessageTab} from "./messageTab.tmpl";
+import Block from "../../modules/Block";
+import {template} from "./message.tmpl";
+import {messageType} from "../../utils/types";
 
-export function registerMessage(): void {
-	Handlebars.registerPartial('message', getTemplateMessage());
+class Message extends Block {
+	constructor(props: messageType) {
+		super(props);
+	}
+
+	render() {
+		return this.compile(template, {...this.props});
+	}
 }
 
-export function registerMessageTab(): void {
-	Handlebars.registerPartial('messageTab', getTemplateMessageTab());
-}
+export default Message;

@@ -1,6 +1,6 @@
 import Handlebars from "handlebars";
 import {pageType, fieldType, avatarType} from "../../utils/types";
-import {getTemplateMain} from "../../layouts/main.tmpl";
+import {getTemplateMain} from "../../layouts/main/main.tmpl";
 import {getTemplateProfile} from "./settingsProfile.tmpl";
 import {getTemplatePassword} from "./settingsPassword.tmpl";
 import {getTemplateNav} from "./settingsNav.tmpl";

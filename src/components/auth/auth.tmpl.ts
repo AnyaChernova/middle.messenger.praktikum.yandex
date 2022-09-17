@@ -1,5 +1,4 @@
-export function getTemplateAuth(): string {
-	return `
+export const template: string = `
 		<form class="formBox">
 				<div class="formBox__header">
 					<h2 class="title title--l">Get’s started.</h2>
@@ -12,9 +11,7 @@ export function getTemplateAuth(): string {
 					</div>
 				</div>
 				<div class="formCard">
-					{{#each fields}}
-						{{> field }}
-					{{/each}}
+					{{{fields}}}
 				</div>
 				<div class="formBox__footer">
 					<button class="btn w-full">
@@ -25,6 +22,4 @@ export function getTemplateAuth(): string {
 						{{/if}}
 					</button>
 				</div>
-			</form>
-	`;
-}
+			</form>`;

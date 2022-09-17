@@ -1,6 +1,6 @@
 import Handlebars from "handlebars";
 import {fieldType} from "../../utils/types";
-import {getTemplateFull} from "../../layouts/full.tmpl";
+import {getTemplateFull} from "../../layouts/full/full.tmpl";
 import {getTemplateAuth} from "../../components/auth/auth.tmpl";
 
 const fieldsClasses: fieldType = {

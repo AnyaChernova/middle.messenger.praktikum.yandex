@@ -16,7 +16,7 @@ export default class Block {
 
 	private _element: HTMLElement | null;
 	protected props: blockProps;
-	protected children: Record<string, Block>;
+	protected children: Record<string, Block | Block[]>;
 	private eventBus = () => new EventBus;
 
 	constructor(propsAndChildren: blockProps = {}) {
@@ -44,11 +44,13 @@ export default class Block {
 	}
 
 	private _getChildren(propsAndChildren: blockProps) {
-		const children: Record<string, Block> = {};
+		const children: Record<string, Block | Block[]> = {};
 		const props: blockProps = {};
 
 		Object.entries(propsAndChildren).forEach(([key, value]) => {
 			if (value instanceof Block) {
+				children[key] = value;
+			} else if (Array.isArray(value) && value.every(v => v instanceof Block)) {
 				children[key] = value;
 			} else {
 				props[key] = value;
@@ -136,15 +138,28 @@ export default class Block {
 		const fragment = this._createDocumentElement('template') as HTMLTemplateElement;
 
 		Object.entries(this.children).forEach(([key, child]) => {
-			props[key] = `<div data-id="id-${child.id}"></div>`
+			if (Array.isArray(child)) {
+				props[key] = child.map((item) => `<div data-id="id-${item.id}"></div>`);
+			} else {
+				props[key] = `<div data-id="id-${child.id}"></div>`;
+			}
 		});
 
 		fragment.innerHTML = Handlebars.compile(template)(props);
 
 		Object.entries(this.children).forEach(([key, child]) => {
-			const stub = fragment.content.querySelector(`[data-id="id-${child.id}"]`);
-			if (stub) {
-				stub.replaceWith(child.getContent());
+			if (Array.isArray(child)) {
+				child.forEach((item) => {
+					const stub = fragment.content.querySelector(`[data-id="id-${item.id}"]`);
+					if (stub) {
+						stub.replaceWith(item.getContent());
+					}
+				});
+			} else {
+				const stub = fragment.content.querySelector(`[data-id="id-${child.id}"]`);
+				if (stub) {
+					stub.replaceWith(child.getContent());
+				}
 			}
 		});
 

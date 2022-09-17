@@ -1,13 +1,14 @@
-import Handlebars from "handlebars";
-import {avatarType} from "../../utils/types";
-import {getTemplateHeader} from "./header.tmpl";
+import Block from "../../modules/Block";
+import {template} from "./header.tmpl";
 
-const avatarData: avatarType = {
-	url: 'avatar.jpg',
-	size: 40
-};
+class Header extends Block {
+	constructor(props: Record<string, Block>) {
+		super(props);
+	}
 
-export function registerHeader(): void {
-	const headerTemplate: any = Handlebars.compile(getTemplateHeader());
-	Handlebars.registerPartial('header', headerTemplate(avatarData));
+	render() {
+		return this.compile(template, {...this.props});
+	}
 }
+
+export default Header;

@@ -1,12 +1,11 @@
-export function getTemplateMessage(): string {
-	return `
+export const template: string = `
+	<div class="chatPanel__item {{itemClass}}">
 		<div class="media {{mediaClass}}">
-			{{#if user}}
-				<div class="media__aside">{{> avatar user }}</div>
+			{{#if avatar}}
+				<div class="media__aside">{{{avatar}}}</div>
 			{{/if}}
 			<div class="media__main {{mainClass}}">
 				<div class="message {{messageClass}}">{{text}}</div>
 			</div>
 		</div>
-	`;
-}
+	</div>`;

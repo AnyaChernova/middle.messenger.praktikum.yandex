@@ -1,5 +1,5 @@
 import Handlebars from "handlebars";
-import {getTemplateMain} from "../../layouts/main.tmpl";
+import {getTemplateMain} from "../../layouts/main/main.tmpl";
 import {getTemplateDummy} from "../../components/dummy/dummy.tmpl";
 
 const errorData: {
