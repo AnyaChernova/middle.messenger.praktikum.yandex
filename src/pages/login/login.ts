@@ -1,35 +1,11 @@
-import Handlebars from "handlebars";
-import {fieldType} from "../../utils/types";
-import {getTemplateFull} from "../../layouts/full/full.tmpl";
-import {getTemplateAuth} from "../../components/auth/auth.tmpl";
+import Field from "../../components/field/field";
+import Auth from "../../components/auth/auth";
+import FullLayout from "../../layouts/full/full";
+import {fieldsList} from "./mocks";
 
-const fieldsClasses: fieldType = {
-	inputClass: 'formCard__field',
-	labelClass: 'formCard__label',
-}
+const fieldsBlocks: Field[] = fieldsList.map((field) => new Field(field));
+const authBlock = new Auth({fields: fieldsBlocks, isLogin: true});
+const loginPage = new FullLayout({body: authBlock});
 
-const fieldsData: fieldType[] = [
-	{
-		...fieldsClasses,
-		name: 'Login',
-		type: 'text',
-	},
-	{
-		...fieldsClasses,
-		name: 'Password',
-		type: 'password'
-	},
-];
 
-export function renderLoginPage(): void {
-	const loginPage: HTMLElement | null = document.querySelector('.page-login');
-	if (loginPage) {
-		const loginTemplate: any = Handlebars.compile(getTemplateAuth());
-		const mainTemplate: any = Handlebars.compile(getTemplateFull());
-		const loginEl: HTMLElement | null = loginTemplate({
-			fields: fieldsData,
-			isLogin: true
-		});
-		loginPage.innerHTML = mainTemplate({body: loginEl});
-	}
-}
+export default loginPage;

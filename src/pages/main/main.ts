@@ -1,7 +1,5 @@
-import {pageData, avatarData, avatarHeaderData, tabs, messages} from "./mocks";
-import Header from "../../components/header/header";
+import {avatarData, tabs, messages} from "./mocks";
 import Avatar from "../../components/avatar/avatar";
-import Aside from "../../components/aside/aside";
 import User from "../../components/user/user";
 import Message from "../../components/message/message";
 import MessageTab from "../../components/messageTab/messageTab";
@@ -9,8 +7,6 @@ import Chat from "../../components/chat/chat";
 import MainLayout from "../../layouts/main/main";
 import {avatarType, userType} from "../../utils/types";
 
-const asideBlock =  new Aside({page: pageData});
-const headerBlock = new Header({avatar: new Avatar(avatarHeaderData)});
 const userBlock = new User({name: 'User name', caption: 'Active Now', avatar: new Avatar(avatarData)});
 const messagesList = messages.map((message) => {
 	return new Message({
@@ -32,8 +28,6 @@ const chatBlock = new Chat({user: userBlock, messages: messagesList, tabs: tabsL
 
 const mainPage = new MainLayout({
 	innerClass: 'content__inner--full',
-	aside: asideBlock,
-	header: headerBlock,
 	body: chatBlock
 });
 

@@ -2,7 +2,7 @@ import Block from "../../modules/Block";
 import {template} from "./full.tmpl";
 
 class FullLayout extends Block {
-	constructor(props: {body: string}) {
+	constructor(props: {body: Block}) {
 		super(props);
 	}
 

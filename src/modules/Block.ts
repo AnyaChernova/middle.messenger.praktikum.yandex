@@ -2,6 +2,14 @@ import Handlebars from "handlebars";
 import { nanoid } from 'nanoid';
 import EventBus from "./EventBus";
 
+Handlebars.registerHelper("if", function(this: any, conditional, options) {
+	if (conditional) {
+		return options.fn(this);
+	} else {
+		return options.inverse(this);
+	}
+});
+
 type blockProps = Record<string, unknown>;
 
 export default class Block {
@@ -100,15 +108,34 @@ export default class Block {
 		const fragment = this.render();
 		const newElement = fragment.firstElementChild as HTMLElement;
 
+		this._deleteEvents();
+
 		if (this._element) {
 			this._element.replaceWith(newElement);
 		}
 
 		this._element = newElement;
+		this._addEvents();
 	}
 
 	public render(): DocumentFragment {
 		return new DocumentFragment();
+	}
+
+	private _deleteEvents() {
+		const {events = {}}: any = this.props;
+
+		Object.keys(events).forEach(eventName => {
+			this._element!.removeEventListener(eventName, events[eventName]);
+		});
+	}
+
+	private _addEvents() {
+		const {events = {}}: any = this.props;
+
+		Object.keys(events).forEach(eventName => {
+			this._element!.addEventListener(eventName, events[eventName]);
+		});
 	}
 
 	private _makePropsProxy(props: blockProps) {
@@ -147,7 +174,7 @@ export default class Block {
 
 		fragment.innerHTML = Handlebars.compile(template)(props);
 
-		Object.entries(this.children).forEach(([key, child]) => {
+		Object.values(this.children).forEach((child) => {
 			if (Array.isArray(child)) {
 				child.forEach((item) => {
 					const stub = fragment.content.querySelector(`[data-id="id-${item.id}"]`);

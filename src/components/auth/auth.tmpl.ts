@@ -11,7 +11,9 @@ export const template: string = `
 					</div>
 				</div>
 				<div class="formCard">
-					{{{fields}}}
+					{{#each fields}}
+						{{{this}}}
+					{{/each}}
 				</div>
 				<div class="formBox__footer">
 					<button class="btn w-full">

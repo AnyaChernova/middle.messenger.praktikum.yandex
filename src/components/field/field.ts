@@ -1,6 +1,15 @@
-import Handlebars from "handlebars";
-import {getTemplate} from "./field.tmpl";
+import Block from "../../modules/Block";
+import {template} from "./field.tmpl";
+import {fieldType} from "../../utils/types";
 
-export function registerField(): void {
-	Handlebars.registerPartial('field', getTemplate());
+class Field extends Block {
+	constructor(props: fieldType) {
+		super(props);
+	}
+
+	render() {
+		return this.compile(template, {...this.props});
+	}
 }
+
+export default Field;
