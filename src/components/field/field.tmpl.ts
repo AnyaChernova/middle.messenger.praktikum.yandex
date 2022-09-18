@@ -1,5 +1,6 @@
 export const template: string = `
-	<label class="formField {{inputClass}}">
-		<span class="formField__label {{labelClass}}">{{name}}</span>
-		<input type="{{type}}" class="formInput">
+	<label class="formField {{fieldClass}}">
+		<span class="formField__label {{labelClass}}">{{title}}</span>
+		<input type="{{type}}" name="{{name}}" class="formInput {{inputClass}}">
+		<span class="formField__error"></span>
 	</label>`;

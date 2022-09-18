@@ -2,15 +2,18 @@ import {fieldType} from "../../../utils/types";
 
 const fieldsPasswordData: fieldType[] = [
 	{
-		name: 'Old password',
+		title: 'Old password',
+		name: 'password',
 		type: 'password'
 	},
 	{
-		name: 'New password',
+		title: 'New password',
+		name: 'password',
 		type: 'password'
 	},
 	{
-		name: 'Repeat password',
+		title: 'Repeat password',
+		name: 'password',
 		type: 'password'
 	},
 ];

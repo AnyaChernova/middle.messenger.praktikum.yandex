@@ -2,27 +2,33 @@ import {avatarType, fieldType} from "../../../utils/types";
 
 const fieldsProfileData: fieldType[] = [
 	{
-		name: 'First Name',
+		title: 'First Name',
+		name: 'first_name',
 		type: 'text'
 	},
 	{
-		name: 'Last Name',
+		title: 'Last Name',
+		name: 'second_name',
 		type: 'text'
 	},
 	{
-		name: 'Display Name',
+		title: 'Display Name',
+		name: 'display_name',
 		type: 'text'
 	},
 	{
-		name: 'Login',
+		title: 'Login',
+		name: 'login',
 		type: 'text'
 	},
 	{
-		name: 'Email',
+		title: 'Email',
+		name: 'email',
 		type: 'email'
 	},
 	{
-		name: 'Phone',
+		title: 'Phone',
+		name: 'phone',
 		type: 'text'
 	},
 ];

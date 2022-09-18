@@ -13,7 +13,7 @@ Handlebars.registerHelper("if", function(this: any, conditional, options) {
 type blockProps = Record<string, unknown>;
 
 export default class Block {
-	static EVENTS = {
+	static EVENTS: Record<string, string> = {
 		INIT: "init",
 		FLOW_CDM: "flow:component-did-mount",
 		FLOW_CDU: "flow:component-did-update",
@@ -126,7 +126,9 @@ export default class Block {
 		const {events = {}}: any = this.props;
 
 		Object.keys(events).forEach(eventName => {
-			this._element!.removeEventListener(eventName, events[eventName]);
+			if (this._element) {
+				this._element.querySelector(events[eventName].target).removeEventListener(eventName, events[eventName].handler);
+			}
 		});
 	}
 
@@ -134,7 +136,9 @@ export default class Block {
 		const {events = {}}: any = this.props;
 
 		Object.keys(events).forEach(eventName => {
-			this._element!.addEventListener(eventName, events[eventName]);
+			if (this._element) {
+				this._element.querySelector(events[eventName].target).addEventListener(eventName, events[eventName].handler);
+			}
 		});
 	}
 

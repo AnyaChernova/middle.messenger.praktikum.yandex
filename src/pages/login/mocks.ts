@@ -1,19 +1,21 @@
 import {fieldType} from "../../utils/types";
 
 const fieldsClasses: fieldType = {
-	inputClass: 'formCard__field',
+	fieldClass: 'formCard__field',
 	labelClass: 'formCard__label',
 }
 
 const fieldsList: fieldType[] = [
 	{
 		...fieldsClasses,
-		name: 'Login',
+		title: 'Login',
+		name: 'login',
 		type: 'text',
 	},
 	{
 		...fieldsClasses,
-		name: 'Password',
+		title: 'Password',
+		name: 'password',
 		type: 'password'
 	},
 ];

@@ -16,9 +16,11 @@ type pageType = {
 }
 
 type fieldType = {
+	fieldClass?: string,
 	inputClass?: string,
 	labelClass?: string,
 	name?: string,
+	title?: string,
 	type?: string,
 }
 
