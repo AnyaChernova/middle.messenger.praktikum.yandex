@@ -127,7 +127,12 @@ export default class Block {
 
 		Object.keys(events).forEach(eventName => {
 			if (this._element) {
-				this._element.querySelector(events[eventName].target).removeEventListener(eventName, events[eventName].handler);
+				if (events[eventName].target) {
+					const target: HTMLElement = this._element.querySelector(events[eventName].target);
+					target.removeEventListener(eventName, events[eventName].handler);
+				} else {
+					this._element.removeEventListener(eventName, events[eventName].handler);
+				}
 			}
 		});
 	}
@@ -137,7 +142,12 @@ export default class Block {
 
 		Object.keys(events).forEach(eventName => {
 			if (this._element) {
-				this._element.querySelector(events[eventName].target).addEventListener(eventName, events[eventName].handler);
+				if (events[eventName].target) {
+					const target: HTMLElement = this._element.querySelector(events[eventName].target);
+					target.addEventListener(eventName, events[eventName].handler);
+				} else {
+					this._element.addEventListener(eventName, events[eventName].handler);
+				}
 			}
 		});
 	}

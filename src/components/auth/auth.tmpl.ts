@@ -15,13 +15,5 @@ export const template: string = `
 						{{{this}}}
 					{{/each}}
 				</div>
-				<div class="formBox__footer">
-					<button class="btn w-full">
-						{{#if isLogin}}
-							Sign in
-						{{else}}
-							Sign up
-						{{/if}}
-					</button>
-				</div>
+				<div class="formBox__footer">{{{button}}}</div>
 			</form>`;

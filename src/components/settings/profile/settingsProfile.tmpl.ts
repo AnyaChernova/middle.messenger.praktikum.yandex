@@ -1,5 +1,5 @@
 export const template: string = `
-	<div class="fieldset">
+	<form class="fieldset">
 		<div class="fieldset__header fieldset__header--border">
 			<h3 class="title title--m">Profile</h3>
 			<div class="fieldset__caption text-gray">Update your photo and personal details here.</div>
@@ -12,8 +12,5 @@ export const template: string = `
 			{{/each}}
 		</div>
 		<div class="fieldset__footer fieldset__footer--border">{{{avatarForm}}}</div>
-	</div>
-	<div class="content__footer">
-		<button class="btn">Save</button>
-	</div>
-`;
+		<div class="content__footer">{{{button}}}</div>
+	</form>`;

@@ -30,12 +30,16 @@ class Field extends Block {
 			return;
 		}
 
-		this.validator = new Validator(input, error);
+		this.validator = new Validator(
+			input,
+			error,
+			this.props.minLength as number,
+			this.props.maxLength as number
+		);
 	}
 
 	validate() {
-		const isEmpty: boolean = this.validator!.checkMatchRule('phone');
-		console.log(isEmpty);
+		this.validator!.validate();
 	}
 
 	render() {

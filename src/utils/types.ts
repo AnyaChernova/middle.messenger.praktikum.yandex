@@ -22,6 +22,8 @@ type fieldType = {
 	name?: string,
 	title?: string,
 	type?: string,
+	minLength?: number,
+	maxLength?: number,
 }
 
 type messageType = {

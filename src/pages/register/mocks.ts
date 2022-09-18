@@ -14,8 +14,8 @@ const fieldsList: fieldType[] = [
 	},
 	{
 		...fieldsClasses,
-		title: 'second_name',
-		name: 'Last Name',
+		title: 'Last Name',
+		name: 'second_name',
 		type: 'text'
 	},
 	{

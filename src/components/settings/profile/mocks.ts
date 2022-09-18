@@ -12,11 +12,6 @@ const fieldsProfileData: fieldType[] = [
 		type: 'text'
 	},
 	{
-		title: 'Display Name',
-		name: 'display_name',
-		type: 'text'
-	},
-	{
 		title: 'Login',
 		name: 'login',
 		type: 'text'
