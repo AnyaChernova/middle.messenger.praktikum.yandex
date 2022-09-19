@@ -6,6 +6,9 @@
 
 .nav__item {
 	@include btn;
+}
+
+.nav__item {
 	display: flex;
 	text-decoration: none;
 	padding: 8px;

@@ -1,9 +1,9 @@
-import {fieldType} from "../../utils/types";
+import { fieldType } from '../../utils/types';
 
 const fieldsClasses: fieldType = {
 	fieldClass: 'formCard__field',
 	labelClass: 'formCard__label',
-}
+};
 
 const fieldsList: fieldType[] = [
 	{
@@ -16,8 +16,8 @@ const fieldsList: fieldType[] = [
 		...fieldsClasses,
 		title: 'Password',
 		name: 'password',
-		type: 'password'
+		type: 'password',
 	},
 ];
 
-export {fieldsList};
+export { fieldsList };

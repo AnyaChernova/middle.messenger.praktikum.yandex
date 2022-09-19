@@ -1,8 +1,8 @@
-import Field from "../../components/field/field";
-import Auth from "../../components/auth/auth";
-import FullLayout from "../../layouts/full/full";
-import {fieldsList} from "./mocks";
-import Button from "../../components/button/button";
+import Field from '../../components/field/field';
+import Auth from '../../components/auth/auth';
+import FullLayout from '../../layouts/full/full';
+import Button from '../../components/button/button';
+import { fieldsList } from './mocks';
 
 const fieldsBlocks: Field[] = fieldsList.map((field) => new Field(field));
 const buttonBlock = new Button({
@@ -12,9 +12,8 @@ const buttonBlock = new Button({
 const authBlock = new Auth({
 	fields: fieldsBlocks,
 	button: buttonBlock,
-	isLogin: true
+	isLogin: true,
 });
-const loginPage = new FullLayout({body: authBlock});
-
+const loginPage = new FullLayout({ body: authBlock });
 
 export default loginPage;

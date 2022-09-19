@@ -1,7 +1,7 @@
-import {template} from "./field.tmpl";
-import {fieldType} from "../../utils/types";
-import Block from "../../modules/Block";
-import Validator from "../../modules/Validator";
+import Block from '../../modules/Block';
+import Validator from '../../modules/Validator';
+import { template } from './field.tmpl';
+import { fieldType } from '../../utils/types';
 
 class Field extends Block {
 	private validator: Validator | null;
@@ -12,9 +12,13 @@ class Field extends Block {
 			events: {
 				blur: {
 					target: '.formInput',
-					handler: () => this.validate()
-				}
-			}
+					handler: () => this.validate(),
+				},
+				focus: {
+					target: '.formInput',
+					handler: () => this.validate(),
+				},
+			},
 		});
 
 		this.validator = null;
@@ -33,7 +37,7 @@ class Field extends Block {
 			input,
 			error,
 			this.props.minLength as number,
-			this.props.maxLength as number
+			this.props.maxLength as number,
 		);
 	}
 
@@ -42,7 +46,7 @@ class Field extends Block {
 	}
 
 	render() {
-		return this.compile(template, {...this.props});
+		return this.compile(template, { ...this.props });
 	}
 }
 

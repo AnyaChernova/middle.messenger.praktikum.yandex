@@ -1,4 +1,9 @@
-import {pageType, avatarType, messageType, tabType} from "../../utils/types";
+import {
+	pageType,
+	avatarType,
+	messageType,
+	tabType,
+} from '../../utils/types';
 
 const pageData: pageType = {
 	main: true,
@@ -7,11 +12,11 @@ const pageData: pageType = {
 const avatarData: avatarType = {
 	class: 'avatar--s',
 	url: 'user1.jpg',
-	size: 44
+	size: 44,
 };
 const avatarHeaderData: avatarType = {
 	url: 'avatar.jpg',
-	size: 40
+	size: 40,
 };
 const tabs: tabType[] = [
 	{
@@ -23,11 +28,11 @@ const tabs: tabType[] = [
 			avatar: {
 				class: 'avatar--m',
 				url: 'user2.jpg',
-				size: 50
-			}
+				size: 50,
+			},
 		},
 		time: '4:30 PM',
-		newCounter: 7
+		newCounter: 7,
 	},
 	{
 		tabClass: 'chatTab--active',
@@ -39,10 +44,10 @@ const tabs: tabType[] = [
 			avatar: {
 				class: 'avatar--m',
 				url: 'user1.jpg',
-				size: 50
-			}
+				size: 50,
+			},
 		},
-		time: '4:30 PM'
+		time: '4:30 PM',
 	},
 	{
 		userClass: 'chatTab__media',
@@ -53,11 +58,11 @@ const tabs: tabType[] = [
 			avatar: {
 				class: 'avatar--m',
 				url: 'avatar.jpg',
-				size: 50
-			}
+				size: 50,
+			},
 		},
-		time: 'yesterday'
-	}
+		time: 'yesterday',
+	},
 ];
 const messages: messageType[] = [
 	{
@@ -67,8 +72,8 @@ const messages: messageType[] = [
 		user: {
 			class: 'avatar--s',
 			url: 'user1.jpg',
-			size: 44
-		}
+			size: 44,
+		},
 	},
 	{
 		itemClass: 'chatPanel__item--bottomL',
@@ -83,9 +88,15 @@ const messages: messageType[] = [
 		user: {
 			class: 'avatar--s',
 			url: 'user1.jpg',
-			size: 44
-		}
+			size: 44,
+		},
 	},
 ];
 
-export {pageData, avatarData, avatarHeaderData, tabs, messages};
+export {
+	pageData,
+	avatarData,
+	avatarHeaderData,
+	tabs,
+	messages,
+};

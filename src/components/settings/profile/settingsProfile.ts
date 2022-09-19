@@ -1,26 +1,26 @@
-import {template} from "./settingsProfile.tmpl";
-import {fieldsProfileData, avatarData} from "./mocks";
-import Field from "../../field/field";
-import SettingsAvatarForm from "../avatar/settingsAvatarForm";
-import Avatar from "../../avatar/avatar";
-import Button from "../../button/button";
-import Form from "../../form/form";
+import Field from '../../field/field';
+import SettingsAvatarForm from '../avatar/settingsAvatarForm';
+import Avatar from '../../avatar/avatar';
+import Button from '../../button/button';
+import Form from '../../form/form';
+import { template } from './settingsProfile.tmpl';
+import { fieldsProfileData, avatarData } from './mocks';
 
 const fieldsBlocks: Field[] = fieldsProfileData.map((field) => new Field(field));
-const avatarFormBlock = new SettingsAvatarForm({avatar: new Avatar(avatarData)});
-const buttonBlock = new Button({btnClass: 'w-full', btnText: 'Save'});
+const avatarFormBlock = new SettingsAvatarForm({ avatar: new Avatar(avatarData) });
+const buttonBlock = new Button({ btnClass: 'w-full', btnText: 'Save' });
 
 class SettingsProfile extends Form {
 	constructor() {
 		super({
 			fields: fieldsBlocks,
 			avatarForm: avatarFormBlock,
-			button: buttonBlock
+			button: buttonBlock,
 		});
 	}
 
 	render() {
-		return this.compile(template, {...this.props});
+		return this.compile(template, { ...this.props });
 	}
 }
 

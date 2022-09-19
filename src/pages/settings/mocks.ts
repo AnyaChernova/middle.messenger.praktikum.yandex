@@ -1,4 +1,4 @@
-import {pageType} from "../../utils/types";
+import { pageType } from '../../utils/types';
 
 const pageData: pageType = {
 	main: false,
@@ -18,4 +18,4 @@ const pagePasswordData: pageType = {
 	password: true,
 };
 
-export {pageProfileData, pagePasswordData};
+export { pageProfileData, pagePasswordData };

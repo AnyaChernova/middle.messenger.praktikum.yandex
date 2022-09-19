@@ -44,15 +44,3 @@
 		}
 	}
 }
-
-/*
-Использование:
-@include media
-(xs) => screen and (max-width: 480)
-(500) => screen and (max-width: 500)
-(from, xs) => (min-width: 481)
-(from, 500) => (min-width: 501)
-(xs, s) => (min-width: 481) and (max-width: 640)
-(400, 500) => (min-width: 401) and (max-width: 500)
-(xs, 500) => (min-width: 481) and (max-width: 500)
-*/

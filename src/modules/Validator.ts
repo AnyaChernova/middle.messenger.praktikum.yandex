@@ -18,18 +18,21 @@ export default class Validator {
 		login: /^(?!^\d+$)[\dA-Za-z-_]+$/,
 		email: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
 		phone: /^\+?\d+$/,
-	}
+	};
 
 	private _fieldElem: HTMLInputElement;
+
 	private _errorElem: HTMLElement | void;
+
 	private readonly _min: number | void;
+
 	private readonly _max: number | void;
 
 	constructor(
 		fieldElem: HTMLInputElement,
 		errorElem?: HTMLElement,
 		min?: number,
-		max?: number
+		max?: number,
 	) {
 		this._fieldElem = fieldElem;
 		this._errorElem = errorElem;
@@ -57,23 +60,22 @@ export default class Validator {
 		if (this._fieldElem.value.trim() === '') {
 			this.setError(Validator.Errors.EMPTY);
 			return true;
-		} else {
-			this.deleteError();
-			return false;
 		}
+		this.deleteError();
+		return false;
 	}
 
 	checkValidLength(min: number, max: number): boolean {
 		if (this._fieldElem.value.length < min) {
 			this.setError(`${Validator.Errors.SHORT} ${min} characters`);
 			return false;
-		} else if (this._fieldElem.value.length > max) {
+		}
+		if (this._fieldElem.value.length > max) {
 			this.setError(`${Validator.Errors.LONG} ${max} characters`);
 			return false;
-		} else {
-			this.deleteError();
-			return true;
 		}
+		this.deleteError();
+		return true;
 	}
 
 	checkValidValue(): boolean {
@@ -81,10 +83,9 @@ export default class Validator {
 		if (Validator.Rules[this._fieldElem.name].test(this._fieldElem.value)) {
 			this.deleteError();
 			return true;
-		} else {
-			this.setError(Validator.Errors[this._fieldElem.name.toUpperCase()]);
-			return false;
 		}
+		this.setError(Validator.Errors[this._fieldElem.name.toUpperCase()]);
+		return false;
 	}
 
 	validate() {

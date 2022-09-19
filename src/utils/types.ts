@@ -1,11 +1,10 @@
-import Block from "../modules/Block";
-import User from "../components/user/user";
+import Block from '../modules/Block';
 
 type avatarType = {
 	class?: string,
 	url: string,
 	size: number
-}
+};
 
 type pageType = {
 	main?: boolean,
@@ -13,7 +12,7 @@ type pageType = {
 	profile?: boolean,
 	password?: boolean,
 	title?: string
-}
+};
 
 type fieldType = {
 	fieldClass?: string,
@@ -24,7 +23,7 @@ type fieldType = {
 	type?: string,
 	minLength?: number,
 	maxLength?: number,
-}
+};
 
 type messageType = {
 	text: string,
@@ -34,21 +33,28 @@ type messageType = {
 	messageClass?: string,
 	user?: avatarType | Block,
 	avatar?: avatarType | Block,
-}
+};
 
 type userType = {
 	name: string,
 	caption: string,
 	avatar: avatarType | Block
-}
+};
 
 type tabType = {
-	user: userType | User,
+	user: userType | Block,
 	time: string,
 	tabClass?: string,
 	userClass?: string,
 	titleClass?: string,
 	newCounter?: number
-}
+};
 
-export {avatarType, pageType, fieldType, messageType, userType, tabType};
+export {
+	avatarType,
+	pageType,
+	fieldType,
+	messageType,
+	userType,
+	tabType,
+};

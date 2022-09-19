@@ -1,5 +1,5 @@
-import Block from "../../modules/Block";
-import {template} from "./header.tmpl";
+import Block from '../../modules/Block';
+import { template } from './header.tmpl';
 
 class Header extends Block {
 	constructor(props: Record<string, Block>) {
@@ -7,7 +7,7 @@ class Header extends Block {
 	}
 
 	render() {
-		return this.compile(template, {...this.props});
+		return this.compile(template, { ...this.props });
 	}
 }
 

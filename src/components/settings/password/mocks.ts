@@ -1,21 +1,21 @@
-import {fieldType} from "../../../utils/types";
+import { fieldType } from '../../../utils/types';
 
 const fieldsPasswordData: fieldType[] = [
 	{
 		title: 'Old password',
 		name: 'password',
-		type: 'password'
+		type: 'password',
 	},
 	{
 		title: 'New password',
 		name: 'password',
-		type: 'password'
+		type: 'password',
 	},
 	{
 		title: 'Repeat password',
 		name: 'password',
-		type: 'password'
+		type: 'password',
 	},
 ];
 
-export {fieldsPasswordData};
+export { fieldsPasswordData };

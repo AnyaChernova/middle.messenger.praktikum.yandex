@@ -1,5 +1,8 @@
 .btn {
 	@include btn;
+}
+
+.btn {
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
@@ -14,6 +17,7 @@
 	&:hover {
 		opacity: .8;
 	}
+
 	&[disabled] {
 		opacity: .4;
 		pointer-events: none;

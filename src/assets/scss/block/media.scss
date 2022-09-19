@@ -1,6 +1,6 @@
 .media {
 	display: inline-grid;
-	grid-template-columns: auto minmax(0,1fr);
+	grid-template-columns: auto minmax(0, 1fr);
 	grid-template-areas: "aside main";
 	align-items: flex-start;
 	justify-content: flex-start;
@@ -11,7 +11,7 @@
 
 .media--reverse {
 	grid-template-areas: "main aside";
-	grid-template-columns: minmax(0,1fr) auto;
+	grid-template-columns: minmax(0, 1fr) auto;
 }
 
 .media__aside {

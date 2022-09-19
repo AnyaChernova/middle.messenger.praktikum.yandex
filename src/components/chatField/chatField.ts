@@ -1,10 +1,11 @@
-import {template} from "./chatField.tmpl";
-import Form from "../form/form";
-import {fieldType} from "../../utils/types";
-import Validator from "../../modules/Validator";
+import Form from '../form/form';
+import Validator from '../../modules/Validator';
+import { template } from './chatField.tmpl';
+import { fieldType } from '../../utils/types';
 
 class ChatField extends Form {
 	private validator: Validator | null;
+
 	private readonly input: HTMLInputElement | null;
 
 	constructor(props: fieldType) {
@@ -26,12 +27,12 @@ class ChatField extends Form {
 		if (isEmpty) {
 			console.log('Message is empty');
 		} else {
-			console.log({[this.input!.name]: this.input!.value});
+			console.log({ [this.input!.name]: this.input!.value });
 		}
 	}
 
 	render() {
-		return this.compile(template, {...this.props});
+		return this.compile(template, { ...this.props });
 	}
 }
 

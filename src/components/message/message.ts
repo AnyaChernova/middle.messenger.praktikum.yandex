@@ -1,6 +1,6 @@
-import Block from "../../modules/Block";
-import {template} from "./message.tmpl";
-import {messageType} from "../../utils/types";
+import Block from '../../modules/Block';
+import { template } from './message.tmpl';
+import { messageType } from '../../utils/types';
 
 class Message extends Block {
 	constructor(props: messageType) {
@@ -8,7 +8,7 @@ class Message extends Block {
 	}
 
 	render() {
-		return this.compile(template, {...this.props});
+		return this.compile(template, { ...this.props });
 	}
 }
 

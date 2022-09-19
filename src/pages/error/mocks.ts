@@ -3,7 +3,7 @@ const errorData: {
 	title: string
 } = {
 	code: '505',
-	title: 'Ooops... Something went wrong '
+	title: 'Ooops... Something went wrong ',
 };
 
-export {errorData};
+export { errorData };

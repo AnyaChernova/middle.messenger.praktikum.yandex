@@ -1,6 +1,6 @@
-import Block from "../../modules/Block";
-import {template} from "./messageTab.tmpl";
-import {tabType} from "../../utils/types";
+import Block from '../../modules/Block';
+import { template } from './messageTab.tmpl';
+import { tabType } from '../../utils/types';
 
 class MessageTab extends Block {
 	constructor(props: tabType) {
@@ -8,7 +8,7 @@ class MessageTab extends Block {
 	}
 
 	render() {
-		return this.compile(template, {...this.props});
+		return this.compile(template, { ...this.props });
 	}
 }
 

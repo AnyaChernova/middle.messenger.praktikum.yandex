@@ -18,14 +18,10 @@ export default class EventBus {
 			throw new Error(`Нет события: ${event}`);
 		}
 
-		this.listeners[event] = this.listeners[event].filter(
-			listener => listener !== callback
-		);
+		this.listeners[event] = this.listeners[event].filter(listener => listener !== callback);
 	}
 
 	emit(event: string, ...args: unknown[]) {
-		this.listeners[event].forEach(function (listener) {
-			listener(...args);
-		});
+		this.listeners[event].forEach((listener) => listener(...args));
 	}
 }

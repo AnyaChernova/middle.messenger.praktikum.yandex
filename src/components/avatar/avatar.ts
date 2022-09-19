@@ -1,6 +1,6 @@
-import Block from "../../modules/Block";
-import {avatarType} from "../../utils/types";
-import {template} from "./avatar.tmpl";
+import Block from '../../modules/Block';
+import { avatarType } from '../../utils/types';
+import { template } from './avatar.tmpl';
 
 class Avatar extends Block {
 	constructor(props: avatarType) {
@@ -8,7 +8,7 @@ class Avatar extends Block {
 	}
 
 	render() {
-		return this.compile(template, {...this.props});
+		return this.compile(template, { ...this.props });
 	}
 }
 

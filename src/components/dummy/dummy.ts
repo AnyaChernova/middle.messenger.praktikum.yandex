@@ -1,5 +1,5 @@
-import Block from "../../modules/Block";
-import {template} from "./dummy.tmpl";
+import Block from '../../modules/Block';
+import { template } from './dummy.tmpl';
 
 class Dummy extends Block {
 	constructor(props: {
@@ -10,7 +10,7 @@ class Dummy extends Block {
 	}
 
 	render() {
-		return this.compile(template, {...this.props});
+		return this.compile(template, { ...this.props });
 	}
 }
 

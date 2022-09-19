@@ -29,7 +29,9 @@ body {
 	-ms-text-size-adjust: none;
 }
 
-*, *:before, *:after {
+*,
+*:before,
+*:after {
 	box-sizing: border-box;
 	-webkit-overflow-scrolling: touch;
 }
