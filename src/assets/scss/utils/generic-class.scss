@@ -1,4 +1,4 @@
-$prefixList: (
+$prefix-list: (
 	"": null,
 	t: "-top",
 	r: "-right",
@@ -8,23 +8,23 @@ $prefixList: (
 
 // generate margin
 // from 0px to 20px
-@each $prefixKey, $prefixValue in $prefixList {
+@each $prefix-key, $prefix-value in $prefix-list {
 	@for $index from 0 through 20 {
 		$value: $index;
 
-		.m#{$prefixKey}-#{$value} {
-			margin#{$prefixValue}: $value+px;
+		.m#{$prefix-key}-#{$value} {
+			margin#{$prefix-value}: $value+px;
 		}
 	}
 }
 
 // from -0px to -10 px
-@each $prefixKey, $prefixValue in $prefixList {
+@each $prefix-key, $prefix-value in $prefix-list {
 	@for $index from 0 through 10 {
 		$value: $index;
 
-		.m#{$prefixKey}--#{$value} {
-			margin#{$prefixValue}: -$value+px;
+		.m#{$prefix-key}--#{$value} {
+			margin#{$prefix-key}: -$value+px;
 		}
 	}
 }

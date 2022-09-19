@@ -14,7 +14,7 @@
 	background-color: var(--color-danger);
 }
 
-.circle:before {
+.circle::before {
 	content: "";
 	display: inline-block;
 	vertical-align: middle;

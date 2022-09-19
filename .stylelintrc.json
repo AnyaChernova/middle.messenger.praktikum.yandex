@@ -1,5 +1,5 @@
 {
-	"extends": "stylelint-config-airbnb",
+	"extends": "stylelint-config-standard-scss",
 	"rules": {
 		"indentation": "tab",
 		"at-rule-empty-line-before": ["always", {
@@ -10,6 +10,15 @@
 		"rule-empty-line-before": ["always", {
 			"except": ["first-nested"]
 		}],
-		"max-nesting-depth": 3
+		"max-nesting-depth": 3,
+		"selector-class-pattern": null,
+		"property-no-vendor-prefix": null,
+		"scss/operator-no-unspaced": null,
+		"shorthand-property-no-redundant-values": null,
+		"color-hex-case": "upper",
+		"color-hex-length": "long",
+		"color-function-notation": "legacy",
+		"alpha-value-notation": "number",
+		"number-leading-zero": "never"
 	}
 }
