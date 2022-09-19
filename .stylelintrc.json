@@ -20,5 +20,8 @@
 		"color-function-notation": "legacy",
 		"alpha-value-notation": "number",
 		"number-leading-zero": "never"
-	}
+	},
+	"ignoreFiles": [
+		"dist/*"
+	]
 }
