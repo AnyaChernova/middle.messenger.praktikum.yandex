@@ -1,9 +1,8 @@
-import Block from "../../../modules/Block";
 import {template} from "./settingsProfile.tmpl";
+import {fieldsProfileData, avatarData} from "./mocks";
 import Field from "../../field/field";
 import SettingsAvatarForm from "../avatar/settingsAvatarForm";
 import Avatar from "../../avatar/avatar";
-import {fieldsProfileData, avatarData} from "./mocks";
 import Button from "../../button/button";
 import Form from "../../form/form";
 

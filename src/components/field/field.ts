@@ -1,7 +1,7 @@
-import Block from "../../modules/Block";
 import {template} from "./field.tmpl";
 import {fieldType} from "../../utils/types";
-import Validator from "../../controllers/Validator";
+import Block from "../../modules/Block";
+import Validator from "../../modules/Validator";
 
 class Field extends Block {
 	private validator: Validator | null;
@@ -18,7 +18,6 @@ class Field extends Block {
 		});
 
 		this.validator = null;
-
 		this.initValidate();
 	}
 

@@ -21,13 +21,13 @@ export default class Validator {
 	}
 
 	private _fieldElem: HTMLInputElement;
-	private _errorElem: HTMLElement;
+	private _errorElem: HTMLElement | void;
 	private readonly _min: number | void;
 	private readonly _max: number | void;
 
 	constructor(
 		fieldElem: HTMLInputElement,
-		errorElem: HTMLElement,
+		errorElem?: HTMLElement,
 		min?: number,
 		max?: number
 	) {
@@ -38,15 +38,19 @@ export default class Validator {
 	}
 
 	protected setError(message: string) {
-		this._fieldElem.classList.add('formInput--error');
-		this._errorElem.textContent = message;
-		this._errorElem.style.display = 'block';
+		if (this._errorElem) {
+			this._fieldElem.classList.add('formInput--error');
+			this._errorElem.textContent = message;
+			this._errorElem.style.display = 'block';
+		}
 	}
 
 	protected deleteError() {
-		this._fieldElem.classList.remove('formInput--error');
-		this._errorElem.textContent = '';
-		this._errorElem.style.display = 'none';
+		if (this._errorElem) {
+			this._fieldElem.classList.remove('formInput--error');
+			this._errorElem.textContent = '';
+			this._errorElem.style.display = 'none';
+		}
 	}
 
 	checkIsEmpty(): boolean {
@@ -73,6 +77,7 @@ export default class Validator {
 	}
 
 	checkValidValue(): boolean {
+		if (!Validator.Rules[this._fieldElem.name]) return true;
 		if (Validator.Rules[this._fieldElem.name].test(this._fieldElem.value)) {
 			this.deleteError();
 			return true;
