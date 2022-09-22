@@ -1,9 +1,11 @@
 import Block from '../../../modules/Block';
 import { template } from './settingsNav.tmpl';
-import { pageType } from '../../../utils/types';
+import { PageType } from '../../../utils/types';
 
-class SettingsNav extends Block {
-	constructor(props: { page: pageType }) {
+type NavProps = { page: PageType };
+
+export class SettingsNav extends Block<NavProps> {
+	constructor(props: NavProps) {
 		super(props);
 	}
 
@@ -11,5 +13,3 @@ class SettingsNav extends Block {
 		return this.compile(template, { ...this.props });
 	}
 }
-
-export default SettingsNav;

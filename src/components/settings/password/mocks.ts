@@ -1,6 +1,6 @@
-import { fieldType } from '../../../utils/types';
+import { FieldType } from '../../../utils/types';
 
-const fieldsPasswordData: fieldType[] = [
+const fieldsPasswordData: FieldType[] = [
 	{
 		title: 'Old password',
 		name: 'password',

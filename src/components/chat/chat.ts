@@ -1,9 +1,22 @@
 import Block from '../../modules/Block';
-import ChatField from '../chatField/chatField';
+import { ChatField } from '../chatField/chatField';
 import { template } from './chat.tmpl';
+import {
+	FieldType,
+	MessageType,
+	TabType,
+	UserType,
+} from '../../utils/types';
 
-class Chat extends Block {
-	constructor(props: Record<string, Block | Block[]>) {
+type ChatProps = {
+	user: Block<UserType>,
+	messages: Block<MessageType>[],
+	tabs: Block<TabType>[],
+	field?: Block<FieldType>,
+};
+
+export class Chat extends Block<ChatProps> {
+	constructor(props: ChatProps) {
 		super({
 			...props,
 			field: new ChatField({ name: 'message', type: 'text' }),
@@ -14,5 +27,3 @@ class Chat extends Block {
 		return this.compile(template, { ...this.props });
 	}
 }
-
-export default Chat;

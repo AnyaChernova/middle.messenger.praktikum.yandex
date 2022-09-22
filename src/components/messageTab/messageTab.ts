@@ -1,9 +1,9 @@
 import Block from '../../modules/Block';
 import { template } from './messageTab.tmpl';
-import { tabType } from '../../utils/types';
+import { TabType } from '../../utils/types';
 
-class MessageTab extends Block {
-	constructor(props: tabType) {
+export class MessageTab extends Block<TabType> {
+	constructor(props: TabType) {
 		super(props);
 	}
 
@@ -11,5 +11,3 @@ class MessageTab extends Block {
 		return this.compile(template, { ...this.props });
 	}
 }
-
-export default MessageTab;

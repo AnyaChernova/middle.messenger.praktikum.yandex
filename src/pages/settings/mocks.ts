@@ -1,18 +1,18 @@
-import { pageType } from '../../utils/types';
+import { PageType } from '../../utils/types';
 
-const pageData: pageType = {
+const pageData: PageType = {
 	main: false,
 	settings: true,
 	title: 'Settings',
 };
 
-const pageProfileData: pageType = {
+const pageProfileData: PageType = {
 	...pageData,
 	profile: true,
 	password: false,
 };
 
-const pagePasswordData: pageType = {
+const pagePasswordData: PageType = {
 	...pageData,
 	profile: false,
 	password: true,

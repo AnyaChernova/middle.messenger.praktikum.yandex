@@ -1,8 +1,9 @@
 import Block from '../../modules/Block';
 import { template } from './button.tmpl';
+import { BtnType } from '../../utils/types';
 
-class Button extends Block {
-	constructor(props: { btnClass?: string, btnText: string }) {
+export class Button extends Block<BtnType> {
+	constructor(props: BtnType) {
 		super(props);
 	}
 
@@ -10,5 +11,3 @@ class Button extends Block {
 		return this.compile(template, { ...this.props });
 	}
 }
-
-export default Button;

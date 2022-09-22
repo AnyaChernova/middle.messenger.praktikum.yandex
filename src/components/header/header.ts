@@ -1,8 +1,13 @@
 import Block from '../../modules/Block';
 import { template } from './header.tmpl';
+import { Avatar } from '../avatar/avatar';
 
-class Header extends Block {
-	constructor(props: Record<string, Block>) {
+type HeaderProps = {
+	avatar: Avatar
+};
+
+export class Header extends Block<HeaderProps> {
+	constructor(props: HeaderProps) {
 		super(props);
 	}
 
@@ -10,5 +15,3 @@ class Header extends Block {
 		return this.compile(template, { ...this.props });
 	}
 }
-
-export default Header;

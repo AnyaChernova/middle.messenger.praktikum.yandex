@@ -9,9 +9,7 @@ Handlebars.registerHelper('if', function (this: any, conditional, options) {
 	return options.inverse(this);
 });
 
-type blockProps = Record<string, unknown>;
-
-export default class Block {
+export default class Block<Props extends Record<string, any>> {
 	static EVENTS: Record<string, string> = {
 		INIT: 'init',
 		FLOW_CDM: 'flow:component-did-mount',
@@ -23,13 +21,13 @@ export default class Block {
 
 	private _element: HTMLElement | null;
 
-	protected props: blockProps;
+	protected props: Props;
 
-	protected children: Record<string, Block | Block[]>;
+	protected children: Record<string, Block<Props> | Block<Props>[]>;
 
 	private eventBus = () => new EventBus;
 
-	constructor(propsAndChildren: blockProps = {}) {
+	constructor(propsAndChildren: Props) {
 		const eventBus = new EventBus();
 		const { children, props } = this._getChildren(propsAndChildren);
 
@@ -53,9 +51,9 @@ export default class Block {
 		this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
 	}
 
-	private _getChildren(propsAndChildren: blockProps) {
-		const children: Record<string, Block | Block[]> = {};
-		const props: blockProps = {};
+	private _getChildren(propsAndChildren: Props) {
+		const children: Record<string, Block<Props> | Block<Props>[]> = {};
+		const props: Props = {} as Props;
 
 		Object.entries(propsAndChildren).forEach(([key, value]) => {
 			if (value instanceof Block) {
@@ -63,7 +61,7 @@ export default class Block {
 			} else if (Array.isArray(value) && value.every(v => v instanceof Block)) {
 				children[key] = value;
 			} else {
-				props[key] = value;
+				props[key as keyof Props] = value;
 			}
 		});
 
@@ -89,7 +87,7 @@ export default class Block {
 		this.eventBus().emit(Block.EVENTS.FLOW_CDM);
 	}
 
-	private _componentDidUpdate(oldProps: blockProps, newProps: blockProps) {
+	private _componentDidUpdate(oldProps: Props, newProps: Props) {
 		const response = this.componentDidUpdate(oldProps, newProps);
 		if (!response) {
 			return;
@@ -97,11 +95,11 @@ export default class Block {
 		this._render();
 	}
 
-	public componentDidUpdate(oldProps: blockProps, newProps: blockProps) {
+	public componentDidUpdate(oldProps: Props, newProps: Props) {
 		return JSON.stringify(oldProps) !== JSON.stringify(newProps);
 	}
 
-	public setProps = (nextProps: blockProps) => {
+	public setProps = (nextProps: Props) => {
 		if (!nextProps) {
 			return;
 		}
@@ -161,17 +159,15 @@ export default class Block {
 		});
 	}
 
-	private _makePropsProxy(props: blockProps) {
-		const self = this;
-
+	private _makePropsProxy(props: Props) {
 		return new Proxy(props, {
-			get(target: blockProps, prop: string) {
+			get: (target: Props, prop: string) => {
 				const value = target[prop];
 				return typeof value === 'function' ? value.bind(target) : value;
 			},
-			set(target: blockProps, prop: string, value: unknown) {
-				target[prop] = value;
-				self.eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target);
+			set: (target: Props, prop: string, value: any) => {
+				target[prop as keyof Props] = value;
+				this.eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target);
 				return true;
 			},
 			deleteProperty() {
@@ -184,18 +180,20 @@ export default class Block {
 		return document.createElement(tagName);
 	}
 
-	protected compile(template: string, props: blockProps) {
+	protected compile(template: string, props: Props) {
 		const fragment = this._createDocumentElement('template') as HTMLTemplateElement;
+
+		const templateProps: Record<string, any> = { ...props };
 
 		Object.entries(this.children).forEach(([key, child]) => {
 			if (Array.isArray(child)) {
-				props[key] = child.map((item) => `<div data-id="id-${item.id}"></div>`);
+				templateProps[key] = child.map((item) => `<div data-id="id-${item.id}"></div>`);
 			} else {
-				props[key] = `<div data-id="id-${child.id}"></div>`;
+				templateProps[key] = `<div data-id="id-${child.id}"></div>`;
 			}
 		});
 
-		fragment.innerHTML = Handlebars.compile(template)(props);
+		fragment.innerHTML = Handlebars.compile(template)(templateProps);
 
 		Object.values(this.children).forEach((child) => {
 			if (Array.isArray(child)) {

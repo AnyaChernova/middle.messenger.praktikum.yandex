@@ -1,15 +1,16 @@
 import Block from '../../modules/Block';
 import Validator from '../../modules/Validator';
 import { template } from './field.tmpl';
-import { fieldType } from '../../utils/types';
+import { FieldType } from '../../utils/types';
 
-class Field extends Block {
+export class FieldValidate extends Block<FieldType> {
 	private validator: Validator | null;
 
-	constructor(props: fieldType) {
+	constructor(props: FieldType) {
 		super({
 			...props,
 			events: {
+				...props.events,
 				blur: {
 					target: '.formInput',
 					handler: () => this.validate(),
@@ -49,5 +50,3 @@ class Field extends Block {
 		return this.compile(template, { ...this.props });
 	}
 }
-
-export default Field;

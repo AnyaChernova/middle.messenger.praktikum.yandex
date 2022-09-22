@@ -1,11 +1,13 @@
 import Block from '../../modules/Block';
 import { template } from './dummy.tmpl';
 
-class Dummy extends Block {
-	constructor(props: {
-		code: string,
-		title: string
-	}) {
+type DummyProps = {
+	code: string,
+	title: string
+};
+
+export class Dummy extends Block<DummyProps> {
+	constructor(props: DummyProps) {
 		super(props);
 	}
 
@@ -13,5 +15,3 @@ class Dummy extends Block {
 		return this.compile(template, { ...this.props });
 	}
 }
-
-export default Dummy;

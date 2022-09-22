@@ -1,9 +1,11 @@
 import Block from '../../modules/Block';
 import { template } from './aside.tmpl';
-import { pageType } from '../../utils/types';
+import { PageType } from '../../utils/types';
 
-class Aside extends Block {
-	constructor(props: Record<string, pageType>) {
+type AsideProps = { page: PageType };
+
+export class Aside extends Block<AsideProps> {
+	constructor(props: AsideProps) {
 		super(props);
 	}
 
@@ -11,5 +13,3 @@ class Aside extends Block {
 		return this.compile(template, { ...this.props });
 	}
 }
-
-export default Aside;

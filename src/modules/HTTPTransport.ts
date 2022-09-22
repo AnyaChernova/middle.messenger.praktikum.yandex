@@ -1,47 +1,52 @@
-enum METHODS {
-	GET = 'GET',
-	POST = 'POST',
-	PUT = 'PUT',
-	DELETE = 'DELETE',
+import { queryStringify } from '../utils/queryStringify';
+
+enum Methods {
+	Get = 'GET',
+	Post = 'POST',
+	Put = 'PUT',
+	Delete = 'DELETE',
 }
 
-type TOptions = Record<string, any>;
-
-function queryStringify(data: Record<string, string | number>) {
-	if (typeof data !== 'object') {
-		throw new Error('Data must be object');
-	}
-
-	const keys = Object.keys(data);
-	return keys.reduce((result, key, index) => `${result}${key}=${data[key]}${index < keys.length - 1 ? '&' : ''}`, '?');
-}
+type TOptions = {
+	method: Methods,
+	headers?: Record<string, string>,
+	timeout?: number,
+	data?: any
+};
 
 export default class HTTPTransport {
-	public get = (url: string, options: TOptions = {}) => this.request(
+	public get = (url: string, options: TOptions) => {
+		const { data } = options;
+		let requestUrl = url;
+		if (data) {
+			requestUrl = `${url}${queryStringify(data)}`;
+		}
+		return this.request(
+			requestUrl,
+			{ ...options, method: Methods.Get },
+			options.timeout,
+		);
+	};
+
+	public post = (url: string, options: TOptions) => this.request(
 		url,
-		{ ...options, method: METHODS.GET },
+		{ ...options, method: Methods.Post },
 		options.timeout,
 	);
 
-	public post = (url: string, options: TOptions = {}) => this.request(
+	public put = (url: string, options: TOptions) => this.request(
 		url,
-		{ ...options, method: METHODS.POST },
+		{ ...options, method: Methods.Put },
 		options.timeout,
 	);
 
-	public put = (url: string, options: TOptions = {}) => this.request(
+	public delete = (url: string, options: TOptions) => this.request(
 		url,
-		{ ...options, method: METHODS.PUT },
+		{ ...options, method: Methods.Delete },
 		options.timeout,
 	);
 
-	public delete = (url: string, options: TOptions = {}) => this.request(
-		url,
-		{ ...options, method: METHODS.DELETE },
-		options.timeout,
-	);
-
-	request = (url: string, options: TOptions = {}, timeout: number = 5000) => {
+	request = (url: string, options: TOptions, timeout: number = 5000) => {
 		const { headers = {}, method, data } = options;
 
 		return new Promise((resolve, reject) => {
@@ -51,14 +56,8 @@ export default class HTTPTransport {
 			}
 
 			const xhr = new XMLHttpRequest();
-			const isGet = method === METHODS.GET;
 
-			xhr.open(
-				method,
-				isGet && !!data
-					? `${url}${queryStringify(data)}`
-					: url,
-			);
+			xhr.open(method, url);
 
 			Object.keys(headers).forEach(key => {
 				xhr.setRequestHeader(key, headers[key]);
@@ -74,10 +73,10 @@ export default class HTTPTransport {
 			xhr.timeout = timeout;
 			xhr.ontimeout = reject;
 
-			if (isGet || !data) {
-				xhr.send();
-			} else {
+			if (data) {
 				xhr.send(data);
+			} else {
+				xhr.send();
 			}
 		});
 	};

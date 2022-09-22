@@ -1,24 +1,24 @@
 import {
-	pageType,
-	avatarType,
-	messageType,
-	tabType,
+	PageType,
+	AvatarType,
+	MessageType,
+	TabType,
 } from '../../utils/types';
 
-const pageData: pageType = {
+const pageData: PageType = {
 	main: true,
 	settings: false,
 };
-const avatarData: avatarType = {
+const avatarData: AvatarType = {
 	class: 'avatar--s',
 	url: 'user1.jpg',
 	size: 44,
 };
-const avatarHeaderData: avatarType = {
+const avatarHeaderData: AvatarType = {
 	url: 'avatar.jpg',
 	size: 40,
 };
-const tabs: tabType[] = [
+const tabs: TabType[] = [
 	{
 		userClass: 'chatTab__media',
 		titleClass: 'media__title--l',
@@ -64,7 +64,7 @@ const tabs: tabType[] = [
 		time: 'yesterday',
 	},
 ];
-const messages: messageType[] = [
+const messages: MessageType[] = [
 	{
 		itemClass: 'chatPanel__item--bottom',
 		mainClass: 'media__main--left',

@@ -90,15 +90,16 @@ export default class Validator {
 
 	validate() {
 		const isEmpty: boolean = this.checkIsEmpty();
-		if (!isEmpty) {
-			if (this._min && this._max) {
-				const isValidLength = this.checkValidLength(this._min, this._max);
-				if (isValidLength) {
-					this.checkValidValue();
-				}
-			} else {
+		if (isEmpty) {
+			return;
+		}
+		if (this._min && this._max) {
+			const isValidLength = this.checkValidLength(this._min, this._max);
+			if (isValidLength) {
 				this.checkValidValue();
 			}
+		} else {
+			this.checkValidValue();
 		}
 	}
 }

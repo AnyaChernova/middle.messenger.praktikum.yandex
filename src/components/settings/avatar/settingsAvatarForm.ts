@@ -1,8 +1,11 @@
 import Block from '../../../modules/Block';
 import { template } from './settingsAvatarForm.tmpl';
+import { Avatar } from '../../avatar/avatar';
 
-class SettingsAvatarForm extends Block {
-	constructor(props: { avatar: Block }) {
+type AvatarProps = { avatar: Avatar };
+
+export class SettingsAvatarForm extends Block<AvatarProps> {
+	constructor(props: AvatarProps) {
 		super(props);
 	}
 
@@ -10,5 +13,3 @@ class SettingsAvatarForm extends Block {
 		return this.compile(template, { ...this.props });
 	}
 }
-
-export default SettingsAvatarForm;

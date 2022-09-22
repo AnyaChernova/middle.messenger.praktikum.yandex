@@ -1,20 +1,20 @@
 import Block from '../modules/Block';
 
-type avatarType = {
+type AvatarType = {
 	class?: string,
 	url: string,
-	size: number
+	size: number,
 };
 
-type pageType = {
+type PageType = {
 	main?: boolean,
 	settings?: boolean,
 	profile?: boolean,
 	password?: boolean,
-	title?: string
+	title?: string,
 };
 
-type fieldType = {
+type FieldType = {
 	fieldClass?: string,
 	inputClass?: string,
 	labelClass?: string,
@@ -23,38 +23,45 @@ type fieldType = {
 	type?: string,
 	minLength?: number,
 	maxLength?: number,
+	events?: Record<string, object>,
 };
 
-type messageType = {
+type MessageType = {
 	text: string,
 	itemClass?: string,
 	mainClass?: string,
 	mediaClass?: string,
 	messageClass?: string,
-	user?: avatarType | Block,
-	avatar?: avatarType | Block,
+	user?: AvatarType | Block<AvatarType>,
+	avatar?: AvatarType | Block<AvatarType>,
 };
 
-type userType = {
+type UserType = {
 	name: string,
 	caption: string,
-	avatar: avatarType | Block
+	avatar: AvatarType | Block<AvatarType>,
 };
 
-type tabType = {
-	user: userType | Block,
+type TabType = {
+	user: UserType | Block<UserType>,
 	time: string,
 	tabClass?: string,
 	userClass?: string,
 	titleClass?: string,
-	newCounter?: number
+	newCounter?: number,
+};
+
+type BtnType = {
+	btnClass?: string,
+	btnText: string,
 };
 
 export {
-	avatarType,
-	pageType,
-	fieldType,
-	messageType,
-	userType,
-	tabType,
+	AvatarType,
+	PageType,
+	FieldType,
+	MessageType,
+	UserType,
+	TabType,
+	BtnType,
 };

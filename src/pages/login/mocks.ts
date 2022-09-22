@@ -1,11 +1,11 @@
-import { fieldType } from '../../utils/types';
+import { FieldType } from '../../utils/types';
 
-const fieldsClasses: fieldType = {
+const fieldsClasses: FieldType = {
 	fieldClass: 'formCard__field',
 	labelClass: 'formCard__label',
 };
 
-const fieldsList: fieldType[] = [
+const fieldsList: FieldType[] = [
 	{
 		...fieldsClasses,
 		title: 'Login',

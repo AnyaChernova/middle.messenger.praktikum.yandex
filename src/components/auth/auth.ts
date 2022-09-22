@@ -1,9 +1,16 @@
-import Form from '../form/form';
+import { Form } from '../form/form';
 import Block from '../../modules/Block';
 import { template } from './auth.tmpl';
+import { FieldType, BtnType } from '../../utils/types';
 
-class Auth extends Form {
-	constructor(props: Record<string, boolean | Block | Block[]>) {
+type AuthProps = {
+	fields: Block<FieldType>[],
+	button: Block<BtnType>,
+	isLogin: boolean,
+};
+
+export class Auth extends Form {
+	constructor(props: AuthProps) {
 		super(props);
 	}
 
@@ -11,5 +18,3 @@ class Auth extends Form {
 		return this.compile(template, { ...this.props });
 	}
 }
-
-export default Auth;

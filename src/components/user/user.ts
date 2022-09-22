@@ -1,9 +1,9 @@
 import Block from '../../modules/Block';
 import { template } from './user.tmpl';
-import { userType } from '../../utils/types';
+import { UserType } from '../../utils/types';
 
-class User extends Block {
-	constructor(props: userType) {
+export class User extends Block<UserType> {
+	constructor(props: UserType) {
 		super(props);
 	}
 
@@ -11,5 +11,3 @@ class User extends Block {
 		return this.compile(template, { ...this.props });
 	}
 }
-
-export default User;

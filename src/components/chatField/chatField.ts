@@ -1,14 +1,14 @@
-import Form from '../form/form';
+import { Form } from '../form/form';
 import Validator from '../../modules/Validator';
 import { template } from './chatField.tmpl';
-import { fieldType } from '../../utils/types';
+import { FieldType } from '../../utils/types';
 
-class ChatField extends Form {
+export class ChatField extends Form {
 	private validator: Validator | null;
 
 	private readonly input: HTMLInputElement | null;
 
-	constructor(props: fieldType) {
+	constructor(props: FieldType) {
 		super(props);
 
 		this.validator = null;
@@ -17,7 +17,9 @@ class ChatField extends Form {
 	}
 
 	initValidate() {
-		if (!this.input) return;
+		if (!this.input) {
+			return;
+		}
 		this.validator = new Validator(this.input);
 	}
 
@@ -35,5 +37,3 @@ class ChatField extends Form {
 		return this.compile(template, { ...this.props });
 	}
 }
-
-export default ChatField;

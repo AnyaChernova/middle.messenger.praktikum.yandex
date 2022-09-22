@@ -1,7 +1,7 @@
 import Block from '../../modules/Block';
-import Field from '../field/field';
+import { Field } from '../field/fieldValidate';
 
-class Form extends Block {
+export class Form extends Block<any> {
 	constructor(props: any) {
 		super({
 			...props,
@@ -27,5 +27,3 @@ class Form extends Block {
 		console.log(formData);
 	}
 }
-
-export default Form;

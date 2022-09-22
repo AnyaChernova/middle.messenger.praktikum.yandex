@@ -1,9 +1,9 @@
 import Block from '../../modules/Block';
 import { template } from './message.tmpl';
-import { messageType } from '../../utils/types';
+import { MessageType } from '../../utils/types';
 
-class Message extends Block {
-	constructor(props: messageType) {
+export class Message extends Block<MessageType> {
+	constructor(props: MessageType) {
 		super(props);
 	}
 
@@ -11,5 +11,3 @@ class Message extends Block {
 		return this.compile(template, { ...this.props });
 	}
 }
-
-export default Message;

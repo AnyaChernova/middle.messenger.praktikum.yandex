@@ -1,9 +1,9 @@
 import Block from '../../modules/Block';
-import { avatarType } from '../../utils/types';
+import { AvatarType } from '../../utils/types';
 import { template } from './avatar.tmpl';
 
-class Avatar extends Block {
-	constructor(props: avatarType) {
+export class Avatar extends Block<AvatarType> {
+	constructor(props: AvatarType) {
 		super(props);
 	}
 
@@ -11,5 +11,3 @@ class Avatar extends Block {
 		return this.compile(template, { ...this.props });
 	}
 }
-
-export default Avatar;
