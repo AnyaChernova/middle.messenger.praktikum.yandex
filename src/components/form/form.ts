@@ -1,5 +1,5 @@
 import Block from '../../modules/Block';
-import { Field } from '../field/fieldValidate';
+import { FieldValidate } from '../field/fieldValidate';
 
 export class Form extends Block<any> {
 	constructor(props: any) {
@@ -15,7 +15,7 @@ export class Form extends Block<any> {
 
 	validate(e: MouseEvent) {
 		e.preventDefault();
-		const fields = this.children.fields as Field[];
+		const fields = this.children.fields as FieldValidate[];
 		const formData: { [x: string]: string }[] = [];
 
 		fields.forEach((field) => {
