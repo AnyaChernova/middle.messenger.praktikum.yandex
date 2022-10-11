@@ -6,14 +6,6 @@ type AvatarType = {
 	size: number,
 };
 
-type PageType = {
-	main?: boolean,
-	settings?: boolean,
-	profile?: boolean,
-	password?: boolean,
-	title?: string,
-};
-
 type FieldType = {
 	fieldClass?: string,
 	inputClass?: string,
@@ -56,12 +48,22 @@ type BtnType = {
 	btnText: string,
 };
 
+type LinkType = {
+	to: string,
+	linkClass?: string,
+	activeClass?: string,
+	linkText: string,
+	linkIcon?: string,
+	linkIconClass?: string,
+	events?: Record<string, object>,
+};
+
 export {
 	AvatarType,
-	PageType,
 	FieldType,
 	MessageType,
 	UserType,
 	TabType,
 	BtnType,
+	LinkType,
 };

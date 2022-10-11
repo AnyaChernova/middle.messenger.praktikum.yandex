@@ -1,14 +1,9 @@
 import {
-	PageType,
 	AvatarType,
 	MessageType,
 	TabType,
 } from '../../utils/types';
 
-const pageData: PageType = {
-	main: true,
-	settings: false,
-};
 const avatarData: AvatarType = {
 	class: 'avatar--s',
 	url: 'user1.jpg',
@@ -94,7 +89,6 @@ const messages: MessageType[] = [
 ];
 
 export {
-	pageData,
 	avatarData,
 	avatarHeaderData,
 	tabs,

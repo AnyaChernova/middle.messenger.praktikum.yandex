@@ -5,4 +5,5 @@ export function renderDOM(query: string, block: Block<any>) {
 
 	root!.innerHTML = '';
 	root!.appendChild(block.getContent());
+	block.dispatchComponentDidMount();
 }

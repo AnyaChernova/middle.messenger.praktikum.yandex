@@ -1,8 +1,8 @@
 import Block from '../../../modules/Block';
 import { template } from './settingsNav.tmpl';
-import { PageType } from '../../../utils/types';
+import { LinkType } from '../../../utils/types';
 
-type NavProps = { page: PageType };
+type NavProps = { links: Block<LinkType>[] };
 
 export class SettingsNav extends Block<NavProps> {
 	constructor(props: NavProps) {

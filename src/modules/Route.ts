@@ -28,12 +28,6 @@ export default class Route {
 		}
 	}
 
-	leave() {
-		if (this._block) {
-			this._block.hide();
-		}
-	}
-
 	match(pathname: string) {
 		return pathname === this._pathname;
 	}
@@ -45,6 +39,6 @@ export default class Route {
 			return;
 		}
 
-		this._block.show();
+		renderDOM(this._rootQuery, this._block as Block<any>);
 	}
 }

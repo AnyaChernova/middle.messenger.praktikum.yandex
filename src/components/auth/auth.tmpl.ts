@@ -4,9 +4,9 @@ export const template: string = `
 			<h2 class="title title--l">Get’s started.</h2>
 			<div class="formBox__caption text-gray">
 				{{#if isLogin}}
-					Don’t have an account? <a href="/register" class="link">Sign up</a>
+					Don’t have an account? {{{link}}}
 				{{else}}
-					Already have an account? <a href="/login" class="link">Sign in</a>
+					Already have an account? {{{link}}}
 				{{/if}}
 			</div>
 		</div>

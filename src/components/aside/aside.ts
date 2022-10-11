@@ -1,8 +1,8 @@
 import Block from '../../modules/Block';
 import { template } from './aside.tmpl';
-import { PageType } from '../../utils/types';
+import { LinkType } from '../../utils/types';
 
-type AsideProps = { page: PageType };
+type AsideProps = { links?: Block<LinkType>[] };
 
 export class Aside extends Block<AsideProps> {
 	constructor(props: AsideProps) {
@@ -11,5 +11,9 @@ export class Aside extends Block<AsideProps> {
 
 	render() {
 		return this.compile(template, { ...this.props });
+	}
+
+	componentDidMount() {
+		this.init();
 	}
 }

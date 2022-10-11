@@ -1,11 +1,12 @@
 import { Form } from '../form/form';
 import Block from '../../modules/Block';
 import { template } from './auth.tmpl';
-import { FieldType, BtnType } from '../../utils/types';
+import { FieldType, BtnType, LinkType } from '../../utils/types';
 
 type AuthProps = {
 	fields: Block<FieldType>[],
 	button: Block<BtnType>,
+	link: Block<LinkType>,
 	isLogin: boolean,
 };
 

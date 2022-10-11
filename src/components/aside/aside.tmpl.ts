@@ -1,6 +1,4 @@
 import { logoIcon } from '../icons/logo';
-import { envelopeIcon } from '../icons/envelope';
-import { settingsIcon } from '../icons/settings';
 import { exitIcon } from '../icons/exit';
 
 export const template: string = `
@@ -10,32 +8,9 @@ export const template: string = `
 			<div class="title logo__title">Logo</div>
 		</div>
 		<nav class="nav aside__nav">
-			<a href="/" class="nav__item
-				{{#if page.main}}
-					nav__item--active
-				{{/if}}">
-				<span class="nav__icon">${envelopeIcon}</span>
-				<span>Messages</span>
-			</a>
-			<a href="/settings" class="nav__item
-				{{#if page.settings}}
-					nav__item--active
-				{{/if}}">
-				<span class="nav__icon">${settingsIcon}</span>
-				<span>Settings</span>
-			</a>
-			<a href="/login" class="nav__item">
-				<span class="nav__icon">${settingsIcon}</span>
-				<span>Sign in</span>
-			</a>
-			<a href="/register" class="nav__item">
-				<span class="nav__icon">${settingsIcon}</span>
-				<span>Sign up</span>
-			</a>
-			<a href="/error" class="nav__item">
-				<span class="nav__icon">${settingsIcon}</span>
-				<span>Error</span>
-			</a>
+			{{#each links}}
+				{{{this}}}
+			{{/each}}
 			<button class="nav__item nav__item--bottom">
 				<span class="nav__icon">${exitIcon}</span>
 				<span>Log out</span>

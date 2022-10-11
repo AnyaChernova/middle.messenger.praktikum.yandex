@@ -83,7 +83,7 @@ export default class Block<Props extends Record<string, any>> {
 	public componentDidMount() {
 	}
 
-	protected dispatchComponentDidMount() {
+	public dispatchComponentDidMount() {
 		this.eventBus().emit(Block.EVENTS.FLOW_CDM);
 	}
 
@@ -114,6 +114,7 @@ export default class Block<Props extends Record<string, any>> {
 	private _render() {
 		const fragment = this.render();
 		const newElement = fragment.firstElementChild as HTMLElement;
+		newElement.dataset.id = this.id;
 
 		this._deleteEvents();
 

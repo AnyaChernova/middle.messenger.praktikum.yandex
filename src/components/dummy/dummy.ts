@@ -1,14 +1,27 @@
 import Block from '../../modules/Block';
 import { template } from './dummy.tmpl';
+import { backIcon } from '../icons/back';
+import { Link } from '../link/link';
 
 type DummyProps = {
 	code: string,
-	title: string
+	title: string,
+	link?: Link
 };
 
 export class Dummy extends Block<DummyProps> {
 	constructor(props: DummyProps) {
-		super(props);
+		const linkBlock = new Link({
+			to: '/',
+			linkText: 'Back to chats',
+			linkClass: 'link link--icon dummy__link',
+			linkIcon: backIcon,
+		});
+
+		super({
+			...props,
+			link: linkBlock,
+		});
 	}
 
 	render() {

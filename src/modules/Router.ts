@@ -6,25 +6,22 @@ interface BlockClass extends Function {
 }
 
 export default class Router {
-	private _currentRoute: Route | null;
-
-	readonly _rootQuery: string;
+	readonly _rootQuery: string = '';
 
 	private static __instance: Router;
 
-	public routes: Route[];
+	public routes: Route[] = [];
 
-	public history: History;
+	public history: History = window.history;
 
 	constructor(rootQuery: string) {
-		this.routes = [];
-		this.history = window.history;
-		this._currentRoute = null;
-		this._rootQuery = rootQuery;
-
 		if (Router.__instance) {
 			return Router.__instance;
 		}
+
+		this.routes = [];
+		this.history = window.history;
+		this._rootQuery = rootQuery;
 
 		Router.__instance = this;
 	}
@@ -51,11 +48,6 @@ export default class Router {
 			return;
 		}
 
-		if (this._currentRoute && this._currentRoute !== route) {
-			this._currentRoute.leave();
-		}
-
-		this._currentRoute = route;
 		route.render();
 	}
 
