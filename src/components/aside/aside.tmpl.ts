@@ -17,22 +17,22 @@ export const template: string = `
 				<span class="nav__icon">${envelopeIcon}</span>
 				<span>Messages</span>
 			</a>
-			<a href="settings-profile.html" class="nav__item
+			<a href="/settings" class="nav__item
 				{{#if page.settings}}
 					nav__item--active
 				{{/if}}">
 				<span class="nav__icon">${settingsIcon}</span>
 				<span>Settings</span>
 			</a>
-			<a href="login.html" class="nav__item">
+			<a href="/login" class="nav__item">
 				<span class="nav__icon">${settingsIcon}</span>
 				<span>Sign in</span>
 			</a>
-			<a href="register.html" class="nav__item">
+			<a href="/register" class="nav__item">
 				<span class="nav__icon">${settingsIcon}</span>
 				<span>Sign up</span>
 			</a>
-			<a href="error.html" class="nav__item">
+			<a href="/error" class="nav__item">
 				<span class="nav__icon">${settingsIcon}</span>
 				<span>Error</span>
 			</a>

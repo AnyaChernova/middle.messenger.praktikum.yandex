@@ -7,7 +7,7 @@ import { template } from './main.tmpl';
 import { avatarHeaderData, pageData } from '../../pages/main/mocks';
 import { AvatarType, PageType } from '../../utils/types';
 
-type layoutProps = {
+type LayoutProps = {
 	title?: string,
 	innerClass?: string,
 	page?: PageType,
@@ -18,8 +18,8 @@ type layoutProps = {
 	body: Block<any>,
 };
 
-export class MainLayout extends Block<layoutProps> {
-	constructor(props: layoutProps) {
+export class MainLayout extends Block<LayoutProps> {
+	constructor(props: LayoutProps) {
 		const pageProps = props.page || pageData;
 		const avatarProps = props.avatar || avatarHeaderData;
 		const asideBlock = new Aside({ page: pageProps });
