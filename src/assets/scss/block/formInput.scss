@@ -14,3 +14,13 @@
 		border: 1px solid var(--color-field-border);
 	}
 }
+
+.formInput--error {
+	border-color: var(--color-danger);
+
+	&:active,
+	&:focus {
+		outline: none;
+		border-color: var(--color-danger);
+	}
+}

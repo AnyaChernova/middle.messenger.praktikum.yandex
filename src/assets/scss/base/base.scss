@@ -17,19 +17,18 @@ body {
 	font-size: $font-size;
 	font-weight: $font-weight;
 	line-height: $line-height;
-
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-tap-highlight-color: transparent;
-
-	text-rendering: geometricPrecision;
-
+	text-rendering: geometricprecision;
 	-webkit-text-size-adjust: none;
 	-moz-text-size-adjust: none;
 	-ms-text-size-adjust: none;
 }
 
-*, *:before, *:after {
+*,
+*::before,
+*::after {
 	box-sizing: border-box;
 	-webkit-overflow-scrolling: touch;
 }

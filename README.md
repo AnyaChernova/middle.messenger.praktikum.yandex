@@ -45,9 +45,12 @@ https://gentle-axolotl-171506.netlify.app
 #### Client
 
 - JavaScript
+- TypeScript
 
 #### Tools
 
 - Parcel
 - Sass
 - Handlebars
+- ESLint
+- Stylelint

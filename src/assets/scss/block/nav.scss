@@ -1,11 +1,11 @@
 .nav {
 	display: flex;
-	flex-wrap: wrap;
-	flex-direction: column;
+	flex-flow: column wrap;
 }
 
 .nav__item {
 	@include btn;
+
 	display: flex;
 	text-decoration: none;
 	padding: 8px;

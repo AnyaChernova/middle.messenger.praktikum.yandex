@@ -1,0 +1,37 @@
+.chatField {
+	position: relative;
+}
+
+.chatField__input {
+	height: 50px;
+	padding: 13px 60px;
+	background-color: var(--color-bg-secondary);
+	border-color: var(--color-border);
+	color: var(--color-text);
+	caret-color: var(--color-accent);
+
+	&::placeholder {
+		color: var(--color-text-gray);
+	}
+
+	&:active,
+	&:focus {
+		border-color: var(--color-primary);
+	}
+}
+
+.chatField__icon {
+	position: absolute;
+	left: 24px;
+	top: 13px;
+	color: var(--color-text-gray);
+}
+
+.chatField__icon--primary {
+	color: var(--color-primary);
+}
+
+.chatField__icon--right {
+	left: unset;
+	right: 24px;
+}

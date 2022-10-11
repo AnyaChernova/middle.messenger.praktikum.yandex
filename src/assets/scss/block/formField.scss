@@ -8,3 +8,10 @@
 	font-weight: 500;
 	margin-bottom: 10px;
 }
+
+.formField__error {
+	display: none;
+	color: var(--color-danger);
+	font-size: 12px;
+	margin-top: 5px;
+}
