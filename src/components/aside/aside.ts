@@ -1,19 +1,32 @@
-import Block from '../../modules/Block';
+import { Block } from '../../core/Block';
 import { template } from './aside.tmpl';
-import { LinkType } from '../../utils/types';
+import { Button } from '../button/button';
+import { exitIcon } from '../icons/exit';
+import { logout } from '../../services/auth';
+import { withStore } from '../../utils/withStore';
 
-type AsideProps = { links?: Block<LinkType>[] };
+class AsideClass extends Block<Indexed> {
+	constructor(props: Indexed) {
+		const logoutBtn = new Button({
+			btnClass: 'nav__item nav__item--bottom',
+			btnText: 'Log out',
+			btnIcon: exitIcon,
+			btnIconClass: 'nav__icon',
+			events: {
+				click: {
+					handler: () => {
+						this.props.store.dispatch(logout);
+					}
+				}
+			}
+		});
 
-export class Aside extends Block<AsideProps> {
-	constructor(props: AsideProps) {
-		super(props);
+		super({ ...props, logoutBtn });
 	}
 
 	render() {
 		return this.compile(template, { ...this.props });
 	}
-
-	componentDidMount() {
-		this.init();
-	}
 }
+
+export const Aside = withStore(AsideClass as typeof Block);

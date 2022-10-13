@@ -1,4 +1,4 @@
-import Block from '../../modules/Block';
+import { Block } from '../../core/Block';
 import { ChatField } from '../chatField/chatField';
 import { template } from './chat.tmpl';
 import {

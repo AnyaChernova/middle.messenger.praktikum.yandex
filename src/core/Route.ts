@@ -1,18 +1,14 @@
-import Block from './Block';
+import { Block, BlockClass } from './Block';
 import { renderDOM } from '../utils/renderDOM';
 
-interface BlockClass extends Function {
-	new (): Block<any>;
-}
+export class Route {
+	private readonly _rootQuery: string;
 
-export default class Route {
-	readonly _rootQuery: string;
-
-	readonly _blockClass: BlockClass;
+	private readonly _blockClass: BlockClass;
 
 	private _pathname: string;
 
-	private _block: Block<any> | null;
+	private _block: Nullable<Block<any>>;
 
 	constructor(pathname: string, view: BlockClass, rootQuery: string) {
 		this._pathname = pathname;

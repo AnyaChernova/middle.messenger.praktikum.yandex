@@ -1,5 +1,4 @@
 import { logoIcon } from '../icons/logo';
-import { exitIcon } from '../icons/exit';
 
 export const template: string = `
 	<aside class="aside">
@@ -11,9 +10,6 @@ export const template: string = `
 			{{#each links}}
 				{{{this}}}
 			{{/each}}
-			<button class="nav__item nav__item--bottom">
-				<span class="nav__icon">${exitIcon}</span>
-				<span>Log out</span>
-			</button>
+			{{{logoutBtn}}}
 		</nav>
 	</aside>`;

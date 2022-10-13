@@ -1,5 +1,5 @@
 import { Form } from '../form/form';
-import Block from '../../modules/Block';
+import { Block } from '../../core/Block';
 import { template } from './auth.tmpl';
 import { FieldType, BtnType, LinkType } from '../../utils/types';
 
@@ -8,6 +8,7 @@ type AuthProps = {
 	button: Block<BtnType>,
 	link: Block<LinkType>,
 	isLogin: boolean,
+	events?: Record<string, object>,
 };
 
 export class Auth extends Form {

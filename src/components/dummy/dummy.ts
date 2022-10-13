@@ -1,4 +1,4 @@
-import Block from '../../modules/Block';
+import { Block } from '../../core/Block';
 import { template } from './dummy.tmpl';
 import { backIcon } from '../icons/back';
 import { Link } from '../link/link';
@@ -12,7 +12,7 @@ type DummyProps = {
 export class Dummy extends Block<DummyProps> {
 	constructor(props: DummyProps) {
 		const linkBlock = new Link({
-			to: '/',
+			to: '/messages',
 			linkText: 'Back to chats',
 			linkClass: 'link link--icon dummy__link',
 			linkIcon: backIcon,

@@ -1,12 +1,8 @@
-import Route from './Route';
-import Block from './Block';
+import { Route } from './Route';
+import { BlockClass } from './Block';
 
-interface BlockClass extends Function {
-	new(): Block<any>;
-}
-
-export default class Router {
-	readonly _rootQuery: string = '';
+export class Router {
+	private readonly _rootQuery: string = '';
 
 	private static __instance: Router;
 
@@ -14,7 +10,7 @@ export default class Router {
 
 	public history: History = window.history;
 
-	constructor(rootQuery: string) {
+	constructor(rootQuery: string = '') {
 		if (Router.__instance) {
 			return Router.__instance;
 		}

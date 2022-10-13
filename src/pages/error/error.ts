@@ -8,7 +8,7 @@ import { Link } from '../../components/link/link';
 
 const pages: LinkType[] = [
 	{
-		to: '/',
+		to: '/messages',
 		linkText: 'Messages',
 		linkIcon: envelopeIcon,
 		linkClass: 'nav__item',

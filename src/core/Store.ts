@@ -1,0 +1,50 @@
+import EventBus from './EventBus';
+import { defaultState } from '../store';
+import { AppState } from '../types/app';
+
+export enum StoreEvents {
+	Updated = 'storeUpdated',
+}
+
+export type Dispatch<State> = (
+	nextStateOrAction: Partial<State> | Action<State>,
+	payload?: any,
+) => void;
+
+export type Action<State> = (
+	dispatch: Dispatch<State>,
+	state: State,
+	payload: any,
+) => void;
+
+class Storage extends EventBus {
+	private _state: AppState = {} as AppState;
+
+	constructor() {
+		super();
+
+		this._state = defaultState;
+	}
+
+	public getState() {
+		return this._state;
+	}
+
+	public set(nextState: Partial<AppState>) {
+		const prevState = { ...this._state };
+
+		this._state = { ...this._state, ...nextState };
+
+		this.emit(StoreEvents.Updated, prevState, nextState);
+	}
+
+	dispatch(nextStateOrAction: Partial<AppState> | Action<AppState>, payload?: any) {
+		if (typeof nextStateOrAction === 'function') {
+			nextStateOrAction(this.dispatch.bind(this), this._state, payload);
+		} else {
+			this.set({ ...this._state, ...nextStateOrAction });
+		}
+	}
+}
+
+export const Store = new Storage();

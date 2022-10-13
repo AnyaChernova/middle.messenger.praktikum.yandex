@@ -1,4 +1,4 @@
-import Block from '../../modules/Block';
+import { Block } from '../../core/Block';
 import { template } from './user.tmpl';
 import { UserType } from '../../utils/types';
 

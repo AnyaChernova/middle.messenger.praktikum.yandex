@@ -1,5 +1,4 @@
 import { pencilIcon } from '../icons/pencil';
-import { searchIcon } from '../icons/search';
 import { moreIcon } from '../icons/more';
 
 export const template: string = `
@@ -10,12 +9,6 @@ export const template: string = `
 				<button class="btn btn--icon btn--primary">
 					${pencilIcon}
 				</button>
-			</div>
-			<div class="chat__search">
-				<label class="searchField">
-					<input class="formInput searchField__input" type="text" placeholder="Search...">
-					<span class="searchField__icon">${searchIcon}</span>
-				</label>
 			</div>
 			<div class="chat__tabs">
 				{{#each tabs}}

@@ -1,4 +1,4 @@
-export default class Validator {
+export class Validator {
 	static Errors: Record<string, string> = {
 		EMPTY: 'Must not be empty',
 		SHORT: 'Must be at least',
@@ -22,7 +22,7 @@ export default class Validator {
 
 	private _fieldElem: HTMLInputElement;
 
-	private _errorElem: HTMLElement | void;
+	private readonly _errorElem: HTMLElement | void;
 
 	private readonly _min: number | void;
 
@@ -91,15 +91,17 @@ export default class Validator {
 	validate() {
 		const isEmpty: boolean = this.checkIsEmpty();
 		if (isEmpty) {
-			return;
+			return false;
 		}
 		if (this._min && this._max) {
 			const isValidLength = this.checkValidLength(this._min, this._max);
 			if (isValidLength) {
-				this.checkValidValue();
+				return this.checkValidValue();
+			} else {
+				return false;
 			}
 		} else {
-			this.checkValidValue();
+			return this.checkValidValue();
 		}
 	}
 }

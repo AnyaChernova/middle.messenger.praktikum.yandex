@@ -7,15 +7,28 @@ enum Methods {
 	Delete = 'DELETE',
 }
 
-type TOptions = {
-	method: Methods,
+type RequestOptions = {
+	method?: Methods,
 	headers?: Record<string, string>,
 	timeout?: number,
-	data?: any
+	data?: any,
 };
 
-export default class HTTPTransport {
-	public get = (url: string, options: TOptions) => {
+type RequestResponse = {
+	status: number,
+	data: Indexed,
+}
+
+export class HTTPTransport {
+	static BASE_URL = 'https://ya-praktikum.tech/api/v2';
+
+	private readonly _apiURL: string;
+
+	constructor(pathname: string) {
+		this._apiURL = HTTPTransport.BASE_URL + pathname;
+	}
+
+	public get = (url: string, options: RequestOptions = {}): Promise<RequestResponse> => {
 		const { data } = options;
 		let requestUrl = url;
 		if (data) {
@@ -28,26 +41,27 @@ export default class HTTPTransport {
 		);
 	};
 
-	public post = (url: string, options: TOptions) => this.request(
+	public post = (url: string, options: RequestOptions = {}): Promise<RequestResponse> => this.request(
 		url,
 		{ ...options, method: Methods.Post },
 		options.timeout,
 	);
 
-	public put = (url: string, options: TOptions) => this.request(
+	public put = (url: string, options: RequestOptions = {}): Promise<RequestResponse> => this.request(
 		url,
 		{ ...options, method: Methods.Put },
 		options.timeout,
 	);
 
-	public delete = (url: string, options: TOptions) => this.request(
+	public delete = (url: string, options: RequestOptions = {}): Promise<RequestResponse> => this.request(
 		url,
 		{ ...options, method: Methods.Delete },
 		options.timeout,
 	);
 
-	request = (url: string, options: TOptions, timeout: number = 5000) => {
+	request = (url: string, options: RequestOptions, timeout: number = 5000): Promise<RequestResponse> => {
 		const { headers = {}, method, data } = options;
+		url = `${this._apiURL}${url}`;
 
 		return new Promise((resolve, reject) => {
 			if (!method) {
@@ -56,7 +70,7 @@ export default class HTTPTransport {
 			}
 
 			const xhr = new XMLHttpRequest();
-
+			xhr.responseType = "json";
 			xhr.open(method, url);
 
 			Object.keys(headers).forEach(key => {
@@ -64,12 +78,22 @@ export default class HTTPTransport {
 			});
 
 			xhr.onload = () => {
-				resolve(xhr);
+				if (xhr.status === 200) {
+					resolve({
+						status: xhr.status,
+						data: xhr.response,
+					});
+				} else {
+					reject({
+						status: xhr.status,
+						data: xhr.response,
+					});
+				}
 			};
 
+			xhr.withCredentials = true;
 			xhr.onabort = reject;
 			xhr.onerror = reject;
-
 			xhr.timeout = timeout;
 			xhr.ontimeout = reject;
 

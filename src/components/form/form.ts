@@ -1,7 +1,9 @@
-import Block from '../../modules/Block';
+import { Block } from '../../core/Block';
 import { FieldValidate } from '../field/fieldValidate';
 
 export class Form extends Block<any> {
+	public formData: { [x: string]: string };
+
 	constructor(props: any) {
 		super({
 			...props,
@@ -11,19 +13,25 @@ export class Form extends Block<any> {
 				},
 			},
 		});
+
+		this.formData = {};
 	}
 
 	validate(e: MouseEvent) {
 		e.preventDefault();
 		const fields = this.children.fields as FieldValidate[];
-		const formData: { [x: string]: string }[] = [];
+		let isValid: boolean = true;
 
 		fields.forEach((field) => {
-			field.validate();
+			isValid = field.validate();
 			const input: HTMLInputElement | null = field!.element!.querySelector('input');
-			formData.push({ [input!.name]: input!.value });
+			this.formData[input!.name] = input!.value;
 		});
 
-		console.log(formData);
+		if (isValid) {
+			this.onSubmit();
+		}
 	}
+
+	onSubmit() {}
 }

@@ -1,5 +1,5 @@
 import { Form } from '../form/form';
-import Validator from '../../modules/Validator';
+import { Validator } from '../../core/Validator';
 import { template } from './chatField.tmpl';
 import { FieldType } from '../../utils/types';
 

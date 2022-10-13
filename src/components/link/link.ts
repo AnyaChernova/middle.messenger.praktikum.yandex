@@ -1,9 +1,7 @@
-import Block from '../../modules/Block';
+import { Block } from '../../core/Block';
 import { template } from './link.tmpl';
 import { LinkType } from '../../utils/types';
-import Router from '../../modules/Router';
-
-const router = new Router('.app');
+import { Router } from '../../core/Router';
 
 export class Link extends Block<LinkType> {
 	constructor(props: LinkType) {
@@ -13,7 +11,7 @@ export class Link extends Block<LinkType> {
 				...props.events,
 				click: {
 					handler: () => {
-						router.go(this.props.to);
+						new Router().go(this.props.to);
 					},
 				},
 			},

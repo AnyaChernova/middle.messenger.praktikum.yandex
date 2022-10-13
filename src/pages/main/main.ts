@@ -12,7 +12,7 @@ import { settingsIcon } from '../../components/icons/settings';
 
 const pages: LinkType[] = [
 	{
-		to: '/',
+		to: '/messages',
 		linkText: 'Messages',
 		activeClass: 'nav__item--active',
 		linkIcon: envelopeIcon,

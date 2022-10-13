@@ -1,5 +1,6 @@
 export const template: string = `
 	<div class="content">
+		{{{notice}}}
 		<div class="content__aside">
 			{{{aside}}}
 		</div>

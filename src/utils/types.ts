@@ -1,4 +1,4 @@
-import Block from '../modules/Block';
+import { Block } from '../core/Block';
 
 type AvatarType = {
 	class?: string,
@@ -10,7 +10,9 @@ type FieldType = {
 	fieldClass?: string,
 	inputClass?: string,
 	labelClass?: string,
+	id?: string,
 	name?: string,
+	value?: string,
 	title?: string,
 	type?: string,
 	minLength?: number,
@@ -46,6 +48,9 @@ type TabType = {
 type BtnType = {
 	btnClass?: string,
 	btnText: string,
+	btnIcon?: string,
+	btnIconClass?: string,
+	events?: Record<string, object>,
 };
 
 type LinkType = {

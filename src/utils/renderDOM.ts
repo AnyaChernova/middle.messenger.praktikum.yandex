@@ -1,7 +1,7 @@
-import Block from '../modules/Block';
+import { Block } from '../core/Block';
 
 export function renderDOM(query: string, block: Block<any>) {
-	const root: HTMLElement | null = document.querySelector(query);
+	const root: Nullable<HTMLElement> = document.querySelector(query);
 
 	root!.innerHTML = '';
 	root!.appendChild(block.getContent());

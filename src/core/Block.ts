@@ -9,17 +9,24 @@ Handlebars.registerHelper('if', function (this: any, conditional, options) {
 	return options.inverse(this);
 });
 
-export default class Block<Props extends Record<string, any>> {
+export interface BlockClass extends Function {
+	new (): Block<any>;
+}
+
+export class Block<Props extends Indexed> {
 	static EVENTS: Record<string, string> = {
 		INIT: 'init',
 		FLOW_CDM: 'flow:component-did-mount',
 		FLOW_CDU: 'flow:component-did-update',
+		FLOW_CWU: 'flow:component-will-unmount',
 		FLOW_RENDER: 'flow:render',
 	};
 
 	public id = nanoid(6);
 
-	private _element: HTMLElement | null;
+	public uniqueName: string | undefined;
+
+	private _element:Nullable<HTMLElement>;
 
 	protected props: Props;
 
@@ -44,6 +51,7 @@ export default class Block<Props extends Record<string, any>> {
 		eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
 		eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
 		eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
+		eventBus.on(Block.EVENTS.FLOW_CWU, this._componentWillUnmount.bind(this));
 		eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
 	}
 
@@ -83,6 +91,13 @@ export default class Block<Props extends Record<string, any>> {
 	public componentDidMount() {
 	}
 
+	_componentWillUnmount() {
+		this.eventBus().destroy();
+		this.componentWillUnmount();
+	}
+
+	componentWillUnmount() {}
+
 	public dispatchComponentDidMount() {
 		this.eventBus().emit(Block.EVENTS.FLOW_CDM);
 	}
@@ -107,14 +122,13 @@ export default class Block<Props extends Record<string, any>> {
 		Object.assign(this.props, nextProps);
 	};
 
-	get element(): HTMLElement | null {
+	get element(): Nullable<HTMLElement> {
 		return this._element;
 	}
 
 	private _render() {
 		const fragment = this.render();
 		const newElement = fragment.firstElementChild as HTMLElement;
-		newElement.dataset.id = this.id;
 
 		this._deleteEvents();
 
@@ -167,8 +181,9 @@ export default class Block<Props extends Record<string, any>> {
 				return typeof value === 'function' ? value.bind(target) : value;
 			},
 			set: (target: Props, prop: string, value: any) => {
+				const oldProps = {...target};
 				target[prop as keyof Props] = value;
-				this.eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target);
+				this.eventBus().emit(Block.EVENTS.FLOW_CDU, oldProps, target);
 				return true;
 			},
 			deleteProperty() {
@@ -184,7 +199,7 @@ export default class Block<Props extends Record<string, any>> {
 	protected compile(template: string, props: Props) {
 		const fragment = this._createDocumentElement('template') as HTMLTemplateElement;
 
-		const templateProps: Record<string, any> = { ...props };
+		const templateProps: Indexed = { ...props };
 
 		Object.entries(this.children).forEach(([key, child]) => {
 			if (Array.isArray(child)) {

@@ -1,4 +1,4 @@
-import Block from '../../modules/Block';
+import { Block } from '../../core/Block';
 import { AvatarType } from '../../utils/types';
 import { template } from './avatar.tmpl';
 

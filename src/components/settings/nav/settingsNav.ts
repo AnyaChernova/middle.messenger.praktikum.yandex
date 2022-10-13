@@ -1,4 +1,4 @@
-import Block from '../../../modules/Block';
+import { Block } from '../../../core/Block';
 import { template } from './settingsNav.tmpl';
 import { LinkType } from '../../../utils/types';
 
