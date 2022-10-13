@@ -4,9 +4,7 @@ import { template } from './full.tmpl';
 
 export class FullLayout extends Block<Indexed> {
 	constructor(props: Indexed) {
-		const noticeBlock = new Notice();
-
-		super({ ...props, notice: noticeBlock });
+		super({ ...props, notice: new Notice() });
 	}
 
 	render() {

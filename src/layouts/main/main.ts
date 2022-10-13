@@ -9,14 +9,11 @@ import { avatarHeaderData } from '../../pages/main/mocks';
 export class MainLayout extends Block<Indexed> {
 	constructor(props: Indexed) {
 		const avatarProps = props.avatar || avatarHeaderData;
-		const asideBlock = new Aside({ links: props.links });
-		const headerBlock = new Header({ avatar: new Avatar(avatarProps) });
-		const noticeBlock = new Notice();
 		super({
 			...props,
-			aside: asideBlock,
-			header: headerBlock,
-			notice: noticeBlock,
+			aside: new Aside({ links: props.links }),
+			header: new Header({ avatar: new Avatar(avatarProps) }),
+			notice: new Notice(),
 		});
 	}
 

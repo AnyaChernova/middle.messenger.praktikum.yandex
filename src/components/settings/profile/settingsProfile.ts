@@ -7,6 +7,7 @@ import { template } from './settingsProfile.tmpl';
 import { fieldsProfileData, avatarData } from './mocks';
 import { withStore } from '../../../utils/withStore';
 import { updateProfile } from '../../../services/user';
+import { Store } from '../../../core/Store';
 
 export class SettingsProfileClass extends Form {
 	constructor(props: Indexed) {
@@ -22,7 +23,7 @@ export class SettingsProfileClass extends Form {
 	}
 
 	onSubmit() {
-		this.props.store.dispatch(updateProfile, this.formData);
+		Store.dispatch(updateProfile, this.formData);
 	}
 
 	render() {
@@ -30,14 +31,19 @@ export class SettingsProfileClass extends Form {
 	}
 
 	componentDidMount() {
-		const user = this.props.store.getState().user;
-		const fields = this.children.fields as FieldValidate[];
-		fields.forEach((field) => {
-			field.setProps({
-				value: user[field.uniqueName!]
+		if (this.props.user) {
+			const fields = this.children.fields as FieldValidate[];
+			fields.forEach((field) => {
+				field.setProps({
+					value: this.props.user[field.uniqueName!]
+				});
 			});
-		});
+		}
 	}
 }
 
-export const SettingsProfile = withStore(SettingsProfileClass);
+export const SettingsProfile = withStore(SettingsProfileClass, (state) => {
+	return {
+		user: state.user,
+	};
+});

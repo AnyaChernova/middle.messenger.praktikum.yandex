@@ -5,7 +5,22 @@ const fieldsClasses: FieldType = {
 	labelClass: 'formCard__label',
 };
 
-const fieldsList: FieldType[] = [
+export const loginFields: FieldType[] = [
+	{
+		...fieldsClasses,
+		title: 'Login',
+		name: 'login',
+		type: 'text',
+	},
+	{
+		...fieldsClasses,
+		title: 'Password',
+		name: 'password',
+		type: 'password',
+	},
+];
+
+export const registerFields: FieldType[] = [
 	{
 		...fieldsClasses,
 		title: 'First Name',
@@ -43,5 +58,3 @@ const fieldsList: FieldType[] = [
 		type: 'text',
 	},
 ];
-
-export { fieldsList };

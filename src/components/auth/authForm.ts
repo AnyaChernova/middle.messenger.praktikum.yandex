@@ -11,7 +11,7 @@ type AuthProps = {
 	events?: Record<string, object>,
 };
 
-export class Auth extends Form {
+export class AuthForm extends Form {
 	constructor(props: AuthProps) {
 		super(props);
 	}

@@ -9,7 +9,9 @@ export const initApp = async (dispatch: Dispatch<AppState>) => {
 		const user = await getUser();
 		if (user) {
 			dispatch({ user: transformUser(user) });
-			new Router().go('/messages');
+			if (document.location.pathname === '/') {
+				new Router().go('/messages');
+			}
 		} else {
 			new Router().go('/');
 		}

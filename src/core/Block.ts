@@ -138,6 +138,7 @@ export class Block<Props extends Indexed> {
 
 		this._element = newElement;
 		this._addEvents();
+		this.dispatchComponentDidMount();
 	}
 
 	public render(): DocumentFragment {

@@ -3,9 +3,9 @@ import { template } from './aside.tmpl';
 import { Button } from '../button/button';
 import { exitIcon } from '../icons/exit';
 import { logout } from '../../services/auth';
-import { withStore } from '../../utils/withStore';
+import { Store } from '../../core/Store';
 
-class AsideClass extends Block<Indexed> {
+export class Aside extends Block<Indexed> {
 	constructor(props: Indexed) {
 		const logoutBtn = new Button({
 			btnClass: 'nav__item nav__item--bottom',
@@ -15,7 +15,7 @@ class AsideClass extends Block<Indexed> {
 			events: {
 				click: {
 					handler: () => {
-						this.props.store.dispatch(logout);
+						Store.dispatch(logout);
 					}
 				}
 			}
@@ -28,5 +28,3 @@ class AsideClass extends Block<Indexed> {
 		return this.compile(template, { ...this.props });
 	}
 }
-
-export const Aside = withStore(AsideClass as typeof Block);
