@@ -11,7 +11,9 @@ export class Link extends Block<LinkType> {
 				...props.events,
 				click: {
 					handler: () => {
-						new Router().go(this.props.to);
+						if (this.props.to) {
+							new Router().go(this.props.to);
+						}
 					},
 				},
 			},

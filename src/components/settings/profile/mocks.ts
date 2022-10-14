@@ -41,7 +41,7 @@ const fieldsProfileData: FieldType[] = [
 
 const avatarData: AvatarType = {
 	class: 'avatar--l',
-	url: 'avatar.jpg',
+	url: 'avatar.svg',
 	size: 64,
 };
 

@@ -6,11 +6,11 @@ import {
 
 const avatarData: AvatarType = {
 	class: 'avatar--s',
-	url: 'user1.jpg',
+	url: 'avatar.svg',
 	size: 44,
 };
 const avatarHeaderData: AvatarType = {
-	url: 'avatar.jpg',
+	url: 'avatar.svg',
 	size: 40,
 };
 const tabs: TabType[] = [
@@ -22,7 +22,7 @@ const tabs: TabType[] = [
 			caption: 'Nice',
 			avatar: {
 				class: 'avatar--m',
-				url: 'user2.jpg',
+				url: 'avatar.svg',
 				size: 50,
 			},
 		},
@@ -38,7 +38,7 @@ const tabs: TabType[] = [
 			caption: 'Hello! Everyone',
 			avatar: {
 				class: 'avatar--m',
-				url: 'user1.jpg',
+				url: 'avatar.svg',
 				size: 50,
 			},
 		},
@@ -52,7 +52,7 @@ const tabs: TabType[] = [
 			caption: 'Wow really Cool 🔥',
 			avatar: {
 				class: 'avatar--m',
-				url: 'avatar.jpg',
+				url: 'avatar.svg',
 				size: 50,
 			},
 		},
@@ -66,7 +66,7 @@ const messages: MessageType[] = [
 		text: 'Hi, I hope you are doing well, yesterday you have gave a pen. This very nice, i am very happy for this.yesterday you have gave a pen This very nice',
 		user: {
 			class: 'avatar--s',
-			url: 'user1.jpg',
+			url: 'avatar.svg',
 			size: 44,
 		},
 	},
@@ -82,7 +82,7 @@ const messages: MessageType[] = [
 		text: 'Hi, I hope you are doing well, yesterday you have gave a pen. This very nice, i am very happy for this.yesterday you have gave a pen This very nice',
 		user: {
 			class: 'avatar--s',
-			url: 'user1.jpg',
+			url: 'avatar.svg',
 			size: 44,
 		},
 	},

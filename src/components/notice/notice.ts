@@ -1,29 +1,23 @@
 import { Block } from '../../core/Block';
-import { StoreEvents, Store } from '../../core/Store';
 import { withStore } from '../../utils/withStore';
 import { template } from './notice.tmpl';
+import { Store } from '../../core/Store';
 
 type NoticeType = {
-	noticeClass?: string,
-	noticeText?: string,
 	noticeError?: string,
 	noticeSuccess?: string,
-	isShow?: boolean,
 }
 
 class NoticeClass extends Block<NoticeType> {
 	constructor(props: NoticeType) {
 		super(props);
-
-		Store.on(StoreEvents.Updated, this.onStoreUpdate);
 	}
 
-	onStoreUpdate = () => {
-		if (this.props.noticeError) {
-			this.error(this.props.noticeError);
-		}
-		if (this.props.noticeSuccess) {
-			this.success(this.props.noticeSuccess);
+	componentDidMount() {
+		if (this.props.noticeSuccess || this.props.noticeError) {
+			setTimeout(() => {
+				this.hide();
+			}, 5000);
 		}
 	}
 
@@ -31,35 +25,15 @@ class NoticeClass extends Block<NoticeType> {
 		return this.compile(template, { ...this.props });
 	}
 
-	error(message: string) {
-		this.setProps({
-			isShow: true,
-			noticeClass: 'notice--error',
-			noticeText: message,
-		});
-
-		setTimeout(() => {
-			this.hide();
-		}, 5000);
-	}
-
-	success(message: string) {
-		this.setProps({
-			isShow: true,
-			noticeClass: 'notice--success',
-			noticeText: message,
-		});
-
-		setTimeout(() => {
-			this.hide();
-		}, 5000);
-	}
-
 	hide() {
 		this.setProps({
-			isShow: false,
-			noticeClass: '',
-			noticeText: '',
+			noticeError: '',
+			noticeSuccess: '',
+		});
+
+		Store.dispatch({
+			noticeError: '',
+			noticeSuccess: '',
 		});
 	}
 }

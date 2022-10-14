@@ -22,9 +22,12 @@ export class UserApi {
 		});
 	}
 
-	avatar(data: FormData) {
+	avatar(file: File) {
+		const formData = new FormData();
+		formData.append('avatar', file);
+
 		return this._api.put('/profile/avatar', {
-			data: JSON.stringify(data),
+			data: formData,
 		});
 	}
 }

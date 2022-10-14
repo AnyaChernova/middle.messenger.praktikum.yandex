@@ -10,7 +10,7 @@ export const template: string = `
 			</div>
 		</div>
 		<div class="cell gaps__item w-6/12 text-right">
-			<button class="link link--gray mr-20">Delete</button>
-			<button class="link">Update</button>
+			{{{updateBtn}}}
+			{{{fileUploader}}}
 		</div>
 	</div>`;

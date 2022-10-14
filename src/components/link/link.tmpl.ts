@@ -1,5 +1,5 @@
 export const template: string = `
-	<button class="{{linkClass}} {{activeClass}}">
+	<button class="{{linkClass}} {{activeClass}}" type="button">
 		{{#if linkIcon}}
 			<span class="{{linkIconClass}}">{{{linkIcon}}}</span>
 		{{/if}}

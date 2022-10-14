@@ -1,4 +1,5 @@
 import { queryStringify } from '../utils/queryStringify';
+import { API_URL } from '../utils/consts';
 
 enum Methods {
 	Get = 'GET',
@@ -20,7 +21,7 @@ type RequestResponse = {
 }
 
 export class HTTPTransport {
-	static BASE_URL = 'https://ya-praktikum.tech/api/v2';
+	static BASE_URL = API_URL;
 
 	private readonly _apiURL: string;
 

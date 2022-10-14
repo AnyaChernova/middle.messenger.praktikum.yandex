@@ -4,6 +4,7 @@ import { AuthDTO, UserDTO } from '../api/types';
 import { Dispatch } from '../core/Store';
 import { AppState } from '../types/app';
 import { transformUser } from '../utils/apiTransformers';
+import { RESOURCES_URL } from '../utils/consts';
 
 const api = new AuthApi();
 
@@ -12,7 +13,10 @@ export const login = async (dispatch: Dispatch<AppState>, _state: AppState, data
 		await api.signin(data);
 		const user = await getUser();
 		if (user) {
-			dispatch({ user: transformUser(user) });
+			dispatch({
+				user: transformUser(user),
+				avatar: user.avatar ? `${RESOURCES_URL}${user.avatar}` : '',
+			});
 		}
 		new Router().go('/messages');
 	} catch (err: any) {

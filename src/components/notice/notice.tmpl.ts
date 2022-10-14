@@ -1,2 +1,9 @@
 export const template: string = `
-	<div class="notice {{noticeClass}} {{#if isShow}} notice--active {{/if}}">{{noticeText}}</div>`;
+	{{#if noticeError}}
+			<div class="notice notice--error notice--active">{{noticeError}}</div>
+	{{ else if noticeSuccess}}
+			<div class="notice notice--success notice--active">{{noticeSuccess}}</div>
+	{{ else }}
+			<div class="notice"></div>
+	{{/if}}
+`;

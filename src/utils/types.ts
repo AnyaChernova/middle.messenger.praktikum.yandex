@@ -50,11 +50,13 @@ type BtnType = {
 	btnText: string,
 	btnIcon?: string,
 	btnIconClass?: string,
+	btnType?: string,
+	asLink?: boolean,
 	events?: Record<string, object>,
 };
 
 type LinkType = {
-	to: string,
+	to?: string,
 	linkClass?: string,
 	activeClass?: string,
 	linkText: string,

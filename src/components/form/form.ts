@@ -17,7 +17,7 @@ export class Form extends Block<any> {
 		this.formData = {};
 	}
 
-	validate(e: MouseEvent) {
+	protected validate(e: MouseEvent) {
 		e.preventDefault();
 		const fields = this.children.fields as FieldValidate[];
 		let isValid: boolean = true;
@@ -33,5 +33,5 @@ export class Form extends Block<any> {
 		}
 	}
 
-	onSubmit() {}
+	protected onSubmit() {}
 }
