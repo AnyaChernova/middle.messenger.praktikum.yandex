@@ -7,6 +7,14 @@ export class Button extends Block<BtnType> {
 		super(props);
 	}
 
+	setClick(handler: () => void) {
+		this.setProps({
+			events: {
+				click: { handler }
+			}
+		});
+	}
+
 	render() {
 		return this.compile(template, { ...this.props });
 	}

@@ -1,4 +1,3 @@
-import { pencilIcon } from '../icons/pencil';
 import { moreIcon } from '../icons/more';
 
 export const template: string = `
@@ -6,9 +5,8 @@ export const template: string = `
 		<div class="chat__aside">
 			<div class="chat__header">
 				<h2 class="title title--l">Messages</h2>
-				<button class="btn btn--icon btn--primary">
-					${pencilIcon}
-				</button>
+				{{{btnAdd}}}
+				{{{modalAdd}}}
 			</div>
 			<div class="chat__tabs">
 				{{#each tabs}}

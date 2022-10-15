@@ -33,11 +33,7 @@ export class SettingsProfileClass extends Form {
 	componentDidMount() {
 		if (this.props.user) {
 			const fields = this.children.fields as FieldValidate[];
-			fields.forEach((field) => {
-				field.setProps({
-					value: this.props.user[field.uniqueName!]
-				});
-			});
+			fields.forEach((field) => field.setValue(this.props.user[field.uniqueName!]));
 		}
 	}
 }

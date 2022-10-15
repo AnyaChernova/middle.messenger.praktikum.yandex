@@ -26,14 +26,8 @@ export class SettingsAvatarForm extends Block<Indexed> {
 			Store.dispatch(updateAvatar, fileUploader.files[0]);
 		}
 
-		(this.children.updateBtn as Block<Indexed>).setProps({
-			events: {
-				click: {
-					handler: () => {
-						fileUploader.emitClick();
-					}
-				}
-			}
+		(this.children.updateBtn as Button).setClick(() => {
+			fileUploader.emitClick();
 		});
 	}
 

@@ -43,6 +43,10 @@ export class FieldValidate extends Block<FieldType> {
 		);
 	}
 
+	setValue(value: string) {
+		this.setProps({ value });
+	}
+
 	validate() {
 		return this.validator!.validate();
 	}

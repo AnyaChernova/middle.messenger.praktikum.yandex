@@ -4,6 +4,15 @@
 	max-width: 506px;
 }
 
+.formBox--modal {
+	display: flex;
+	flex-direction: column;
+
+	.formBox__footer {
+		margin-top: auto;
+	}
+}
+
 .formBox__header {
 	margin-bottom: 40px;
 }

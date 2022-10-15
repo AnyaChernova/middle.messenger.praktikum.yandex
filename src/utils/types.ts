@@ -47,7 +47,7 @@ type TabType = {
 
 type BtnType = {
 	btnClass?: string,
-	btnText: string,
+	btnText?: string,
 	btnIcon?: string,
 	btnIconClass?: string,
 	btnType?: string,

@@ -21,3 +21,7 @@ export type AuthDTO = {
 	phone?: string;
 	email?: string;
 };
+
+export type ChatDTO = {
+	title: string;
+};
