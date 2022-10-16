@@ -16,13 +16,15 @@ export class ChatAddForm extends Form {
 			})],
 			button: new Button({
 				btnClass: 'w-full',
-				btnText: 'Создать',
+				btnText: 'Create',
 			}),
 		});
 	}
 
-	onSubmit() {
-		Store.dispatch(createChat, this.formData);
+	async onSubmit() {
+		(this.children.button as Button).setLoading(true);
+		await Store.dispatch(createChat, this.formData);
+		Store.dispatch({ activeModal: '' });
 	}
 
 	render() {

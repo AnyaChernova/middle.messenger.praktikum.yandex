@@ -15,6 +15,10 @@ export class Button extends Block<BtnType> {
 		});
 	}
 
+	setLoading(isLoading: boolean) {
+		this.setProps({ isLoading });
+	}
+
 	render() {
 		return this.compile(template, { ...this.props });
 	}

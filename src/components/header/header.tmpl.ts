@@ -1,6 +1,6 @@
 import { moonIcon } from '../icons/moon';
-import { bellIcon } from '../icons/bell';
 import { searchIcon } from '../icons/search';
+import { sunIcon } from '../icons/sun';
 
 export const template: string = `
 	<header class="header">
@@ -15,8 +15,8 @@ export const template: string = `
 				<button class="btn btn--icon mr-16">
 					${moonIcon}
 				</button>
-				<button class="btn btn--icon">
-					${bellIcon}
+				<button class="btn btn--icon btn--primary">
+					${sunIcon}
 				</button>
 				{{{avatar}}}
 			</div>

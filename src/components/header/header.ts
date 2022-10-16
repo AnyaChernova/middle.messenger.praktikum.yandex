@@ -1,9 +1,10 @@
 import { Block } from '../../core/Block';
 import { template } from './header.tmpl';
+import { AvatarUser } from '../avatar/avatarUser';
 
 export class Header extends Block<Indexed> {
-	constructor(props: Indexed) {
-		super(props);
+	constructor() {
+		super({ avatar: new AvatarUser() });
 	}
 
 	render() {

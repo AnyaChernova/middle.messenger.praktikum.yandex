@@ -27,7 +27,9 @@ export class AuthRegisterForm extends AuthForm {
 		});
 	}
 
-	onSubmit() {
-		Store.dispatch(register, this.formData);
+	async onSubmit() {
+		(this.children.button as Button).setLoading(true);
+		await Store.dispatch(register, this.formData);
+		(this.children.button as Button).setLoading(false);
 	}
 }

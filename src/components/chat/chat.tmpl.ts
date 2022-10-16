@@ -1,5 +1,3 @@
-import { moreIcon } from '../icons/more';
-
 export const template: string = `
 	<div class="chat">
 		<div class="chat__aside">
@@ -8,20 +6,11 @@ export const template: string = `
 				{{{btnAdd}}}
 				{{{modalAdd}}}
 			</div>
-			<div class="chat__tabs">
-				{{#each tabs}}
-					{{{this}}}
-				{{/each}}
-			</div>
+			{{{chatList}}}
 		</div>
 		<div class="chat__main">
 			<div class="chatPanel">
-				<div class="chatPanel__header">
-					{{{user}}}
-					<button class="btn btn--round">
-						${moreIcon}
-					</button>
-				</div>
+				{{{header}}}
 				<div class="chatPanel__inner">
 					{{#each messages}}
 						{{{this}}}

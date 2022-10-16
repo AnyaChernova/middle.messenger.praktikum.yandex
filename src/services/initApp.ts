@@ -11,7 +11,7 @@ export const initApp = async (dispatch: Dispatch<AppState>) => {
 		if (user) {
 			dispatch({
 				user: transformUser(user),
-				avatar: user.avatar ? `${RESOURCES_URL}${user.avatar}` : '',
+				avatar: user.avatar ? `${RESOURCES_URL}${user.avatar}` : 'avatar.svg',
 			});
 			if (document.location.pathname === '/') {
 				new Router().go('/messages');

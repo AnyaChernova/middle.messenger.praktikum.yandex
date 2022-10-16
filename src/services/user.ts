@@ -39,7 +39,7 @@ export const updateAvatar = async (dispatch: Dispatch<AppState>, _state: AppStat
 		const response = await api.avatar(data);
 		if (response.data) {
 			dispatch({
-				avatar: response.data.avatar ? `${RESOURCES_URL}${response.data.avatar}` : '',
+				avatar: response.data.avatar ? `${RESOURCES_URL}${response.data.avatar}` : 'avatar.svg',
 				noticeSuccess: 'Avatar updated successfully',
 			});
 		}

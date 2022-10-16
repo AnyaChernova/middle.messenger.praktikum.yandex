@@ -27,7 +27,9 @@ export class AuthLoginForm extends AuthForm {
 		});
 	}
 
-	onSubmit() {
-		Store.dispatch(login, this.formData);
+	async onSubmit() {
+		(this.children.button as Button).setLoading(true);
+		await Store.dispatch(login, this.formData);
+		(this.children.button as Button).setLoading(false);
 	}
 }

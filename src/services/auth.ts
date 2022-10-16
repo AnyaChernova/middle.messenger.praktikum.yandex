@@ -15,7 +15,7 @@ export const login = async (dispatch: Dispatch<AppState>, _state: AppState, data
 		if (user) {
 			dispatch({
 				user: transformUser(user),
-				avatar: user.avatar ? `${RESOURCES_URL}${user.avatar}` : '',
+				avatar: user.avatar ? `${RESOURCES_URL}${user.avatar}` : 'avatar.svg',
 			});
 		}
 		new Router().go('/messages');

@@ -5,6 +5,10 @@ import { Button } from '../button/button';
 import { Modal } from '../modal/modal';
 import { ChatAddForm } from './chatAddForm/chatAddForm';
 import { pencilIcon } from '../icons/pencil';
+import { ChatList } from './chatList/chatList';
+import { getChats } from '../../services/chats';
+import { Store } from '../../core/Store';
+import { ChatHeader } from './chatHeader/chatHeader';
 
 export class Chat extends Block<Indexed> {
 	constructor(props: Indexed) {
@@ -12,10 +16,7 @@ export class Chat extends Block<Indexed> {
 			btnClass: 'btn--icon btn--primary',
 			btnIcon: pencilIcon,
 		});
-		const modalAddChat = new Modal({
-			isOpen: false,
-			content: new ChatAddForm(),
-		});
+		const modalAddChat = new Modal({ content: () => new ChatAddForm() });
 		const fieldMessage = new ChatField({ name: 'message', type: 'text' });
 
 
@@ -24,12 +25,16 @@ export class Chat extends Block<Indexed> {
 			btnAdd: btnAddChat,
 			modalAdd: modalAddChat,
 			field: fieldMessage,
+			header: new ChatHeader(),
+			chatList: new ChatList(),
 		});
+
+		Store.dispatch(getChats);
 	}
 
 	componentDidMount() {
 		(this.children.btnAdd as Button).setClick(() => {
-			(this.children.modalAdd as Modal).open();
+			Store.dispatch({ activeModal: (this.children.modalAdd as Block<Indexed>).id });
 		});
 	}
 

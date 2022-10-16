@@ -2,14 +2,15 @@ import { Block } from '../../core/Block';
 import { template } from './modal.tmpl';
 import { Button } from '../button/button';
 import { closeIcon } from '../icons/close';
+import { withStore } from '../../utils/withStore';
+import { Store } from '../../core/Store';
 
 type ModalPropsType = {
-	content?: Block<Indexed>,
-	isOpen?: boolean,
-	closeBtn?: Button,
+	content: () => typeof Block;
+	activeModal: string;
 }
 
-export class Modal extends Block<ModalPropsType> {
+class ModalClass extends Block<Indexed> {
 	constructor(props: ModalPropsType) {
 		const closeBtn = new Button({
 				btnClass: 'modalContainer__close',
@@ -20,23 +21,21 @@ export class Modal extends Block<ModalPropsType> {
 			...props,
 			closeBtn,
 		});
-	}
 
-	componentDidMount() {
 		(this.children.closeBtn as Button).setClick(() => {
-			this.close();
+			Store.dispatch({ activeModal: '' });
 		});
 	}
 
-	open() {
-		this.setProps({ isOpen: true });
-	}
-
-	close () {
-		this.setProps({ isOpen: false });
-	}
-
 	render() {
-		return this.compile(template, { ...this.props });
+		this.children.content = this.props.content();
+		const isOpen = this.props.activeModal === this.id;
+		return this.compile(template, { ...this.props, isOpen });
 	}
 }
+
+export const Modal = withStore(ModalClass as typeof Block, (state) => {
+	return {
+		activeModal: state.activeModal,
+	};
+});

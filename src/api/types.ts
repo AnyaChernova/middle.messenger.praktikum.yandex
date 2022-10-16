@@ -25,3 +25,17 @@ export type AuthDTO = {
 export type ChatDTO = {
 	title: string;
 };
+
+export type ChatMessageDTO = {
+	user: UserDTO;
+	time: string;
+	content: string;
+};
+
+export type ChatItemDTO = {
+	id: number;
+	title: string;
+	avatar: string | null;
+	unread_count: number;
+	last_message:Nullable<ChatMessageDTO>;
+};

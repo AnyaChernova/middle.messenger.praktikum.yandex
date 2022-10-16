@@ -1,9 +1,18 @@
 .avatar {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	width: 48px;
 	height: 48px;
 	border-radius: 50%;
 	overflow: hidden;
 	flex-shrink: 0;
+	background-color: $color-primary;
+	border: 1px solid transparent;
+	color: $color-light;
+	text-transform: uppercase;
+	font-size: 16px;
+	font-weight: 500;
 }
 
 .avatar--l {

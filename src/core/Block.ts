@@ -66,7 +66,7 @@ export class Block<Props extends Indexed> {
 		Object.entries(propsAndChildren).forEach(([key, value]) => {
 			if (value instanceof Block) {
 				children[key] = value;
-			} else if (Array.isArray(value) && value.every(v => v instanceof Block)) {
+			} else if (Array.isArray(value) && value.length && value.every(v => v instanceof Block)) {
 				children[key] = value;
 			} else {
 				props[key as keyof Props] = value;

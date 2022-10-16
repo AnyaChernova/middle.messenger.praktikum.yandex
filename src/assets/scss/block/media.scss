@@ -51,4 +51,8 @@
 	color: var(--color-text-gray);
 	font-size: 12px;
 	margin-top: 6px;
+	white-space: nowrap;
+	max-width: 100%;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }

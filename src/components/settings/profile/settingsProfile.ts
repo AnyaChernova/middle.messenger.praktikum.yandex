@@ -3,7 +3,7 @@ import { SettingsAvatarForm } from '../avatar/settingsAvatarForm';
 import { Button } from '../../button/button';
 import { Form } from '../../form/form';
 import { template } from './settingsProfile.tmpl';
-import { fieldsProfileData, avatarData } from './mocks';
+import { fieldsProfileData } from './mocks';
 import { withStore } from '../../../utils/withStore';
 import { updateProfile } from '../../../services/user';
 import { Store } from '../../../core/Store';
@@ -12,7 +12,13 @@ import { AvatarUser } from '../../avatar/avatarUser';
 export class SettingsProfileClass extends Form {
 	constructor(props: Indexed) {
 		const fieldsBlocks: FieldValidate[] = fieldsProfileData.map((field) => new FieldValidate(field));
-		const avatarFormBlock = new SettingsAvatarForm({ avatar: new AvatarUser(avatarData) });
+		const avatarFormBlock = new SettingsAvatarForm({
+			avatar: new AvatarUser({
+				class: 'avatar--l',
+				url: 'avatar.svg',
+				size: 64,
+			})
+		});
 		const buttonBlock = new Button({ btnClass: 'w-full', btnText: 'Save' });
 		super({
 			...props,
@@ -22,8 +28,10 @@ export class SettingsProfileClass extends Form {
 		});
 	}
 
-	onSubmit() {
-		Store.dispatch(updateProfile, this.formData);
+	async onSubmit() {
+		(this.children.button as Button).setLoading(true);
+		await Store.dispatch(updateProfile, this.formData);
+		(this.children.button as Button).setLoading(false);
 	}
 
 	render() {
