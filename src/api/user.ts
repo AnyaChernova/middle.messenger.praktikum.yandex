@@ -22,6 +22,13 @@ export class UserApi {
 		});
 	}
 
+	search(data: { login: string }) {
+		return this._api.post('/search', {
+			data: JSON.stringify(data),
+			headers: { "Content-Type": "application/json" },
+		});
+	}
+
 	avatar(file: File) {
 		const formData = new FormData();
 		formData.append('avatar', file);

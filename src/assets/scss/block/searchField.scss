@@ -23,8 +23,20 @@
 }
 
 .searchField__icon {
+	width: 20px;
+	height: 20px;
 	position: absolute;
 	left: 17px;
 	top: 11px;
 	color: var(--color-text-gray);
+}
+
+.searchField__loader {
+	svg {
+		width: 100%;
+		height: 100%;
+		transform: rotate(0deg);
+		-webkit-animation: spinner-animation 1.5s linear infinite;
+		animation: spinner-animation 1.5s linear infinite;
+	}
 }

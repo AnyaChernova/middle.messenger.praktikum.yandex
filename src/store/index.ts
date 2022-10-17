@@ -7,5 +7,6 @@ export const defaultState: AppState = {
 	avatar: 'avatar.svg',
 	chatList: [],
 	activeChat: null,
+	activeChatUsers: [],
 	activeModal: '',
 };

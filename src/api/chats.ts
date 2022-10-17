@@ -18,4 +18,8 @@ export class ChatsApi {
 	list() {
 		return this._api.get('');
 	}
+
+	users(id: number) {
+		return this._api.get(`/${id}/users`);
+	}
 }

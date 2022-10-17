@@ -1,7 +1,4 @@
 import { moreIcon } from '../../icons/more';
-import { plusIcon } from '../../icons/plus';
-import { removeIcon } from '../../icons/remove';
-import { minusIcon } from '../../icons/minus';
 
 export const template: string = `
 	<div class="chatPanel__header">
@@ -18,18 +15,9 @@ export const template: string = `
 				${moreIcon}
 			</button>
 			<div class="dropdown__content">
-				<button class="dropdown__item dropdown__item--primary">
-					${plusIcon}
-					<span class="dropdown__text">Add user</span>
-				</button>
-				<button class="dropdown__item">
-					${minusIcon}
-					<span class="dropdown__text">Delete user</span>
-				</button>
-				<button class="dropdown__item dropdown__item--danger">
-					${removeIcon}
-					<span class="dropdown__text">Delete chat</span>
-				</button>
+				{{{usersBtn}}}
+				{{{deleteChatBtn}}}
 			</div>
 		</div>
+		{{{usersModal}}}
 	</div>`;

@@ -6,5 +6,5 @@ export const template: string = `
 		{{#if btnIcon}}
 			<span class="{{btnIconClass}}">{{{btnIcon}}}</span>
 		{{/if}}
-		<span class="btn__text">{{btnText}}</span>
+		<span class="btn__text {{btnTextClass}}">{{btnText}}</span>
 	</button>`;

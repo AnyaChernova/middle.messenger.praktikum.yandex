@@ -49,3 +49,20 @@ export const updateAvatar = async (dispatch: Dispatch<AppState>, _state: AppStat
 		}
 	}
 };
+
+export const searchUsers = async (dispatch: Dispatch<AppState>, _state: AppState, data: { login: string}) => {
+	try {
+		const response = await api.search(data);
+		return response.data.map((user: UserDTO) => {
+			return {
+				id: user.id,
+				avatar: user.avatar ? `${RESOURCES_URL}${user.avatar}` : 'avatar.svg',
+				name: user.display_name || user.first_name,
+			}
+		});
+	} catch (err: any) {
+		if (err?.data?.reason) {
+			dispatch({ noticeError: err.data.reason });
+		}
+	}
+};

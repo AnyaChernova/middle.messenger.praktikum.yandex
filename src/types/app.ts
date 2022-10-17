@@ -8,5 +8,6 @@ export type AppState = {
 	avatar: string,
 	chatList: [],
 	activeChat: Nullable<ChatItemType>,
+	activeChatUsers: [],
 	activeModal: string,
 }

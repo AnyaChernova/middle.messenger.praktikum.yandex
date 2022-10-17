@@ -34,8 +34,10 @@ type MessageType = {
 
 type UserType = {
 	name: string;
-	caption: string;
-	avatar: AvatarType | Block<AvatarType>;
+	userClass?: string;
+	caption?: string;
+	id?: number;
+	avatar?: AvatarType | Block<AvatarType> | string;
 };
 
 type TabType = {
@@ -50,6 +52,7 @@ type TabType = {
 type BtnType = {
 	btnClass?: string;
 	btnText?: string;
+	btnTextClass?: string;
 	btnIcon?: string;
 	btnIconClass?: string;
 	btnType?: string;

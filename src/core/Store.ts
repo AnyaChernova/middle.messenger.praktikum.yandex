@@ -38,9 +38,9 @@ class Storage extends EventBus {
 		this.emit(StoreEvents.Updated, prevState, nextState);
 	}
 
-	async dispatch(nextStateOrAction: Partial<AppState> | Action<AppState>, payload?: any) {
+	async dispatch(nextStateOrAction: Partial<AppState> | Action<AppState>, payload?: any): Promise<any> {
 		if (typeof nextStateOrAction === 'function') {
-			await nextStateOrAction(this.dispatch.bind(this), this._state, payload);
+			return nextStateOrAction(this.dispatch.bind(this), this._state, payload);
 		} else {
 			this.set({ ...this._state, ...nextStateOrAction });
 		}
