@@ -11,21 +11,21 @@ export class UserApi {
 	profile(data: UserDTO) {
 		return this._api.put('/profile', {
 			data: JSON.stringify(data),
-			headers: { "Content-Type": "application/json" },
+			headers: { 'Content-Type': 'application/json' },
 		});
 	}
 
 	password(data: UserDTO) {
 		return this._api.put('/password', {
 			data: JSON.stringify(data),
-			headers: { "Content-Type": "application/json" },
+			headers: { 'Content-Type': 'application/json' },
 		});
 	}
 
 	search(data: { login: string }) {
 		return this._api.post('/search', {
 			data: JSON.stringify(data),
-			headers: { "Content-Type": "application/json" },
+			headers: { 'Content-Type': 'application/json' },
 		});
 	}
 

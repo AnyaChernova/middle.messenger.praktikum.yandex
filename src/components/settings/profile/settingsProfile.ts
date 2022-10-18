@@ -11,13 +11,14 @@ import { AvatarUser } from '../../avatar/avatarUser';
 
 export class SettingsProfileClass extends Form {
 	constructor(props: Indexed) {
-		const fieldsBlocks: FieldValidate[] = fieldsProfileData.map((field) => new FieldValidate(field));
+		const fieldsBlocks: FieldValidate[] = fieldsProfileData
+			.map((field) => new FieldValidate(field));
 		const avatarFormBlock = new SettingsAvatarForm({
 			avatar: new AvatarUser({
 				class: 'avatar--l',
 				url: 'avatar.svg',
 				size: 64,
-			})
+			}),
 		});
 		const buttonBlock = new Button({ btnClass: 'w-full', btnText: 'Save' });
 		super({
@@ -46,8 +47,6 @@ export class SettingsProfileClass extends Form {
 	}
 }
 
-export const SettingsProfile = withStore(SettingsProfileClass, (state) => {
-	return {
+export const SettingsProfile = withStore(SettingsProfileClass, (state) => ({
 		user: state.user,
-	};
-});
+	}));

@@ -6,7 +6,7 @@
 		"start": "npm run build && node ./server.js",
 		"dev": "parcel src/index.html",
 		"build": "parcel build src/index.html",
-		"lint": "eslint src/**",
+		"lint": "eslint --ext .js,.ts --fix src/**",
 		"stylelint": "stylelint src/assets/**"
 	},
 	"author": "Anna Chernova",

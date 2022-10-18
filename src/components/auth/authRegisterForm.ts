@@ -11,7 +11,7 @@ export class AuthRegisterForm extends AuthForm {
 		const fieldsBlocks: FieldValidate[] = registerFields.map((field) => new FieldValidate(field));
 		const buttonBlock = new Button({
 			btnClass: 'w-full',
-			btnText: 'Sign Up'
+			btnText: 'Sign Up',
 		});
 		const linkBlock = new Link({
 			to: '/login',

@@ -21,10 +21,10 @@ export class SettingsAvatarForm extends Block<Indexed> {
 	}
 
 	componentDidMount() {
-		const fileUploader = this.children.fileUploader as FileUploader
+		const fileUploader = this.children.fileUploader as FileUploader;
 		fileUploader.onSubmit = () => {
 			Store.dispatch(updateAvatar, fileUploader.files[0]);
-		}
+		};
 
 		(this.children.updateBtn as Button).setClick(() => {
 			fileUploader.emitClick();

@@ -44,4 +44,4 @@ export type ChatItemDTO = {
 export type UsersToChatDTO = {
 	users: number[];
 	chatId: number;
-}
+};

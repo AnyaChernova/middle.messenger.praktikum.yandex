@@ -1,5 +1,6 @@
 .btn {
 	@include btn;
+
 	--height: 60px;
 
 	display: inline-flex;
@@ -24,16 +25,6 @@
 	}
 }
 
-.btn--loading {
-	.btn__text {
-		opacity: 0;
-	}
-
-	.btn__loader {
-		display: block;
-	}
-}
-
 .btn--icon {
 	height: unset;
 	padding: 0;
@@ -52,6 +43,7 @@
 
 .btn--round {
 	--height: 44px;
+
 	width: 44px;
 	padding: 0;
 	border-radius: 50%;
@@ -65,8 +57,8 @@
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
-	width: calc(var(--height) * 0.5);
-	height: calc(var(--height) * 0.5);
+	width: calc(var(--height) * .5);
+	height: calc(var(--height) * .5);
 
 	svg {
 		width: 100%;
@@ -77,15 +69,27 @@
 	}
 }
 
+.btn--loading {
+	.btn__text {
+		opacity: 0;
+	}
+
+	.btn__loader {
+		display: block;
+	}
+}
+
 @keyframes spinner-animation {
 	0% {
 		stroke-dasharray: 7 70;
 		transform: rotate(0deg);
 	}
+
 	50% {
 		stroke-dasharray: 50 70;
 		transform: rotate(180deg);
 	}
+
 	100% {
 		stroke-dasharray: 7 70;
 		transform: rotate(2turn);

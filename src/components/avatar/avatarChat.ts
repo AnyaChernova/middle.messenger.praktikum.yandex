@@ -8,14 +8,12 @@ class AvatarChatClass extends Avatar {
 			class: 'avatar--s',
 			url: '',
 			size: 44,
-			...props
+			...props,
 		});
 	}
 }
 
-export const AvatarChat = withStore(AvatarChatClass as typeof Block, (state) => {
-	return {
+export const AvatarChat = withStore(AvatarChatClass as typeof Block, (state) => ({
 		url: state.activeChat?.avatar ?? '',
 		title: state.activeChat?.title ? state.activeChat.title[0] : '',
-	};
-});
+	}));

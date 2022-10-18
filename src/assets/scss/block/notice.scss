@@ -1,9 +1,10 @@
 .notice {
 	--color-bg: var(--color-plate);
+
 	position: fixed;
 	bottom: 20px;
 	right: 20px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, .05);
 	background-color: var(--color-light);
 	color: var(--color-bg);
 	border-radius: 4px;
@@ -24,7 +25,7 @@
 		z-index: 1;
 		background-color: var(--color-bg);
 		border-radius: 4px;
-		opacity: 0.1;
+		opacity: .1;
 	}
 }
 
@@ -37,11 +38,11 @@
 }
 
 .notice--active {
-	animation: fadeInUp 0.6s 1 ease;
+	animation: fade-in-up .6s 1 ease;
 	z-index: 1000;
 }
 
-@keyframes fadeInUp {
+@keyframes fade-in-up {
 	from {
 		opacity: 0;
 		transform: translate3d(0, 100%, 0);

@@ -12,8 +12,6 @@ class AvatarUserClass extends Avatar {
 	}
 }
 
-export const AvatarUser = withStore(AvatarUserClass as typeof Block, (state) => {
-	return {
+export const AvatarUser = withStore(AvatarUserClass as typeof Block, (state) => ({
 		url: state.avatar,
-	};
-});
+	}));

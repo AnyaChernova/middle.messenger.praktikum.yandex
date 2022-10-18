@@ -97,11 +97,9 @@ export class Validator {
 			const isValidLength = this.checkValidLength(this._min, this._max);
 			if (isValidLength) {
 				return this.checkValidValue();
-			} else {
-				return false;
 			}
-		} else {
-			return this.checkValidValue();
+				return false;
 		}
+			return this.checkValidValue();
 	}
 }

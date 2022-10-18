@@ -18,7 +18,6 @@ export class Chat extends Block<Indexed> {
 		const modalAddChat = new Modal({ content: () => new ChatAddForm() });
 		const fieldMessage = new ChatField({ name: 'message', type: 'text' });
 
-
 		super({
 			...props,
 			btnAdd: btnAddChat,

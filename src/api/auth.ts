@@ -19,14 +19,14 @@ export class AuthApi {
 	signup(data: AuthDTO) {
 		return this._api.post('/signup', {
 			data: JSON.stringify(data),
-			headers: { "Content-Type": "application/json" },
+			headers: { 'Content-Type': 'application/json' },
 		});
 	}
 
 	signin(data: AuthDTO) {
 		return this._api.post('/signin', {
 			data: JSON.stringify(data),
-			headers: { "Content-Type": "application/json" },
+			headers: { 'Content-Type': 'application/json' },
 		});
 	}
 }

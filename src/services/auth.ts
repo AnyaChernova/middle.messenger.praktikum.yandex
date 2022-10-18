@@ -2,11 +2,21 @@ import { AuthApi } from '../api/auth';
 import { Router } from '../core/Router';
 import { AuthDTO, UserDTO } from '../api/types';
 import { Dispatch } from '../core/Store';
-import {AppState} from '../utils/types';
+import { AppState } from '../utils/types';
 import { transformUser } from '../utils/apiTransformers';
 import { RESOURCES_URL } from '../utils/consts';
 
 const api = new AuthApi();
+
+export const getUser = async () => {
+	try {
+		const res = await api.user();
+		return res.data as UserDTO;
+	} catch (e) {
+		console.log(e);
+		return null;
+	}
+};
 
 export const login = async (dispatch: Dispatch<AppState>, _state: AppState, data: AuthDTO) => {
 	try {
@@ -38,15 +48,6 @@ export const register = async (dispatch: Dispatch<AppState>, _state: AppState, d
 		if (err?.data?.reason) {
 			dispatch({ noticeError: err.data.reason });
 		}
-	}
-};
-
-export const getUser = async () => {
-	try {
-		const res = await api.user();
-		return res.data as UserDTO;
-	} catch (e) {
-		console.log(e);
 	}
 };
 

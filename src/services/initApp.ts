@@ -25,4 +25,4 @@ export const initApp = async (dispatch: Dispatch<AppState>) => {
 	} catch (e) {
 		new Router().go('/');
 	}
-}
+};

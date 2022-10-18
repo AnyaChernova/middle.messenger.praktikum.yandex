@@ -22,10 +22,10 @@ export class ChatItem extends Block<Indexed> {
 				click: {
 					handler: () => {
 						Store.dispatch(setActiveChat, this.props.id);
-					}
-				}
-			}
-		})
+					},
+				},
+			},
+		});
 	}
 
 	render() {

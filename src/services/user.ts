@@ -7,7 +7,11 @@ import { RESOURCES_URL } from '../utils/consts';
 
 const api = new UserApi();
 
-export const updateProfile = async (dispatch: Dispatch<AppState>, _state: AppState, data: UserDTO) => {
+export const updateProfile = async (
+	dispatch: Dispatch<AppState>,
+	_state: AppState,
+	data: UserDTO,
+) => {
 	try {
 		const response = await api.profile(data);
 		if (response.data) {
@@ -23,7 +27,11 @@ export const updateProfile = async (dispatch: Dispatch<AppState>, _state: AppSta
 	}
 };
 
-export const updatePassword = async (dispatch: Dispatch<AppState>, _state: AppState, data: UserDTO) => {
+export const updatePassword = async (
+	dispatch: Dispatch<AppState>,
+	_state: AppState,
+	data: UserDTO,
+) => {
 	try {
 		await api.password(data);
 		dispatch({ noticeSuccess: 'Profile updated successfully' });
@@ -34,7 +42,11 @@ export const updatePassword = async (dispatch: Dispatch<AppState>, _state: AppSt
 	}
 };
 
-export const updateAvatar = async (dispatch: Dispatch<AppState>, _state: AppState, data: File) => {
+export const updateAvatar = async (
+	dispatch: Dispatch<AppState>,
+	_state: AppState,
+	data: File,
+) => {
 	try {
 		const response = await api.avatar(data);
 		if (response.data) {
@@ -50,19 +62,22 @@ export const updateAvatar = async (dispatch: Dispatch<AppState>, _state: AppStat
 	}
 };
 
-export const searchUsers = async (dispatch: Dispatch<AppState>, _state: AppState, data: { login: string}) => {
+export const searchUsers = async (
+	dispatch: Dispatch<AppState>,
+	_state: AppState,
+	data: { login: string },
+) => {
 	try {
 		const response = await api.search(data);
-		return response.data.map((user: UserDTO) => {
-			return {
+		return response.data.map((user: UserDTO) => ({
 				id: user.id,
 				avatar: user.avatar ? `${RESOURCES_URL}${user.avatar}` : 'avatar.svg',
 				name: user.display_name || user.first_name,
-			}
-		});
+			}));
 	} catch (err: any) {
 		if (err?.data?.reason) {
 			dispatch({ noticeError: err.data.reason });
 		}
+		return [];
 	}
 };

@@ -16,9 +16,9 @@ export class Aside extends Block<Indexed> {
 				click: {
 					handler: () => {
 						Store.dispatch(logout);
-					}
-				}
-			}
+					},
+				},
+			},
 		});
 
 		super({ ...props, logoutBtn });

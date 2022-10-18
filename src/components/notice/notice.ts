@@ -6,7 +6,7 @@ import { Store } from '../../core/Store';
 type NoticeType = {
 	noticeError?: string,
 	noticeSuccess?: string,
-}
+};
 
 class NoticeClass extends Block<NoticeType> {
 	constructor(props: NoticeType) {
@@ -38,9 +38,7 @@ class NoticeClass extends Block<NoticeType> {
 	}
 }
 
-export const Notice = withStore(NoticeClass as typeof Block, (state) => {
-	return {
+export const Notice = withStore(NoticeClass as typeof Block, (state) => ({
 		noticeError: state.noticeError,
 		noticeSuccess: state.noticeSuccess,
-	};
-});
+	}));

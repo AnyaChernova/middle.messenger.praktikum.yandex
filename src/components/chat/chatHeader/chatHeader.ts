@@ -31,10 +31,10 @@ class ChatHeaderClass extends Block<Indexed> {
 			...props,
 			avatar: new AvatarChat(),
 			usersModal: new Modal({
-				content: () => new ChatUsersForm({ selectedUsers: [] })
+				content: () => new ChatUsersForm({ selectedUsers: [] }),
 			}),
 			chatDeleteModal: new Modal({
-				content: () => new ChatDeleteForm({ title: '', chatId: 0, })
+				content: () => new ChatDeleteForm({ title: '', chatId: 0 }),
 			}),
 			usersBtn,
 			deleteChatBtn,
@@ -46,9 +46,9 @@ class ChatHeaderClass extends Block<Indexed> {
 					target: '.dropdown__open',
 					handler: () => {
 						this._openDropdown();
-					}
-				}
-			}
+					},
+				},
+			},
 		});
 	}
 
@@ -77,15 +77,15 @@ class ChatHeaderClass extends Block<Indexed> {
 
 		(this.children.usersModal as Block<Indexed>).setProps({
 			content: () => new ChatUsersForm({
-				selectedUsers: this.props.activeChatUsers
-			})
+				selectedUsers: this.props.activeChatUsers,
+			}),
 		});
 
 		(this.children.chatDeleteModal as Block<Indexed>).setProps({
 			content: () => new ChatDeleteForm({
 				title: this.props.title,
 				chatId: this.props.chatId,
-			})
+			}),
 		});
 	}
 
@@ -94,10 +94,8 @@ class ChatHeaderClass extends Block<Indexed> {
 	}
 }
 
-export const ChatHeader = withStore(ChatHeaderClass as typeof Block, (state) => {
-	return {
+export const ChatHeader = withStore(ChatHeaderClass as typeof Block, (state) => ({
 		title: state.activeChat?.title ?? '',
 		chatId: state.activeChat?.id ?? 0,
 		activeChatUsers: state.activeChatUsers,
-	};
-});
+	}));

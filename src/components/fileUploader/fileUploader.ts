@@ -1,5 +1,5 @@
 import { Block } from '../../core/Block';
-import { template} from './fileUploader.tmpl';
+import { template } from './fileUploader.tmpl';
 import { fileExtension, humanFileSize } from '../../utils/file';
 import { Store } from '../../core/Store';
 
@@ -8,7 +8,7 @@ type uploaderType = {
 	fileFormats?: string,
 	fileMaxSize?: number,
 	events?: Record<string, object>,
-}
+};
 
 export class FileUploader extends Block<uploaderType> {
 	private _files: File[];
@@ -24,9 +24,9 @@ export class FileUploader extends Block<uploaderType> {
 			...props,
 			events: {
 				change: {
-					handler: (e: Event) => this.onChange(e)
-				}
-			}
+					handler: (e: Event) => this.onChange(e),
+				},
+			},
 		});
 
 		this.multiple = props.multiple || false;
@@ -60,7 +60,8 @@ export class FileUploader extends Block<uploaderType> {
 				this._files = this._filterFileByFormat(this._filterFileBySize(filesArray));
 				this.onSubmit();
 			}
-		} catch (e) {
+		} catch (err) {
+			console.log(err);
 		}
 	}
 
@@ -82,7 +83,7 @@ export class FileUploader extends Block<uploaderType> {
 			const ext = fileExtension(file.name);
 			const isValidFormat = this.fileFormats.includes(ext.toLocaleLowerCase());
 			if (!isValidFormat) {
-				const error =`${file.name}\nФормат файла не разрешен`;
+				const error = `${file.name}\nФормат файла не разрешен`;
 				Store.dispatch({ noticeError: error });
 			}
 			return isValidFormat;

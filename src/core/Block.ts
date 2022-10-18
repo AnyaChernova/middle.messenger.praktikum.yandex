@@ -182,7 +182,7 @@ export class Block<Props extends Indexed> {
 				return typeof value === 'function' ? value.bind(target) : value;
 			},
 			set: (target: Props, prop: string, value: any) => {
-				const oldProps = {...target};
+				const oldProps = { ...target };
 				target[prop as keyof Props] = value;
 				this.eventBus().emit(Block.EVENTS.FLOW_CDU, oldProps, target);
 				return true;

@@ -1,12 +1,16 @@
 import { ChatDTO, ChatItemDTO, UserDTO } from '../api/types';
 import { Dispatch } from '../core/Store';
-import  {AppState } from '../utils/types';
+import { AppState } from '../utils/types';
 import { ChatsApi } from '../api/chats';
 import { transformChatItem, transformUser } from '../utils/apiTransformers';
 
 const api = new ChatsApi();
 
-export const createChat = async (dispatch: Dispatch<AppState>, _state: AppState, data: ChatDTO) => {
+export const createChat = async (
+	dispatch: Dispatch<AppState>,
+	_state: AppState,
+	data: ChatDTO,
+) => {
 	try {
 		await api.create(data);
 		dispatch({ noticeSuccess: 'New chat added successfully' });
@@ -17,7 +21,11 @@ export const createChat = async (dispatch: Dispatch<AppState>, _state: AppState,
 	}
 };
 
-export const deleteChat = async (dispatch: Dispatch<AppState>, _state: AppState, chatId: number = 0) => {
+export const deleteChat = async (
+	dispatch: Dispatch<AppState>,
+	_state: AppState,
+	chatId: number = 0,
+) => {
 	try {
 		await api.delete(chatId);
 		dispatch({ noticeSuccess: 'Chat deleted successfully' });
@@ -28,7 +36,24 @@ export const deleteChat = async (dispatch: Dispatch<AppState>, _state: AppState,
 	}
 };
 
-export const setActiveChat = async (dispatch: Dispatch<AppState>, state: AppState, chatId: number = 0) => {
+export const getChatUsers = async (dispatch: Dispatch<AppState>, chatId: number) => {
+	try {
+		const response = await api.users(chatId);
+		if (response.data) {
+			dispatch({
+				activeChatUsers: response.data.map((user: UserDTO) => transformUser(user)),
+			});
+		}
+	} catch (e) {
+		console.log(e);
+	}
+};
+
+export const setActiveChat = async (
+	dispatch: Dispatch<AppState>,
+	state: AppState,
+	chatId: number = 0,
+) => {
 	if (chatId) {
 		const chat = state.chatList.find(({ id }) => id === chatId);
 		await dispatch({ activeChat: chat });
@@ -52,7 +77,11 @@ export const getChats = async (dispatch: Dispatch<AppState>) => {
 	}
 };
 
-export const updateUsers = async (dispatch: Dispatch<AppState>, state: AppState, data: number[]) => {
+export const updateUsers = async (
+	dispatch: Dispatch<AppState>,
+	state: AppState,
+	data: number[],
+) => {
 	const users = state.activeChatUsers.map(({ id }) => id);
 	const usersToAdd = data.filter((id) => !users.includes(id));
 	const usersToDelete = users.filter((id) => !data.includes(id));
@@ -83,18 +112,5 @@ export const updateUsers = async (dispatch: Dispatch<AppState>, state: AppState,
 		if (err?.data?.reason) {
 			dispatch({ noticeError: err.data.reason });
 		}
-	}
-};
-
-export const getChatUsers = async (dispatch: Dispatch<AppState>, chatId: number) => {
-	try {
-		const response = await api.users(chatId);
-		if (response.data) {
-			dispatch({
-				activeChatUsers: response.data.map((user: UserDTO) => transformUser(user))
-			});
-		}
-	} catch (e) {
-		console.log(e);
 	}
 };

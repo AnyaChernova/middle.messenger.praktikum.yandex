@@ -8,7 +8,7 @@ import { Store } from '../../core/Store';
 type ModalPropsType = {
 	content: () => typeof Block;
 	activeModal: string;
-}
+};
 
 class ModalClass extends Block<Indexed> {
 	constructor(props: ModalPropsType) {
@@ -34,8 +34,6 @@ class ModalClass extends Block<Indexed> {
 	}
 }
 
-export const Modal = withStore(ModalClass as typeof Block, (state) => {
-	return {
+export const Modal = withStore(ModalClass as typeof Block, (state) => ({
 		activeModal: state.activeModal,
-	};
-});
+	}));

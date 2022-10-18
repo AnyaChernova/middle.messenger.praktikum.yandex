@@ -9,7 +9,7 @@ type AppState = {
 	activeChat: Nullable<ChatItemType>,
 	activeChatUsers: UserType[],
 	activeModal: string,
-}
+};
 
 type AvatarType = {
 	class?: string;
@@ -121,5 +121,5 @@ export {
 	BtnType,
 	LinkType,
 	ChatItemType,
-	ChatMessageType
+	ChatMessageType,
 };

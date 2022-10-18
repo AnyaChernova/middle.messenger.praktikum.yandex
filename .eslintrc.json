@@ -25,7 +25,7 @@
 			"warn",
 			{
 				"selector": "variable",
-				"format": ["camelCase"]
+				"format": ["camelCase", "PascalCase", "UPPER_CASE"]
 			}
 		]
 	}

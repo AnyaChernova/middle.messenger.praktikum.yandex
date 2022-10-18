@@ -10,8 +10,8 @@ export class Button extends Block<BtnType> {
 	setClick(handler: () => void) {
 		this.setProps({
 			events: {
-				click: { handler }
-			}
+				click: { handler },
+			},
 		});
 	}
 

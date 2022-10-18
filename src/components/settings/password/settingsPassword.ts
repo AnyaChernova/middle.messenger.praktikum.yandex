@@ -8,11 +8,12 @@ import { Store } from '../../../core/Store';
 
 export class SettingsPassword extends Form {
 	constructor() {
-		const fieldsBlocks: FieldValidate[] = fieldsPasswordData.map((field) => new FieldValidate(field));
+		const fieldsBlocks: FieldValidate[] = fieldsPasswordData
+			.map((field) => new FieldValidate(field));
 		const buttonBlock = new Button({ btnClass: 'w-full', btnText: 'Save' });
 		super({
 			fields: fieldsBlocks,
-			button: buttonBlock
+			button: buttonBlock,
 		});
 	}
 

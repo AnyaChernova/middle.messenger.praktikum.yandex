@@ -11,7 +11,9 @@ import { RESOURCES_URL } from '../../../utils/consts';
 
 export class ChatUsersForm extends Block<Indexed> {
 	private _searchInput: Nullable<HTMLInputElement>;
+
 	private _searchString: string;
+
 	private _timeout: number;
 
 	constructor(props: Indexed) {
@@ -31,8 +33,8 @@ export class ChatUsersForm extends Block<Indexed> {
 				submit: {
 					handler: (e: Event) => {
 						this._onSubmit(e);
-					}
-				}
+					},
+				},
 			},
 		});
 
@@ -59,7 +61,7 @@ export class ChatUsersForm extends Block<Indexed> {
 		const user = this.props.users.find((item: UserMediaType) => item.id === userId);
 		if (user) {
 			this.setProps({
-				selectedUsers: [...new Set([...this.props.selectedUsers, user ])],
+				selectedUsers: [...new Set([...this.props.selectedUsers, user])],
 				users: [],
 			});
 		}
@@ -75,8 +77,7 @@ export class ChatUsersForm extends Block<Indexed> {
 	}
 
 	private _setSearchUsers() {
-		this.children.searchUsers = this.props.users.map((user: UserMediaType) => {
-			return new User({
+		this.children.searchUsers = this.props.users.map((user: UserMediaType) => new User({
 				id: user.id,
 				name: user.name,
 				avatar: new Avatar({
@@ -88,16 +89,15 @@ export class ChatUsersForm extends Block<Indexed> {
 					click: {
 						handler: () => {
 							this._onDropdownUserClick(user.id);
-						}
-					}
-				}
-			});
-		});
+						},
+					},
+				},
+			}));
 	}
 
 	private _setSelectedUsers() {
 		this.children.selectedUsers = this.props.selectedUsers.map((user: UserMediaType | UserType) => {
-			if ('firstName' in user ) {
+			if ('firstName' in user) {
 				return new User({
 					id: user.id,
 					name: (user as UserType).displayName || (user as UserType).firstName,
@@ -112,11 +112,11 @@ export class ChatUsersForm extends Block<Indexed> {
 						click: {
 							handler: () => {
 								this._onDeleteUserClick(user.id);
-							}
-						}
-					}
+							},
+						},
+					},
 				});
-			} else {
+			}
 				return new User({
 					id: user.id,
 					name: (user as UserMediaType).name,
@@ -131,18 +131,20 @@ export class ChatUsersForm extends Block<Indexed> {
 						click: {
 							handler: () => {
 								this._onDeleteUserClick(user.id);
-							}
-						}
-					}
+							},
+						},
+					},
 				});
-			}
 		});
 	}
 
 	private async _onSubmit(e: Event) {
 		e.preventDefault();
 		(this.children.button as Button).setLoading(true);
-		await Store.dispatch(updateUsers, this.props.selectedUsers.map((user: UserMediaType) => user.id));
+		await Store.dispatch(
+			updateUsers,
+			this.props.selectedUsers.map((user: UserMediaType) => user.id),
+		);
 		Store.dispatch({ activeModal: '' });
 	}
 
