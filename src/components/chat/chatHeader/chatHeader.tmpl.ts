@@ -11,13 +11,14 @@ export const template: string = `
 				{{/if}}
 		</div>
 		<div class="dropdown">
-			<button class="btn btn--round">
+			<button class="btn btn--round dropdown__open">
 				${moreIcon}
 			</button>
-			<div class="dropdown__content">
+			<div class="dropdown__content{{#if isOpenDropdown}} dropdown__content--open{{/if}}">
 				{{{usersBtn}}}
 				{{{deleteChatBtn}}}
 			</div>
 		</div>
 		{{{usersModal}}}
+		{{{chatDeleteModal}}}
 	</div>`;

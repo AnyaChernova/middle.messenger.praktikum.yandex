@@ -11,6 +11,7 @@ export type UserDTO = {
 	avatar: string;
 	phone: string;
 	email: string;
+	role?: string;
 };
 
 export type AuthDTO = {
@@ -39,3 +40,8 @@ export type ChatItemDTO = {
 	unread_count: number;
 	last_message:Nullable<ChatMessageDTO>;
 };
+
+export type UsersToChatDTO = {
+	users: number[];
+	chatId: number;
+}

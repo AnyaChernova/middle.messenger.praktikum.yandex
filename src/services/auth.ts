@@ -2,7 +2,7 @@ import { AuthApi } from '../api/auth';
 import { Router } from '../core/Router';
 import { AuthDTO, UserDTO } from '../api/types';
 import { Dispatch } from '../core/Store';
-import { AppState } from '../types/app';
+import {AppState} from '../utils/types';
 import { transformUser } from '../utils/apiTransformers';
 import { RESOURCES_URL } from '../utils/consts';
 

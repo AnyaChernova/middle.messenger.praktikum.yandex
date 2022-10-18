@@ -6,6 +6,8 @@ export class Router {
 
 	private static __instance: Router;
 
+	private _currentRoute: Nullable<Route> = null;
+
 	public routes: Route[] = [];
 
 	public history: History = window.history;
@@ -18,6 +20,7 @@ export class Router {
 		this.routes = [];
 		this.history = window.history;
 		this._rootQuery = rootQuery;
+		this._currentRoute = null;
 
 		Router.__instance = this;
 	}
@@ -43,6 +46,12 @@ export class Router {
 		if (!route) {
 			return;
 		}
+
+		if (this._currentRoute) {
+			this._currentRoute.leave();
+		}
+
+		this._currentRoute = route;
 
 		route.render();
 	}

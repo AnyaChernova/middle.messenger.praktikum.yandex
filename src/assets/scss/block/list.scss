@@ -4,11 +4,8 @@
 
 .list__item {
 	padding: 8px 0;
-	border-bottom: var(--color-border);
-}
-
-.list__item--flex {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+	border-bottom: 1px solid var(--color-border);
+	&:last-child {
+		border-bottom: none;
+	}
 }

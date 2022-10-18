@@ -22,11 +22,13 @@ export class Form extends Block<any> {
 		const fields = this.children.fields as FieldValidate[];
 		let isValid: boolean = true;
 
-		fields.forEach((field) => {
-			isValid = field.validate();
-			const input: HTMLInputElement | null = field!.element!.querySelector('input');
-			this.formData[input!.name] = input!.value;
-		});
+		if (fields && fields.length) {
+			fields.forEach((field) => {
+				isValid = field.validate();
+				const input: HTMLInputElement | null = field!.element!.querySelector('input');
+				this.formData[input!.name] = input!.value;
+			});
+		}
 
 		if (isValid) {
 			this.onSubmit();

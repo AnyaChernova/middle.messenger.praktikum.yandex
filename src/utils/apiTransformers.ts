@@ -1,8 +1,7 @@
 import { ChatItemDTO, ChatMessageDTO, UserDTO } from '../api/types';
-import { User } from '../types/user';
-import { ChatItemType, ChatMessageType } from './types';
+import { ChatItemType, ChatMessageType, UserType } from './types';
 
-export const transformUser = (data: UserDTO): User => {
+export const transformUser = (data: UserDTO): UserType => {
 	return {
 		id: data.id,
 		login: data.login,
@@ -12,6 +11,7 @@ export const transformUser = (data: UserDTO): User => {
 		avatar: data.avatar,
 		phone: data.phone,
 		email: data.email,
+		role: data.role === 'admin' ? 'admin' : 'user',
 	};
 };
 

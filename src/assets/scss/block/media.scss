@@ -14,11 +14,6 @@
 	grid-template-columns: minmax(0, 1fr) auto;
 }
 
-.media--dropdown {
-	padding: 8px 16px;
-	width: 100%;
-}
-
 .media__aside {
 	grid-area: aside;
 	flex: 0 0 auto;
@@ -60,4 +55,15 @@
 	max-width: 100%;
 	text-overflow: ellipsis;
 	overflow: hidden;
+}
+
+.mediaWrap {
+	@include btn;
+
+	padding: 0;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	color: var(--color-text-main);
 }

@@ -1,4 +1,4 @@
-import { AppState } from '../types/app';
+import { AppState } from '../utils/types';
 
 export const defaultState: AppState = {
 	noticeError: '',

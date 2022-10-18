@@ -10,6 +10,11 @@
 	border-radius: $border-radius;
 	background-color: var(--color-bg-btn);
 	min-width: 160px;
+	display: none;
+}
+
+.dropdown__content--open {
+	display: block;
 }
 
 .dropdown__list {

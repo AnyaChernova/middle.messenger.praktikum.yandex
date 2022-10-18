@@ -1,6 +1,5 @@
 import { searchIcon } from '../../icons/search';
 import { spinnerIcon } from '../../icons/spinner';
-import { removeIcon } from '../../icons/remove';
 
 export const template: string = `
 	<form class="formBox formBox--modal">
@@ -17,18 +16,17 @@ export const template: string = `
 					{{/if}}
 				</label>
 				<div class="dropdown__content dropdown__list">
-					{{#each seacrhUsers}}
-					<button type="button" class="dropdown__item dropdown__item--stick">
+					{{#each searchUsers}}
+						<div class="dropdown__item">
 						{{{this}}}
-					</button>
+						</div>
 					{{/each}}
 				</div>
 			</div>
 		<ul class="list formBox__list">
 			{{#each selectedUsers}}
-				<li class="list__item list__item--flex ">
+				<li class="list__item">
 					{{{this}}}
-					<button class="btn btn--icon btn--danger">${removeIcon}</button>
 				</li>
 			{{/each}}
 		</ul>

@@ -1,6 +1,6 @@
 import { UserDTO } from '../api/types';
 import { Dispatch } from '../core/Store';
-import { AppState } from '../types/app';
+import { AppState } from '../utils/types';
 import { transformUser } from '../utils/apiTransformers';
 import { UserApi } from '../api/user';
 import { RESOURCES_URL } from '../utils/consts';

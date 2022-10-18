@@ -1,5 +1,15 @@
 import { Block } from '../core/Block';
-import { User } from '../types/user';
+
+type AppState = {
+	noticeError: string,
+	noticeSuccess: string,
+	user: Nullable<UserType>,
+	avatar: string,
+	chatList: ChatItemType[],
+	activeChat: Nullable<ChatItemType>,
+	activeChatUsers: UserType[],
+	activeModal: string,
+}
 
 type AvatarType = {
 	class?: string;
@@ -33,11 +43,25 @@ type MessageType = {
 };
 
 type UserType = {
-	name: string;
+	id: number;
+	login: string;
+	firstName: string;
+	secondName: string;
+	displayName: string;
+	avatar: string;
+	phone: string;
+	email: string;
+	role?: string;
+};
+
+type UserMediaType = {
+	name?: string;
 	userClass?: string;
 	caption?: string;
+	isRemove?: boolean;
 	id?: number;
 	avatar?: AvatarType | Block<AvatarType> | string;
+	events?: Record<string, object>;
 };
 
 type TabType = {
@@ -70,13 +94,14 @@ type LinkType = {
 	linkIconClass?: string;
 	events?: Record<string, object>;
 };
-export type ChatMessageType = {
-	user: User;
+
+type ChatMessageType = {
+	user: UserType;
 	time: string;
 	content: string;
 };
 
-export type ChatItemType = {
+type ChatItemType = {
 	id: number;
 	title: string;
 	avatar: string | null;
@@ -86,11 +111,15 @@ export type ChatItemType = {
 };
 
 export {
+	AppState,
 	AvatarType,
 	FieldType,
 	MessageType,
 	UserType,
+	UserMediaType,
 	TabType,
 	BtnType,
 	LinkType,
+	ChatItemType,
+	ChatMessageType
 };

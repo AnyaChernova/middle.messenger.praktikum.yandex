@@ -1,6 +1,6 @@
 import EventBus from './EventBus';
 import { defaultState } from '../store';
-import { AppState } from '../types/app';
+import { AppState } from '../utils/types';
 
 export enum StoreEvents {
 	Updated = 'storeUpdated',

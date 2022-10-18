@@ -6,7 +6,7 @@ import { ErrorPage } from './pages/error/error';
 import { PasswordPage } from './pages/settings/password/password';
 import { ProfilePage } from './pages/settings/profile/profile';
 import { Store, StoreEvents } from './core/Store';
-import { AppState } from './types/app';
+import { AppState } from './utils/types';
 import { initApp } from './services/initApp';
 
 const router = new Router('.app');

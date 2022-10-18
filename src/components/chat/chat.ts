@@ -6,7 +6,6 @@ import { Modal } from '../modal/modal';
 import { ChatAddForm } from './chatAddForm/chatAddForm';
 import { pencilIcon } from '../icons/pencil';
 import { ChatList } from './chatList/chatList';
-import { getChats } from '../../services/chats';
 import { Store } from '../../core/Store';
 import { ChatHeader } from './chatHeader/chatHeader';
 
@@ -28,8 +27,6 @@ export class Chat extends Block<Indexed> {
 			header: new ChatHeader(),
 			chatList: new ChatList(),
 		});
-
-		Store.dispatch(getChats);
 	}
 
 	componentDidMount() {

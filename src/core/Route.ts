@@ -24,6 +24,12 @@ export class Route {
 		}
 	}
 
+	leave() {
+		if (this._block) {
+			this._block.componentWillUnmount();
+		}
+	}
+
 	match(pathname: string) {
 		return pathname === this._pathname;
 	}

@@ -1,9 +1,9 @@
 import { Block } from '../../core/Block';
 import { template } from './user.tmpl';
-import { UserType } from '../../utils/types';
+import { UserMediaType } from '../../utils/types';
 
-export class User extends Block<UserType> {
-	constructor(props: UserType) {
+export class User extends Block<UserMediaType> {
+	constructor(props: UserMediaType) {
 		super(props);
 	}
 
