@@ -11,11 +11,7 @@ export const template: string = `
 		<div class="chat__main">
 			<div class="chatPanel">
 				{{{header}}}
-				<div class="chatPanel__inner">
-					{{#each messages}}
-						{{{this}}}
-					{{/each}}
-				</div>
+				{{{messages}}}
 				<div class="chatPanel__footer">
 					{{{field}}}
 				</div>

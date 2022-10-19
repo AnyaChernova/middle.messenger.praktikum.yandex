@@ -22,6 +22,12 @@ export class ChatsApi {
 		});
 	}
 
+	token(id: number) {
+		return this._api.post(`/token/${id}`, {
+			headers: { 'Content-Type': 'application/json' },
+		});
+	}
+
 	list() {
 		return this._api.get('');
 	}

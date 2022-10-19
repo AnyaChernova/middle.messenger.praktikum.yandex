@@ -78,20 +78,3 @@
 		display: block;
 	}
 }
-
-@keyframes spinner-animation {
-	0% {
-		stroke-dasharray: 7 70;
-		transform: rotate(0deg);
-	}
-
-	50% {
-		stroke-dasharray: 50 70;
-		transform: rotate(180deg);
-	}
-
-	100% {
-		stroke-dasharray: 7 70;
-		transform: rotate(2turn);
-	}
-}

@@ -33,6 +33,23 @@ export type ChatMessageDTO = {
 	content: string;
 };
 
+export type ChatMessageSocket = {
+	chat_id?: number;
+	time: string;
+	type: string;
+	user_id: number;
+	content: string;
+	file?: {
+		id: number;
+		user_id: number;
+		path: string;
+		filename: string;
+		content_type: string;
+		content_size: string;
+		upload_date: string;
+	}
+};
+
 export type ChatItemDTO = {
 	id: number;
 	title: string;

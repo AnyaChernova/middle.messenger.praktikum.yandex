@@ -1,8 +1,11 @@
-import { ChatDTO, ChatItemDTO, UserDTO } from '../api/types';
+import {
+ ChatDTO, ChatItemDTO, ChatMessageSocket, UserDTO,
+} from '../api/types';
 import { Dispatch } from '../core/Store';
-import { AppState } from '../utils/types';
+import { AppState, ChatItemType } from '../utils/types';
 import { ChatsApi } from '../api/chats';
-import { transformChatItem, transformUser } from '../utils/apiTransformers';
+import { transformChatItem, transformSocketMessage, transformUser } from '../utils/apiTransformers';
+import { WS } from '../core/WS';
 
 const api = new ChatsApi();
 
@@ -49,28 +52,94 @@ export const getChatUsers = async (dispatch: Dispatch<AppState>, chatId: number)
 	}
 };
 
+export const getChatToken = async (chatId: number = 0) => {
+	try {
+		const response = await api.token(chatId);
+		if (response.data) {
+			return response.data.token;
+		}
+		return '';
+	} catch (e) {
+		console.log(e);
+		return '';
+	}
+};
+
 export const setActiveChat = async (
 	dispatch: Dispatch<AppState>,
 	state: AppState,
 	chatId: number = 0,
 ) => {
+	let chat: Nullable<ChatItemType> = null;
+
 	if (chatId) {
-		const chat = state.chatList.find(({ id }) => id === chatId);
-		await dispatch({ activeChat: chat });
-		await getChatUsers(dispatch, chatId);
+		chat = state.chatList.find(({ id }) => id === chatId)!;
 	} else if (state.chatList[0]) {
-		dispatch({ activeChat: state.chatList[0] });
-		await getChatUsers(dispatch, state.chatList[0].id);
+		chat = state.chatList[0];
+	}
+
+	if (chat) {
+		dispatch({
+			activeChat: chat,
+			activeChatMessages: [],
+			chatLoading: true,
+		});
+		getChatUsers(dispatch, chat.id);
 	}
 };
 
-export const getChats = async (dispatch: Dispatch<AppState>) => {
+export function initActiveChat(dispatch: Dispatch<AppState>, state: AppState) {
+	if (state.activeChat && state.activeChat.ws) {
+		state.activeChat.ws.onMessage = (data: ChatMessageSocket | ChatMessageSocket[]) => {
+			if (Array.isArray(data)) {
+				const messages = data.reverse().map((message) => transformSocketMessage(message));
+				dispatch({ activeChatMessages: messages });
+			} else if (data.type === 'message' || data.type === 'file') {
+				const message = transformSocketMessage(data);
+				dispatch({ activeChatMessages: [...this.props.activeChatMessages, message] });
+			}
+			dispatch({ chatLoading: false });
+		};
+
+		if (state.activeChat.ws.isOpen) {
+			state.activeChat!.ws!.send({
+				content: '0',
+				type: 'get old',
+			});
+		} else {
+			state.activeChat.ws.onOpen = () => {
+				state.activeChat!.ws!.send({
+					content: '0',
+					type: 'get old',
+				});
+			};
+		}
+	}
+}
+
+export const initChat = async (
+	state: AppState,
+	chat: ChatItemType,
+) => {
+	const token = await getChatToken(chat.id);
+	if (token) {
+		chat.ws = new WS({
+			token,
+			chatId: chat.id,
+			userId: state.user!.id,
+		});
+	}
+};
+
+export const getChats = async (dispatch: Dispatch<AppState>, state: AppState) => {
+	dispatch({ chatLoading: true });
 	try {
 		const response = await api.list();
 		if (response.data) {
-			dispatch({
-				chatList: response.data.map((item: ChatItemDTO) => transformChatItem(item)),
-			});
+			const chats = response.data.map((item: ChatItemDTO) => transformChatItem(item));
+			await Promise.all(chats.map((chat: ChatItemType) => initChat(state, chat)));
+
+			dispatch({ chatList: chats });
 		}
 	} catch (e) {
 		console.log(e);

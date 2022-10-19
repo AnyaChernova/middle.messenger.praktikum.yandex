@@ -1,4 +1,5 @@
 import { Block } from '../core/Block';
+import { WS } from '../core/WS';
 
 type AppState = {
 	noticeError: string,
@@ -8,7 +9,9 @@ type AppState = {
 	chatList: ChatItemType[],
 	activeChat: Nullable<ChatItemType>,
 	activeChatUsers: UserType[],
+	activeChatMessages: ChatMessageType[],
 	activeModal: string,
+	chatLoading: boolean,
 };
 
 type AvatarType = {
@@ -33,12 +36,13 @@ type FieldType = {
 };
 
 type MessageType = {
-	text: string;
+	content: string;
+	time: string;
+	title?: string;
 	itemClass?: string;
 	mainClass?: string;
 	mediaClass?: string;
 	messageClass?: string;
-	user?: AvatarType | Block<AvatarType>;
 	avatar?: AvatarType | Block<AvatarType>;
 };
 
@@ -95,10 +99,21 @@ type LinkType = {
 	events?: Record<string, object>;
 };
 
+type ChatFileType = {
+	userId: number;
+	path: string;
+	filename: string;
+	contentType: string;
+	contentSize: string;
+	uploadDate: string;
+};
+
 type ChatMessageType = {
-	user: UserType;
+	userId?: number,
+	user?: UserType;
 	time: string;
 	content: string;
+	file?: ChatFileType;
 };
 
 type ChatItemType = {
@@ -108,6 +123,12 @@ type ChatItemType = {
 	unreadCount: number;
 	lastMessage: Nullable<ChatMessageType>;
 	isActive?: boolean;
+	ws?: WS;
+};
+
+type SocketMessageType = {
+	content?: string;
+	type: string;
 };
 
 export {
@@ -122,4 +143,5 @@ export {
 	LinkType,
 	ChatItemType,
 	ChatMessageType,
+	SocketMessageType,
 };

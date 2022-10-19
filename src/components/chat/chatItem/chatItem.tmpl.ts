@@ -5,7 +5,9 @@ export const template: string = `
 			<div class="media__main media__main--left">
 				<div class="media__title media__title--l">{{title}}</div>
 				{{#if lastMessage}}
-					<div class="media__caption">{{lastMessage.content}}</div>
+					<div class="media__caption">
+					<span class="text-primary">{{lastMessage.name}}:</span> {{lastMessage.content}}
+					</div>
 				{{else }}
 				<div class="media__caption">Add users and start chatting!</div>
 				{{/if}}

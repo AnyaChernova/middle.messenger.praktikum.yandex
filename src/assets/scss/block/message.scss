@@ -1,16 +1,28 @@
 .message {
 	width: 100%;
 	max-width: 423px;
+	min-width: 110px;
 	border-radius: 0 10px 10px 10px;
 	background-color: var(--color-bg-secondary);
-	padding: 10px 22px 10px 14px;
+	padding: 10px 46px 10px 14px;
 	font-size: 13px;
 	line-height: 1.5;
+	position: relative;
 }
 
 .message--reverse {
-	padding: 10px 27px 10px 14px;
 	border-radius: 10px 0 10px 10px;
 	background-color: var(--color-primary);
 	color: var(--color-light);
+}
+
+.message__time {
+	position: absolute;
+	right: 8px;
+	bottom: 4px;
+}
+
+.message__caption {
+	color: var(--color-text-light);
+	font-size: 12px;
 }

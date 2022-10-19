@@ -8,5 +8,7 @@ export const defaultState: AppState = {
 	chatList: [],
 	activeChat: null,
 	activeChatUsers: [],
+	activeChatMessages: [],
 	activeModal: '',
+	chatLoading: false,
 };

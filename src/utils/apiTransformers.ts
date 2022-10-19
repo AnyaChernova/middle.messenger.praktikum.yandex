@@ -1,28 +1,37 @@
-import { ChatItemDTO, ChatMessageDTO, UserDTO } from '../api/types';
+import {
+ ChatItemDTO, ChatMessageDTO, ChatMessageSocket, UserDTO,
+} from '../api/types';
 import { ChatItemType, ChatMessageType, UserType } from './types';
+import { getTime } from './time';
 
 export const transformUser = (data: UserDTO): UserType => ({
-		id: data.id,
-		login: data.login,
-		firstName: data.first_name,
-		secondName: data.second_name,
-		displayName: data.display_name,
-		avatar: data.avatar,
-		phone: data.phone,
-		email: data.email,
-		role: data.role === 'admin' ? 'admin' : 'user',
-	});
+	id: data.id,
+	login: data.login,
+	firstName: data.first_name,
+	secondName: data.second_name,
+	displayName: data.display_name,
+	avatar: data.avatar,
+	phone: data.phone,
+	email: data.email,
+	role: data.role === 'admin' ? 'admin' : 'user',
+});
 
 export const transformChatMessage = (data: ChatMessageDTO): ChatMessageType => ({
-		user: transformUser(data.user),
-		time: data.time,
-		content: data.content,
-	});
+	user: transformUser(data.user),
+	time: getTime(data.time),
+	content: data.content,
+});
+
+export const transformSocketMessage = (data: ChatMessageSocket): ChatMessageType => ({
+	userId: data.user_id,
+	time: data.time,
+	content: data.content,
+});
 
 export const transformChatItem = (data: ChatItemDTO): ChatItemType => ({
-		id: data.id,
-		title: data.title,
-		avatar: data.avatar,
-		unreadCount: data.unread_count,
-		lastMessage: data.last_message ? transformChatMessage(data.last_message) : null,
-	});
+	id: data.id,
+	title: data.title,
+	avatar: data.avatar,
+	unreadCount: data.unread_count,
+	lastMessage: data.last_message ? transformChatMessage(data.last_message) : null,
+});

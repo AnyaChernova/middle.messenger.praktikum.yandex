@@ -8,23 +8,23 @@ import { pencilIcon } from '../icons/pencil';
 import { ChatList } from './chatList/chatList';
 import { Store } from '../../core/Store';
 import { ChatHeader } from './chatHeader/chatHeader';
+import { ChatMessages } from './chatMessages/chatMessages';
 
 export class Chat extends Block<Indexed> {
-	constructor(props: Indexed) {
+	constructor() {
 		const btnAddChat = new Button({
 			btnClass: 'btn--icon btn--primary',
 			btnIcon: pencilIcon,
 		});
 		const modalAddChat = new Modal({ content: () => new ChatAddForm() });
-		const fieldMessage = new ChatField({ name: 'message', type: 'text' });
 
 		super({
-			...props,
 			btnAdd: btnAddChat,
 			modalAdd: modalAddChat,
-			field: fieldMessage,
+			field: new ChatField(),
 			header: new ChatHeader(),
 			chatList: new ChatList(),
+			messages: new ChatMessages(),
 		});
 	}
 

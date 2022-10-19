@@ -2,6 +2,10 @@
 	color: var(--color-text-gray);
 }
 
+.text-primary {
+	color: var(--color-primary);
+}
+
 .text-danger {
 	color: var(--color-danger);
 }
@@ -12,4 +16,8 @@
 
 .text-center {
 	text-align: center;
+}
+
+.text-mid {
+	font-weight: 500;
 }

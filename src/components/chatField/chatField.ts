@@ -1,39 +1,56 @@
 import { Form } from '../form/form';
 import { Validator } from '../../core/Validator';
 import { template } from './chatField.tmpl';
-import { FieldType } from '../../utils/types';
+import { withStore } from '../../utils/withStore';
+import { Block } from '../../core/Block';
 
-export class ChatField extends Form {
-	private validator: Validator | null;
+export class ChatFieldClass extends Form {
+	private _validator: Validator | null;
 
-	private readonly input: HTMLInputElement | null;
+	private _input: HTMLInputElement | null;
 
-	constructor(props: FieldType) {
+	constructor(props: Indexed) {
 		super(props);
 
-		this.validator = null;
-		this.input = this.element!.querySelector('input');
-		this.initValidate();
+		this._validator = null;
+		this._input = null;
+		this._initValidate();
 	}
 
-	initValidate() {
-		if (!this.input) {
+	private _initValidate() {
+		this._input = this.element!.querySelector('input');
+		if (!this._input) {
 			return;
 		}
-		this.validator = new Validator(this.input);
+		this._validator = new Validator(this._input);
 	}
 
 	validate(e: MouseEvent) {
 		e.preventDefault();
-		const isEmpty: boolean = this.validator!.checkIsEmpty();
-		if (isEmpty) {
-			console.log('Message is empty');
-		} else {
-			console.log({ [this.input!.name]: this.input!.value });
+		const isEmpty: boolean = this._validator!.checkIsEmpty();
+		if (!isEmpty) {
+			this.onSubmit();
 		}
+	}
+
+	onSubmit() {
+		this.props.activeChat.ws.send({
+			type: 'message',
+			content: this._input!.value,
+		});
+
+		this._input!.value = '';
+	}
+
+	componentDidMount() {
+		this._initValidate();
 	}
 
 	render() {
 		return this.compile(template, { ...this.props });
 	}
 }
+
+export const ChatField = withStore(ChatFieldClass as typeof Block, (state) => ({
+	activeChat: state.activeChat,
+}));
