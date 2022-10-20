@@ -43,6 +43,7 @@ type MessageType = {
 	mainClass?: string;
 	mediaClass?: string;
 	messageClass?: string;
+	day?: string;
 	avatar?: AvatarType | Block<AvatarType>;
 };
 

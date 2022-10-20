@@ -23,7 +23,6 @@ export class ChatItemClass extends Block<Indexed> {
 			lastMessage = { ...this.props.lastMessage };
 
 			const login = this.props.lastMessage.user?.login;
-			console.log(lastMessage);
 			if (login === this.props.user?.login) {
 				lastMessage.name = 'You';
 			} else {

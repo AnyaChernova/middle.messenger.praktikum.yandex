@@ -33,8 +33,6 @@
 	padding: 24px 0 24px;
 	max-height: 100%;
 	overflow-y: auto;
-	display: flex;
-	flex-direction: column;
 }
 
 .chatPanel__loading {
@@ -58,11 +56,13 @@
 }
 
 .chatPanel__item {
-	align-self: flex-start;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
 }
 
 .chatPanel__item--right {
-	align-self: flex-end;
+	align-items: flex-end;
 }
 
 .chatPanel__item--bottom {
@@ -71,4 +71,12 @@
 
 .chatPanel__item--bottomL {
 	margin-bottom: 34px;
+}
+
+.chatPanel__day {
+	color: var(--color-text-gray);
+	padding: 40px 0 24px;
+	font-size: 12px;
+	width: 100%;
+	text-align: center;
 }

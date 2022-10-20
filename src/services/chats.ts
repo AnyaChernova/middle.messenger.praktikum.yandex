@@ -96,6 +96,7 @@ export function initActiveChat(dispatch: Dispatch<AppState>, state: AppState) {
 				dispatch({ activeChatMessages: messages });
 			} else if (data.type === 'message' || data.type === 'file') {
 				const message = transformSocketMessage(data);
+				// @ts-expect-error this is not typed
 				dispatch({ activeChatMessages: [...this.props.activeChatMessages, message] });
 			}
 			dispatch({ chatLoading: false });
