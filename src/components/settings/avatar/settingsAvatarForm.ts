@@ -4,6 +4,7 @@ import { Button } from '../../button/button';
 import { FileUploader } from '../../fileUploader/fileUploader';
 import { Store } from '../../../core/Store';
 import { updateAvatar } from '../../../services/user';
+import { fileSize } from '../../../utils/file';
 
 export class SettingsAvatarForm extends Block<Indexed> {
 	constructor(props: Indexed) {
@@ -14,10 +15,14 @@ export class SettingsAvatarForm extends Block<Indexed> {
 		});
 		const fileUploader = new FileUploader({
 			fileFormats: 'png,jpg,jpeg',
-			fileMaxSize: 10000000,
+			fileMaxSize: 10 * fileSize.MB,
 		});
 
-		super({ ...props, updateBtn, fileUploader });
+		super({
+			...props,
+			updateBtn,
+			fileUploader,
+		});
 	}
 
 	componentDidMount() {

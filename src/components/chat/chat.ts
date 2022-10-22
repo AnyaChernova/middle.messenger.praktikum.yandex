@@ -1,5 +1,5 @@
 import { Block } from '../../core/Block';
-import { ChatField } from '../chatField/chatField';
+import { ChatField } from './chatField/chatField';
 import { template } from './chat.tmpl';
 import { Button } from '../button/button';
 import { Modal } from '../modal/modal';

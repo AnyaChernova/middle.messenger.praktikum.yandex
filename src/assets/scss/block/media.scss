@@ -7,11 +7,13 @@
 	vertical-align: middle;
 	text-align: left;
 	max-width: 100%;
+	align-self: flex-start;
 }
 
 .media--reverse {
 	grid-template-areas: "main aside";
 	grid-template-columns: minmax(0, 1fr) auto;
+	align-self: flex-end;
 }
 
 .media__aside {

@@ -1,5 +1,5 @@
 import {
- ChatDTO, ChatItemDTO, ChatMessageSocket, UserDTO,
+	ChatDTO, ChatItemDTO, ChatMessageSocket, UserDTO,
 } from '../api/types';
 import { Dispatch } from '../core/Store';
 import { AppState, ChatItemType } from '../utils/types';
@@ -11,12 +11,21 @@ const api = new ChatsApi();
 
 export const createChat = async (
 	dispatch: Dispatch<AppState>,
-	_state: AppState,
+	state: AppState,
 	data: ChatDTO,
 ) => {
 	try {
 		await api.create(data);
-		dispatch({ noticeSuccess: 'New chat added successfully' });
+		const response = await api.get(data);
+		if (response.data) {
+			const chats = [...state.chatList];
+			const newChat = transformChatItem(response.data[0] as ChatItemDTO);
+			await setSocketChat(state, newChat);
+			dispatch({
+				chatList: [newChat, ...chats],
+				noticeSuccess: 'New chat added successfully',
+			});
+		}
 	} catch (err: any) {
 		if (err?.data?.reason) {
 			dispatch({ noticeError: err.data.reason });
@@ -26,12 +35,21 @@ export const createChat = async (
 
 export const deleteChat = async (
 	dispatch: Dispatch<AppState>,
-	_state: AppState,
+	state: AppState,
 	chatId: number = 0,
 ) => {
 	try {
 		await api.delete(chatId);
-		dispatch({ noticeSuccess: 'Chat deleted successfully' });
+		const chats = [...state.chatList];
+		const index = chats.findIndex(({ id }) => id === chatId);
+		if (index !== -1) {
+			chats[index].ws!.close();
+			chats.splice(index, 1);
+		}
+		dispatch({
+			chatList: chats,
+			noticeSuccess: 'Chat deleted successfully',
+		});
 	} catch (err: any) {
 		if (err?.data?.reason) {
 			dispatch({ noticeError: err.data.reason });
@@ -79,46 +97,32 @@ export const setActiveChat = async (
 	}
 
 	if (chat) {
+		chat.unreadCount = 0;
+
 		dispatch({
 			activeChat: chat,
 			activeChatMessages: [],
 			chatLoading: true,
 		});
-		getChatUsers(dispatch, chat.id);
-	}
-};
 
-export function initActiveChat(dispatch: Dispatch<AppState>, state: AppState) {
-	if (state.activeChat && state.activeChat.ws) {
-		state.activeChat.ws.onMessage = (data: ChatMessageSocket | ChatMessageSocket[]) => {
-			if (Array.isArray(data)) {
-				const messages = data.reverse().map((message) => transformSocketMessage(message));
-				dispatch({ activeChatMessages: messages });
-			} else if (data.type === 'message' || data.type === 'file') {
-				const message = transformSocketMessage(data);
-				// @ts-expect-error this is not typed
-				dispatch({ activeChatMessages: [...this.props.activeChatMessages, message] });
-			}
-			dispatch({ chatLoading: false });
-		};
-
-		if (state.activeChat.ws.isOpen) {
-			state.activeChat!.ws!.send({
+		if (chat.ws!.isOpen) {
+			chat.ws!.send({
 				content: '0',
 				type: 'get old',
 			});
 		} else {
-			state.activeChat.ws.onOpen = () => {
-				state.activeChat!.ws!.send({
+			chat.ws!.onOpen = () => {
+				chat!.ws!.send({
 					content: '0',
 					type: 'get old',
 				});
 			};
 		}
+		getChatUsers(dispatch, chat.id);
 	}
-}
+};
 
-export const initChat = async (
+export const setSocketChat = async (
 	state: AppState,
 	chat: ChatItemType,
 ) => {
@@ -132,19 +136,52 @@ export const initChat = async (
 	}
 };
 
+export function initChat(dispatch: Dispatch<AppState>, _state: AppState, chat: ChatItemType) {
+	if (chat.ws) {
+		chat.ws.onMessage = (data: ChatMessageSocket | ChatMessageSocket[]) => {
+			// @ts-expect-error this is not typed
+			const activeChat = this.props.activeChat;
+			// @ts-expect-error this is not typed
+			const chatList = this.props.chatList;
+			// @ts-expect-error this is not typed
+			const activeChatMessages = this.props.activeChatMessages;
+
+			if (Array.isArray(data)) {
+				const messages = data.reverse().map((message) => transformSocketMessage(message));
+				dispatch({ activeChatMessages: messages, chatLoading: false });
+			} else if (data.type === 'message' || data.type === 'file') {
+				if (chat.id !== activeChat!.id) {
+					const chats = chatList.map((item: ChatItemType) => {
+						return (item.id === chat.id) ? {
+							...item,
+							unreadCount: item.unreadCount + 1,
+						} : item;
+					}).sort((a: ChatItemType, b: ChatItemType) => (b.id === activeChat.id) ? 1 : b.unreadCount - a.unreadCount);
+					dispatch({ chatList: chats });
+				}
+				if (data.chat_id === activeChat!.id) {
+					const message = transformSocketMessage(data);
+					dispatch({ activeChatMessages: [...activeChatMessages, message] });
+				}
+			}
+		};
+	}
+}
+
 export const getChats = async (dispatch: Dispatch<AppState>, state: AppState) => {
 	dispatch({ chatLoading: true });
 	try {
 		const response = await api.list();
 		if (response.data) {
 			const chats = response.data.map((item: ChatItemDTO) => transformChatItem(item));
-			await Promise.all(chats.map((chat: ChatItemType) => initChat(state, chat)));
+			await Promise.all(chats.map((chat: ChatItemType) => setSocketChat(state, chat)));
 
 			dispatch({ chatList: chats });
 		}
 	} catch (e) {
 		console.log(e);
 	}
+	dispatch({ chatLoading: false });
 };
 
 export const updateUsers = async (

@@ -44,6 +44,7 @@ type MessageType = {
 	mediaClass?: string;
 	messageClass?: string;
 	day?: string;
+	isImg?: boolean;
 	avatar?: AvatarType | Block<AvatarType>;
 };
 
@@ -101,6 +102,7 @@ type LinkType = {
 };
 
 type ChatFileType = {
+	id: number;
 	userId: number;
 	path: string;
 	filename: string;
@@ -144,5 +146,6 @@ export {
 	LinkType,
 	ChatItemType,
 	ChatMessageType,
+	ChatFileType,
 	SocketMessageType,
 };

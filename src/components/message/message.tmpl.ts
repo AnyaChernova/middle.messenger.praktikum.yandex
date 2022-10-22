@@ -12,8 +12,16 @@ export const template: string = `
 				{{#if title}}
 					<div class="text-mid">{{title}}</div>
 				{{/if}}
+				{{#if file}}
+					{{#if isImg}}
+					<img class="message__img" src="{{file.path}}" alt="{{file.filename}}">
+					{{else }}
+					<a class="link message__link" href="{{file.path}}" target="_blank">{{file.filename}}</a>
+					{{/if}}
+				{{else }}
 				{{content}}
-					<span class="message__time message__caption">{{time}}</span>
+				{{/if}}
+				<span class="message__time message__caption">{{time}}</span>
 				</div>
 			</div>
 		</div>

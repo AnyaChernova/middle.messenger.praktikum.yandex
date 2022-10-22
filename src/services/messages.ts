@@ -1,8 +1,41 @@
-import { ChatMessageType, UserType } from '../utils/types';
+import { AppState, ChatMessageType, UserType } from '../utils/types';
 import { Message } from '../components/message/message';
 import { Avatar } from '../components/avatar/avatar';
-import { diffDays, getDay, getDayStringFull, getTime, isSameDay } from '../utils/time';
+import { diffDays, getDayFull, getDayStringFull, getTime, isSameDay } from '../utils/time';
 import { RESOURCES_URL } from '../utils/consts';
+import { Dispatch } from '../core/Store';
+import { ResourcesApi } from '../api/resources';
+
+const api = new ResourcesApi();
+
+export const sendMessage = (
+	_dispatch: Dispatch<AppState>,
+	state: AppState,
+	data: string,
+) => {
+	state.activeChat!.ws!.send({
+		type: 'message',
+		content: data,
+	});
+};
+
+export const sendMessageFile = async (
+	_dispatch: Dispatch<AppState>,
+	state: AppState,
+	data: File,
+) => {
+	try {
+		const response = await api.create(data);
+		if (response.data) {
+			state.activeChat!.ws!.send({
+				type: 'file',
+				content: response.data.id,
+			});
+		}
+	} catch (err: any) {
+		console.log(err);
+	}
+};
 
 export const setMessage = (
 	message: ChatMessageType,
@@ -30,7 +63,7 @@ export const setMessage = (
 		if (diff === 1) {
 			dayTitle = 'Yesterday';
 		} else if (diff < 4) {
-			dayTitle = getDay(message.time);
+			dayTitle = getDayFull(message.time);
 		}
 	}
 
@@ -40,6 +73,7 @@ export const setMessage = (
 		mainClass: isMy ? 'media__main--right' : 'media__main--left',
 		mediaClass: isMy ? 'media--reverse' : '',
 		messageClass: isMy ? 'message--reverse' : '',
+		isImg: message.file && message.file.contentType.includes('image'),
 		day: showDayTitle ? dayTitle : '',
 		title: (!isMy && user) ? (user.displayName || user.firstName) : '',
 		time: getTime(message.time),

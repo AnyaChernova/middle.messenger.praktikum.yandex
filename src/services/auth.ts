@@ -5,6 +5,7 @@ import { Dispatch } from '../core/Store';
 import { AppState } from '../utils/types';
 import { transformUser } from '../utils/apiTransformers';
 import { RESOURCES_URL } from '../utils/consts';
+import { defaultState } from '../store';
 
 const api = new AuthApi();
 
@@ -51,11 +52,14 @@ export const register = async (dispatch: Dispatch<AppState>, _state: AppState, d
 	}
 };
 
-export const logout = async (dispatch: Dispatch<AppState>) => {
+export const logout = async (dispatch: Dispatch<AppState>, state: AppState) => {
 	try {
 		await api.logout();
 		new Router().go('/');
-		dispatch({ user: null });
+		state.chatList.forEach((chat) => {
+			chat.ws!.close();
+		});
+		dispatch(defaultState);
 	} catch (e) {
 		console.log(e);
 	}

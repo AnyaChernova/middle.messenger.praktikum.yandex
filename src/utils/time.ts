@@ -15,6 +15,11 @@ export const getTime = (date: string): string => {
 
 export const getDay = (date: string): string => {
 	const dateObj = new Date(date);
+	return day[dateObj.getDay()];
+};
+
+export const getDayFull = (date: string): string => {
+	const dateObj = new Date(date);
 	return dayFull[dateObj.getDay()];
 };
 
@@ -31,8 +36,6 @@ export const getDayString = (date: string): string => {
 export const diffDays = (dateL: string, dateR: string): number => {
 	const dateObjL = new Date(dateL).getTime();
 	const dateObjR = new Date(dateR).getTime();
-	console.log(dateL)
-	console.log(dateR)
 	const diffTime = Math.abs(dateObjL - dateObjR);
 	return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 }

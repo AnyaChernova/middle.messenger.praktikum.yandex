@@ -26,3 +26,14 @@
 	color: var(--color-text-light);
 	font-size: 12px;
 }
+
+.message__link {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.message__img {
+	height: 200px;
+	object-fit: contain;
+	border-radius: 10px;
+}

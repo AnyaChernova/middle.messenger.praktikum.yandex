@@ -2,7 +2,7 @@ import { Block } from '../../../core/Block';
 import { template } from './chatItem.tmpl';
 import { Avatar } from '../../avatar/avatar';
 import { Store } from '../../../core/Store';
-import { initActiveChat, setActiveChat } from '../../../services/chats';
+import { setActiveChat } from '../../../services/chats';
 import { withStore } from '../../../utils/withStore';
 
 export class ChatItemClass extends Block<Indexed> {
@@ -36,7 +36,6 @@ export class ChatItemClass extends Block<Indexed> {
 				click: {
 					handler: async () => {
 						await Store.dispatch(setActiveChat, this.props.id);
-						await Store.dispatch(initActiveChat.bind(this));
 					},
 				},
 			},

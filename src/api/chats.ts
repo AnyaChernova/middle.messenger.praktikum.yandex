@@ -15,6 +15,10 @@ export class ChatsApi {
 		});
 	}
 
+	get(data: ChatDTO) {
+		return this._api.get('', { data });
+	}
+
 	delete(id: number) {
 		return this._api.delete('', {
 			data: JSON.stringify({ chatId: id }),

@@ -36,6 +36,10 @@ export class WS {
 		this._socket.send(JSON.stringify(message));
 	}
 
+	close() {
+		this._socket.close();
+	}
+
 	onOpen() {
 	}
 
@@ -66,7 +70,16 @@ export class WS {
 
 	private _onMessage(e: MessageEvent) {
 		const parseData = JSON.parse(e.data);
-		this.onMessage(parseData);
+
+		if (Array.isArray(parseData)) {
+			this.onMessage(parseData);
+		} else {
+			this.onMessage({
+				...parseData,
+				chat_id: this._id,
+			});
+		}
+
 		if (parseData.type === 'pong') {
 			setTimeout(() => {
 				this.send({ type: 'ping' });

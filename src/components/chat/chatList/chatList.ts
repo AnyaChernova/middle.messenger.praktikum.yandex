@@ -3,7 +3,7 @@ import { template } from './chatList.tmpl';
 import { withStore } from '../../../utils/withStore';
 import { ChatItem } from '../chatItem/chatItem';
 import { ChatItemType } from '../../../utils/types';
-import { getChats, initActiveChat, setActiveChat } from '../../../services/chats';
+import { getChats, initChat, setActiveChat } from '../../../services/chats';
 import { Store } from '../../../core/Store';
 
 class ChatListClass extends Block<Indexed> {
@@ -16,8 +16,10 @@ class ChatListClass extends Block<Indexed> {
 
 	async getChats() {
 		await Store.dispatch(getChats);
+		this.props.chatList.forEach((chat: ChatItemType) => {
+			Store.dispatch(initChat.bind(this), chat);
+		});
 		await Store.dispatch(setActiveChat);
-		await Store.dispatch(initActiveChat.bind(this));
 	}
 
 	render() {

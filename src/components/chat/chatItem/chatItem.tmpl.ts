@@ -14,4 +14,7 @@ export const template: string = `
 			</div>
 		</div>
 		<div class="chatTab__caption">{{lastMessage.time}}</div>
+		{{#if unreadCount}}
+			<div class="circle chatTab__counter"><span class="circle__inner">{{unreadCount}}</span></div>
+		{{/if}}
 	</button>`;
