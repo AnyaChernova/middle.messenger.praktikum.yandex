@@ -4,6 +4,7 @@ import { AppState } from '../utils/types';
 import { transformUser } from '../utils/apiTransformers';
 import { UserApi } from '../api/user';
 import { RESOURCES_URL } from '../utils/consts';
+import { setError } from './setError';
 
 const api = new UserApi();
 
@@ -20,10 +21,8 @@ export const updateProfile = async (
 				noticeSuccess: 'Profile updated successfully',
 			});
 		}
-	} catch (err: any) {
-		if (err?.data?.reason) {
-			dispatch({ noticeError: err.data.reason });
-		}
+	} catch (e) {
+		dispatch(setError, e);
 	}
 };
 
@@ -35,10 +34,8 @@ export const updatePassword = async (
 	try {
 		await api.password(data);
 		dispatch({ noticeSuccess: 'Profile updated successfully' });
-	} catch (err: any) {
-		if (err?.data?.reason) {
-			dispatch({ noticeError: err.data.reason });
-		}
+	} catch (e) {
+		dispatch(setError, e);
 	}
 };
 
@@ -55,10 +52,8 @@ export const updateAvatar = async (
 				noticeSuccess: 'Avatar updated successfully',
 			});
 		}
-	} catch (err: any) {
-		if (err?.data?.reason) {
-			dispatch({ noticeError: err.data.reason });
-		}
+	} catch (e) {
+		dispatch(setError, e);
 	}
 };
 
@@ -74,10 +69,8 @@ export const searchUsers = async (
 				avatar: user.avatar ? `${RESOURCES_URL}${user.avatar}` : 'avatar.svg',
 				name: user.display_name || user.first_name,
 			}));
-	} catch (err: any) {
-		if (err?.data?.reason) {
-			dispatch({ noticeError: err.data.reason });
-		}
+	} catch (e) {
+		dispatch(setError, e);
 		return [];
 	}
 };

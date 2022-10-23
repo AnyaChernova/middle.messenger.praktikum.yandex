@@ -3,7 +3,7 @@ import { SettingsAvatarForm } from '../avatar/settingsAvatarForm';
 import { Button } from '../../button/button';
 import { Form } from '../../form/form';
 import { template } from './settingsProfile.tmpl';
-import { fieldsProfileData } from './mocks';
+import { fieldsProfileData } from './fields';
 import { withStore } from '../../../utils/withStore';
 import { updateProfile } from '../../../services/user';
 import { Store } from '../../../core/Store';
@@ -48,5 +48,5 @@ export class SettingsProfileClass extends Form {
 }
 
 export const SettingsProfile = withStore(SettingsProfileClass, (state) => ({
-		user: state.user,
-	}));
+	user: state.user,
+}));

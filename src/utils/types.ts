@@ -2,6 +2,8 @@ import { Block } from '../core/Block';
 import { WS } from '../core/WS';
 
 type AppState = {
+	appInit: boolean,
+	chatInit: boolean,
 	noticeError: string,
 	noticeSuccess: string,
 	user: Nullable<UserType>,
@@ -12,6 +14,7 @@ type AppState = {
 	activeChatMessages: ChatMessageType[],
 	activeModal: string,
 	chatLoading: boolean,
+	errorCode?: number,
 };
 
 type AvatarType = {

@@ -1,6 +1,7 @@
 import Handlebars from 'handlebars';
 import { nanoid } from 'nanoid';
 import EventBus from './EventBus';
+import { isEqual } from '../utils/isEqual';
 
 Handlebars.registerHelper('if', function (this: any, conditional, options) {
 	if (conditional) {
@@ -111,7 +112,7 @@ export class Block<Props extends Indexed> {
 	}
 
 	public componentDidUpdate(oldProps: Props, newProps: Props) {
-		return JSON.stringify(oldProps) !== JSON.stringify(newProps);
+		return !isEqual(oldProps, newProps);
 	}
 
 	public setProps = (nextProps: Props) => {

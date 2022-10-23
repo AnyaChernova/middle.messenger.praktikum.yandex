@@ -1,5 +1,6 @@
 import { Block } from '../core/Block';
 import { Store, StoreEvents } from '../core/Store';
+import { isEqual } from './isEqual';
 
 export function withStore(Component: typeof Block, mapStateToProps: (state: Indexed) => Indexed) {
 	// @ts-expect-error No base constructor has the specified
@@ -11,7 +12,7 @@ export function withStore(Component: typeof Block, mapStateToProps: (state: Inde
 
 			Store.on(StoreEvents.Updated, () => {
 				const newState = mapStateToProps(Store.getState());
-				if (JSON.stringify(state) !== JSON.stringify(newState)) {
+				if (!isEqual(state, newState)) {
 					// @ts-expect-error this is not typed
 					this.setProps({ ...newState });
 				}

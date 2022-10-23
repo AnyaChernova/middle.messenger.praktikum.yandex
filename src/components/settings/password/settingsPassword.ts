@@ -2,7 +2,7 @@ import { FieldValidate } from '../../field/fieldValidate';
 import { Button } from '../../button/button';
 import { Form } from '../../form/form';
 import { template } from './settingsPassword.tmpl';
-import { fieldsPasswordData } from './mocks';
+import { fieldsPasswordData } from './fields';
 import { updatePassword } from '../../../services/user';
 import { Store } from '../../../core/Store';
 

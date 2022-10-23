@@ -1,6 +1,6 @@
-import { AvatarType, FieldType } from '../../../utils/types';
+import { FieldType } from '../../../utils/types';
 
-const fieldsProfileData: FieldType[] = [
+export const fieldsProfileData: FieldType[] = [
 	{
 		title: 'First Name',
 		name: 'first_name',
@@ -38,11 +38,3 @@ const fieldsProfileData: FieldType[] = [
 		type: 'text',
 	},
 ];
-
-const avatarData: AvatarType = {
-	class: 'avatar--l',
-	url: 'avatar.svg',
-	size: 64,
-};
-
-export { fieldsProfileData, avatarData };

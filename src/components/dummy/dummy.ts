@@ -2,18 +2,13 @@ import { Block } from '../../core/Block';
 import { template } from './dummy.tmpl';
 import { backIcon } from '../icons/back';
 import { Link } from '../link/link';
+import { withStore } from '../../utils/withStore';
 
-type DummyProps = {
-	code: string,
-	title: string,
-	link?: Link
-};
-
-export class Dummy extends Block<DummyProps> {
-	constructor(props: DummyProps) {
+export class DummyClass extends Block<Indexed> {
+	constructor(props: Indexed) {
 		const linkBlock = new Link({
-			to: '/messages',
-			linkText: 'Back to chats',
+			to: '/',
+			linkText: 'Return back',
 			linkClass: 'link link--icon dummy__link',
 			linkIcon: backIcon,
 		});
@@ -28,3 +23,8 @@ export class Dummy extends Block<DummyProps> {
 		return this.compile(template, { ...this.props });
 	}
 }
+
+export const Dummy = withStore(DummyClass as typeof Block, (state) => ({
+	code: state.errorCode,
+	title: state.noticeError,
+}));

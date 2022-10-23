@@ -10,16 +10,20 @@ export const initApp = async (dispatch: Dispatch<AppState>) => {
 		const user = await getUser();
 		if (user) {
 			dispatch({
+				appInit: true,
 				user: transformUser(user),
 				avatar: user.avatar ? `${RESOURCES_URL}${user.avatar}` : 'avatar.svg',
 			});
 			if (document.location.pathname === '/') {
 				new Router().go('/messages');
+			} else {
+				new Router().go(document.location.pathname);
 			}
 		} else {
-			new Router().go('/');
+			dispatch({ appInit: true });
+			new Router().go(document.location.pathname);
 		}
 	} catch (e) {
-		new Router().go('/');
+		new Router().go('/error');
 	}
 };

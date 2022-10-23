@@ -8,7 +8,7 @@ export class Router {
 
 	private _currentRoute: Nullable<Route> = null;
 
-	public routes: Route[] = [];
+	public routes: Record<string, Function> = {};
 
 	public history: History = window.history;
 
@@ -17,7 +17,6 @@ export class Router {
 			return Router.__instance;
 		}
 
-		this.routes = [];
 		this.history = window.history;
 		this._rootQuery = rootQuery;
 		this._currentRoute = null;
@@ -25,11 +24,8 @@ export class Router {
 		Router.__instance = this;
 	}
 
-	use(pathname: string, block: BlockClass) {
-		const route = new Route(pathname, block, this._rootQuery);
-
-		this.routes.push(route);
-
+	use(pathname: string, callback: () => BlockClass | undefined) {
+		this.routes[pathname] = callback;
 		return this;
 	}
 
@@ -42,10 +38,17 @@ export class Router {
 	}
 
 	_onRoute(pathname: string) {
-		const route = this.getRoute(pathname);
-		if (!route) {
+		if (!this.routes[pathname]) {
 			return;
 		}
+
+		const block = this.routes[pathname]();
+
+		if (!block) {
+			return;
+		}
+
+		const route = new Route(block, this._rootQuery);
 
 		if (this._currentRoute) {
 			this._currentRoute.leave();
@@ -67,9 +70,5 @@ export class Router {
 
 	forward() {
 		this.history.forward();
-	}
-
-	getRoute(pathname: string) {
-		return this.routes.find(route => route.match(pathname));
 	}
 }

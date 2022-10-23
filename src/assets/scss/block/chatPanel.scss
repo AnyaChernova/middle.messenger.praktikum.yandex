@@ -55,6 +55,13 @@
 	}
 }
 
+.chatPanel__dummy {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+}
+
 .chatPanel__item {
 	width: 100%;
 	display: flex;

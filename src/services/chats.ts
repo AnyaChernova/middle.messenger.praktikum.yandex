@@ -6,6 +6,7 @@ import { AppState, ChatItemType } from '../utils/types';
 import { ChatsApi } from '../api/chats';
 import { transformChatItem, transformSocketMessage, transformUser } from '../utils/apiTransformers';
 import { WS } from '../core/WS';
+import { setError } from './setError';
 
 const api = new ChatsApi();
 
@@ -26,10 +27,8 @@ export const createChat = async (
 				noticeSuccess: 'New chat added successfully',
 			});
 		}
-	} catch (err: any) {
-		if (err?.data?.reason) {
-			dispatch({ noticeError: err.data.reason });
-		}
+	} catch (e) {
+		dispatch(setError, e);
 	}
 };
 
@@ -50,10 +49,8 @@ export const deleteChat = async (
 			chatList: chats,
 			noticeSuccess: 'Chat deleted successfully',
 		});
-	} catch (err: any) {
-		if (err?.data?.reason) {
-			dispatch({ noticeError: err.data.reason });
-		}
+	} catch (e) {
+		dispatch(setError, e);
 	}
 };
 
@@ -176,7 +173,10 @@ export const getChats = async (dispatch: Dispatch<AppState>, state: AppState) =>
 			const chats = response.data.map((item: ChatItemDTO) => transformChatItem(item));
 			await Promise.all(chats.map((chat: ChatItemType) => setSocketChat(state, chat)));
 
-			dispatch({ chatList: chats });
+			dispatch({
+				chatList: chats,
+				chatInit: true,
+			});
 		}
 	} catch (e) {
 		console.log(e);
@@ -215,9 +215,7 @@ export const updateUsers = async (
 		await getChatUsers(dispatch, state.activeChat!.id);
 
 		dispatch({ noticeSuccess: 'Chat users updated successfully' });
-	} catch (err: any) {
-		if (err?.data?.reason) {
-			dispatch({ noticeError: err.data.reason });
-		}
+	} catch (e) {
+		dispatch(setError, e);
 	}
 };

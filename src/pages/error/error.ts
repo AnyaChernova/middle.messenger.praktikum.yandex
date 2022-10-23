@@ -1,10 +1,9 @@
-import { MainLayout } from '../../layouts/main/main';
 import { Dummy } from '../../components/dummy/dummy';
-import { errorData } from './mocks';
 import { LinkType } from '../../utils/types';
 import { envelopeIcon } from '../../components/icons/envelope';
 import { settingsIcon } from '../../components/icons/settings';
 import { Link } from '../../components/link/link';
+import { FullLayout } from '../../layouts/full/full';
 
 const pages: LinkType[] = [
 	{
@@ -23,10 +22,10 @@ const pages: LinkType[] = [
 	},
 ];
 
-export class ErrorPage extends MainLayout {
+export class ErrorPage extends FullLayout {
 	constructor() {
 		const pageLinks: Link[] = pages.map(item => new Link(item));
-		const errorBlock = new Dummy(errorData);
+		const errorBlock = new Dummy();
 
 		super({ innerClass: 'content__inner--center', body: errorBlock, links: pageLinks });
 	}

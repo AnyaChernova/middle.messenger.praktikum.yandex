@@ -40,16 +40,8 @@ class ChatHeaderClass extends Block<Indexed> {
 			deleteChatBtn,
 		});
 
-		this.setProps({
-			events: {
-				click: {
-					target: '.dropdown__open',
-					handler: () => {
-						this._openDropdown();
-					},
-				},
-			},
-		});
+		this._initProps();
+
 	}
 
 	private _openDropdown() {
@@ -66,7 +58,18 @@ class ChatHeaderClass extends Block<Indexed> {
 		document.body.removeEventListener('click', this._closeDropdown.bind(this));
 	}
 
-	componentDidMount() {
+	private _initProps() {
+		this.setProps({
+			events: {
+				click: {
+					target: '.dropdown__open',
+					handler: () => {
+						this._openDropdown();
+					},
+				},
+			},
+		});
+
 		(this.children.usersBtn as Button).setClick(() => {
 			Store.dispatch({ activeModal: (this.children.usersModal as Block<Indexed>).id });
 		});

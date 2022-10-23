@@ -32,8 +32,8 @@ export const sendMessageFile = async (
 				content: response.data.id,
 			});
 		}
-	} catch (err: any) {
-		console.log(err);
+	} catch (e) {
+		console.log(e);
 	}
 };
 

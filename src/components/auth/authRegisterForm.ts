@@ -14,7 +14,7 @@ export class AuthRegisterForm extends AuthForm {
 			btnText: 'Sign Up',
 		});
 		const linkBlock = new Link({
-			to: '/login',
+			to: '/',
 			linkText: 'Sign in',
 			linkClass: 'link',
 		});

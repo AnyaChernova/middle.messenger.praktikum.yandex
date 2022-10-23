@@ -22,7 +22,7 @@ const tabs: LinkType[] = [
 
 const pages: LinkType[] = [
 	{
-		to: '/',
+		to: '/messages',
 		linkText: 'Messages',
 		linkIcon: envelopeIcon,
 		linkClass: 'nav__item',

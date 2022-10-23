@@ -1,6 +1,6 @@
 import { FieldType } from '../../../utils/types';
 
-const fieldsPasswordData: FieldType[] = [
+export const fieldsPasswordData: FieldType[] = [
 	{
 		title: 'Old password',
 		name: 'oldPassword',
@@ -12,5 +12,3 @@ const fieldsPasswordData: FieldType[] = [
 		type: 'password',
 	},
 ];
-
-export { fieldsPasswordData };

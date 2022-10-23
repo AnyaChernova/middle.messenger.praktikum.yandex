@@ -6,6 +6,7 @@ import { AppState } from '../utils/types';
 import { transformUser } from '../utils/apiTransformers';
 import { RESOURCES_URL } from '../utils/consts';
 import { defaultState } from '../store';
+import { setError } from './setError';
 
 const api = new AuthApi();
 
@@ -30,10 +31,8 @@ export const login = async (dispatch: Dispatch<AppState>, _state: AppState, data
 			});
 		}
 		new Router().go('/messages');
-	} catch (err: any) {
-		if (err?.data?.reason) {
-			dispatch({ noticeError: err.data.reason });
-		}
+	} catch (e) {
+		dispatch(setError, e);
 	}
 };
 
@@ -45,10 +44,8 @@ export const register = async (dispatch: Dispatch<AppState>, _state: AppState, d
 			dispatch({ user: transformUser(user) });
 		}
 		new Router().go('/messages');
-	} catch (err: any) {
-		if (err?.data?.reason) {
-			dispatch({ noticeError: err.data.reason });
-		}
+	} catch (e) {
+		dispatch(setError, e);
 	}
 };
 
@@ -59,8 +56,11 @@ export const logout = async (dispatch: Dispatch<AppState>, state: AppState) => {
 		state.chatList.forEach((chat) => {
 			chat.ws!.close();
 		});
-		dispatch(defaultState);
+		dispatch({
+			...defaultState,
+			appInit: true,
+		});
 	} catch (e) {
-		console.log(e);
+		dispatch(setError, e);
 	}
 };

@@ -43,6 +43,10 @@
 	&:hover {
 		opacity: .6;
 	}
+
+	&:last-child {
+		border-bottom: none;
+	}
 }
 
 .dropdown__item--stick {
