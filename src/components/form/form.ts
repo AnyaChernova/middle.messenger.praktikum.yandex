@@ -20,7 +20,7 @@ export class Form extends Block<any> {
 	protected validate(e: MouseEvent) {
 		e.preventDefault();
 		const fields = this.children.fields as FieldValidate[];
-		let noValidFields: Record<string, boolean> = {};
+		const noValidFields: Record<string, boolean> = {};
 
 		if (fields && fields.length) {
 			fields.forEach((field) => {

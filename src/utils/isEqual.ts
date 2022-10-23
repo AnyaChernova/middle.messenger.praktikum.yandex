@@ -2,20 +2,14 @@ type PlainObject<T = any> = {
 	[k in string]: T;
 };
 
-const isPlainObject = (value: unknown): value is PlainObject => {
-	return typeof value === 'object'
-		&& value !== null
-		&& value.constructor === Object
-		&& Object.prototype.toString.call(value) === '[object Object]';
-}
+const isPlainObject = (value: unknown): value is PlainObject => typeof value === 'object'
+	&& value !== null
+	&& value.constructor === Object
+	&& Object.prototype.toString.call(value) === '[object Object]';
 
-const isArray = (value: unknown): value is [] => {
-	return Array.isArray(value);
-}
+const isArray = (value: unknown) => Array.isArray(value);
 
-const isArrayOrObject = (value: unknown): value is [] | PlainObject => {
-	return isPlainObject(value) || isArray(value);
-}
+const isArrayOrObject = (value: unknown) => isPlainObject(value) || isArray(value);
 
 export const isEqual = (lhs: PlainObject, rhs: PlainObject) => {
 	if (Object.keys(lhs).length !== Object.keys(rhs).length) {
@@ -37,4 +31,4 @@ export const isEqual = (lhs: PlainObject, rhs: PlainObject) => {
 	}
 
 	return true;
-}
+};

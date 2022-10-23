@@ -14,18 +14,18 @@ export class Header extends Block<Indexed> {
 				btnIcon: moonIcon,
 				events: {
 					click: {
-						handler: () => document.querySelector('.page')!.classList.add('page--dark')
-					}
-				}
+						handler: () => document.querySelector('.page')!.classList.add('page--dark'),
+					},
+				},
 			}),
 			btnRight: new Button({
 				btnClass: 'btn--icon btn--headerRight',
 				btnIcon: sunIcon,
 				events: {
 					click: {
-						handler: () => document.querySelector('.page')!.classList.remove('page--dark')
-					}
-				}
+						handler: () => document.querySelector('.page')!.classList.remove('page--dark'),
+					},
+				},
 			}),
 		});
 	}

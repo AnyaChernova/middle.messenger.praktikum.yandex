@@ -26,19 +26,19 @@ export const getDayFull = (date: string): string => {
 export const getDayStringFull = (date: string): string => {
 	const dateObj = new Date(date);
 	return `The ${dateObj.getDate()}th of ${monthFull[dateObj.getMonth()]}`;
-}
+};
 
 export const getDayString = (date: string): string => {
 	const dateObj = new Date(date);
 	return `${dateObj.getDate()} ${month[dateObj.getMonth()]}`;
-}
+};
 
 export const diffDays = (dateL: string, dateR: string): number => {
 	const dateObjL = new Date(dateL).getTime();
 	const dateObjR = new Date(dateR).getTime();
 	const diffTime = Math.abs(dateObjL - dateObjR);
 	return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-}
+};
 
 export const isSameDay = (dateL: string, dateR: string): boolean => {
 	const dateObjL = new Date(dateL);
@@ -46,4 +46,4 @@ export const isSameDay = (dateL: string, dateR: string): boolean => {
 	return (dateObjL.getDate() === dateObjR.getDate()
 		&& dateObjL.getMonth() === dateObjR.getMonth()
 		&& dateObjL.getFullYear() === dateObjR.getFullYear());
-}
+};

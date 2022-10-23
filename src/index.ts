@@ -4,7 +4,6 @@ import { initApp } from './services/initApp';
 import { initRouter } from './services/initRouter';
 import { Router } from './core/Router';
 
-
 Store.on(StoreEvents.Updated, (_prevState: AppState, nextState: AppState) => {
 	console.log(
 		'%cstore updated',
@@ -19,7 +18,6 @@ Store.on(StoreEvents.Updated, (_prevState: AppState, nextState: AppState) => {
 	if (String(nextState.errorCode).startsWith('5')) {
 		new Router().go('/error');
 	}
-
 });
 
 Store.dispatch(initApp);

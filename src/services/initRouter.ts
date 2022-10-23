@@ -48,12 +48,12 @@ export const initRouter = (store: typeof Store) => {
 			const isAuthorized = Boolean(store.getState().user);
 
 			if (!appInit) {
-				return;
+				return null;
 			}
 
 			if (appInit && !isAuthorized && route.shouldAuthorized) {
 				router.go('/');
-				return;
+				return null;
 			}
 
 			return route.block;
@@ -61,4 +61,4 @@ export const initRouter = (store: typeof Store) => {
 	});
 
 	router.start();
-}
+};

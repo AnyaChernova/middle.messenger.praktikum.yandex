@@ -24,7 +24,7 @@ export class Router {
 		Router.__instance = this;
 	}
 
-	use(pathname: string, callback: () => BlockClass | undefined) {
+	use(pathname: string, callback: () => BlockClass | null) {
 		this.routes[pathname] = callback;
 		return this;
 	}

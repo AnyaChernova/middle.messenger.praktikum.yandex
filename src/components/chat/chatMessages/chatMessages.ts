@@ -13,14 +13,12 @@ class ChatMessagesClass extends Block<Indexed> {
 
 	private _setMessages() {
 		this.children.messages = this.props.activeChatMessages
-			.map((message: ChatMessageType, i: number) => {
-				return setMessage(
+			.map((message: ChatMessageType, i: number) => setMessage(
 					message,
 					this.props.activeChatMessages[i - 1],
 					this.props.activeChatUsers,
 					this.props.userId,
-				);
-			});
+				));
 	}
 
 	componentDidMount() {

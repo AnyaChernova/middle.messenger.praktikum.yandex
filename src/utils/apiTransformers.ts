@@ -1,8 +1,12 @@
 import {
 	ChatItemDTO, ChatMessageDTO, ChatMessageFileSocket, ChatMessageSocket, UserDTO,
 } from '../api/types';
-import { ChatFileType, ChatItemType, ChatMessageType, UserType } from './types';
-import { diffDays, getDay, getDayString, getTime, isSameDay } from './time';
+import {
+ ChatFileType, ChatItemType, ChatMessageType, UserType,
+} from './types';
+import {
+ diffDays, getDay, getDayString, getTime, isSameDay,
+} from './time';
 import { RESOURCES_URL } from './consts';
 
 export const transformUser = (data: UserDTO): UserType => ({
@@ -21,7 +25,7 @@ export const transformChatMessage = (data: ChatMessageDTO): ChatMessageType => {
 	const diff = diffDays(data.time, new Date().toDateString());
 	let dayTitle = getTime(data.time);
 
-	if(!isSameDay(data.time, new Date().toDateString())) {
+	if (!isSameDay(data.time, new Date().toDateString())) {
 		if (diff === 1) {
 			dayTitle = 'yesterday';
 		} else if (diff < 4) {
@@ -35,15 +39,8 @@ export const transformChatMessage = (data: ChatMessageDTO): ChatMessageType => {
 		user: transformUser(data.user),
 		time: dayTitle,
 		content: data.content,
-	}
+	};
 };
-
-export const transformSocketMessage = (data: ChatMessageSocket): ChatMessageType => ({
-	userId: data.user_id,
-	time: data.time,
-	content: data.content,
-	file: data.file ? transformSocketMessageFile(data.file) : undefined,
-});
 
 export const transformSocketMessageFile = (data: ChatMessageFileSocket): ChatFileType => ({
 	id: data.id,
@@ -53,6 +50,13 @@ export const transformSocketMessageFile = (data: ChatMessageFileSocket): ChatFil
 	contentType: data.content_type,
 	contentSize: data.content_size,
 	uploadDate: data.upload_date,
+});
+
+export const transformSocketMessage = (data: ChatMessageSocket): ChatMessageType => ({
+	userId: data.user_id,
+	time: data.time,
+	content: data.content,
+	file: data.file ? transformSocketMessageFile(data.file) : undefined,
 });
 
 export const transformChatItem = (data: ChatItemDTO): ChatItemType => ({

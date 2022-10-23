@@ -6,7 +6,11 @@ type RequestError = {
 	data: Indexed,
 };
 
-export const setError = async (dispatch: Dispatch<AppState>, _state: AppState, err: RequestError) => {
+export const setError = async (
+	dispatch: Dispatch<AppState>,
+	_state: AppState,
+	err: RequestError,
+) => {
 	let reason = err?.data?.reason ? err.data.reason : 'Ooops...something wrong';
 
 	if (err.status === 404) {

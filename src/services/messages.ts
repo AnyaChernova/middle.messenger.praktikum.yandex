@@ -1,7 +1,9 @@
 import { AppState, ChatMessageType, UserType } from '../utils/types';
 import { Message } from '../components/message/message';
 import { Avatar } from '../components/avatar/avatar';
-import { diffDays, getDayFull, getDayStringFull, getTime, isSameDay } from '../utils/time';
+import {
+ diffDays, getDayFull, getDayStringFull, getTime, isSameDay,
+} from '../utils/time';
 import { RESOURCES_URL } from '../utils/consts';
 import { Dispatch } from '../core/Store';
 import { ResourcesApi } from '../api/resources';
@@ -41,22 +43,22 @@ export const setMessage = (
 	message: ChatMessageType,
 	prevMessage: ChatMessageType | undefined,
 	activeChatUsers: UserType[],
-	userId: number
+	userId: number,
 ): Message => {
 	let user = message.user;
 	let dayTitle = getDayStringFull(message.time);
 	let showDayTitle = true;
-	let isMy = message.userId === userId;
+	const isMy = message.userId === userId;
 
 	if (!user && message.userId) {
 		user = activeChatUsers.find((item: UserType) => item.id === message.userId);
 	}
 
-	if(prevMessage && isSameDay(message.time, prevMessage.time)) {
+	if (prevMessage && isSameDay(message.time, prevMessage.time)) {
 		showDayTitle = false;
 	}
 
-	if(isSameDay(message.time, new Date().toDateString())) {
+	if (isSameDay(message.time, new Date().toDateString())) {
 		dayTitle = 'Today';
 	} else {
 		const diff = diffDays(message.time, new Date().toDateString());
@@ -84,4 +86,4 @@ export const setMessage = (
 			size: 50,
 		}) : undefined,
 	});
-}
+};

@@ -10,50 +10,6 @@ import { setError } from './setError';
 
 const api = new ChatsApi();
 
-export const createChat = async (
-	dispatch: Dispatch<AppState>,
-	state: AppState,
-	data: ChatDTO,
-) => {
-	try {
-		await api.create(data);
-		const response = await api.get(data);
-		if (response.data) {
-			const chats = [...state.chatList];
-			const newChat = transformChatItem(response.data[0] as ChatItemDTO);
-			await setSocketChat(state, newChat);
-			dispatch({
-				chatList: [newChat, ...chats],
-				noticeSuccess: 'New chat added successfully',
-			});
-		}
-	} catch (e) {
-		dispatch(setError, e);
-	}
-};
-
-export const deleteChat = async (
-	dispatch: Dispatch<AppState>,
-	state: AppState,
-	chatId: number = 0,
-) => {
-	try {
-		await api.delete(chatId);
-		const chats = [...state.chatList];
-		const index = chats.findIndex(({ id }) => id === chatId);
-		if (index !== -1) {
-			chats[index].ws!.close();
-			chats.splice(index, 1);
-		}
-		dispatch({
-			chatList: chats,
-			noticeSuccess: 'Chat deleted successfully',
-		});
-	} catch (e) {
-		dispatch(setError, e);
-	}
-};
-
 export const getChatUsers = async (dispatch: Dispatch<AppState>, chatId: number) => {
 	try {
 		const response = await api.users(chatId);
@@ -148,13 +104,14 @@ export function initChat(dispatch: Dispatch<AppState>, _state: AppState, chat: C
 				dispatch({ activeChatMessages: messages, chatLoading: false });
 			} else if (data.type === 'message' || data.type === 'file') {
 				if (chat.id !== activeChat!.id) {
-					const chats = chatList.map((item: ChatItemType) => {
-						return (item.id === chat.id) ? {
+					const chats = chatList.map((item: ChatItemType) => ((item.id === chat.id) ? {
 							...item,
 							unreadCount: item.unreadCount + 1,
-						} : item;
-					}).sort((a: ChatItemType, b: ChatItemType) => (b.id === activeChat.id) ? 1 : b.unreadCount - a.unreadCount);
-					dispatch({ chatList: chats });
+						} : item));
+					const chatsSorted = chats.sort((a: ChatItemType, b: ChatItemType) => (
+						(b.id === activeChat.id) ? 1 : b.unreadCount - a.unreadCount
+					));
+					dispatch({ chatList: chatsSorted });
 				}
 				if (data.chat_id === activeChat!.id) {
 					const message = transformSocketMessage(data);
@@ -215,6 +172,50 @@ export const updateUsers = async (
 		await getChatUsers(dispatch, state.activeChat!.id);
 
 		dispatch({ noticeSuccess: 'Chat users updated successfully' });
+	} catch (e) {
+		dispatch(setError, e);
+	}
+};
+
+export const createChat = async (
+	dispatch: Dispatch<AppState>,
+	state: AppState,
+	data: ChatDTO,
+) => {
+	try {
+		await api.create(data);
+		const response = await api.get(data);
+		if (response.data) {
+			const chats = [...state.chatList];
+			const newChat = transformChatItem(response.data[0] as ChatItemDTO);
+			await setSocketChat(state, newChat);
+			dispatch({
+				chatList: [newChat, ...chats],
+				noticeSuccess: 'New chat added successfully',
+			});
+		}
+	} catch (e) {
+		dispatch(setError, e);
+	}
+};
+
+export const deleteChat = async (
+	dispatch: Dispatch<AppState>,
+	state: AppState,
+	chatId: number = 0,
+) => {
+	try {
+		await api.delete(chatId);
+		const chats = [...state.chatList];
+		const index = chats.findIndex(({ id }) => id === chatId);
+		if (index !== -1) {
+			chats[index].ws!.close();
+			chats.splice(index, 1);
+		}
+		dispatch({
+			chatList: chats,
+			noticeSuccess: 'Chat deleted successfully',
+		});
 	} catch (e) {
 		dispatch(setError, e);
 	}

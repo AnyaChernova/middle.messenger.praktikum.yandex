@@ -38,7 +38,7 @@ export class ChatClass extends Block<Indexed> {
 		this.setProps({
 			isInit: this.props.chatInit,
 			isEmpty: this.props.chatInit && this.props.chatList.length === 0,
-		})
+		});
 	}
 
 	render() {

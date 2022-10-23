@@ -41,7 +41,6 @@ class ChatHeaderClass extends Block<Indexed> {
 		});
 
 		this._initProps();
-
 	}
 
 	private _openDropdown() {
