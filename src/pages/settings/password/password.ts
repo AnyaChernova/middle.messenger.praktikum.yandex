@@ -1,40 +1,22 @@
 import { MainLayout } from '../../../layouts/main/main';
 import { SettingsNav } from '../../../components/settings/nav/settingsNav';
 import { SettingsPassword } from '../../../components/settings/password/settingsPassword';
-import { LinkType } from '../../../utils/types';
 import { Link } from '../../../components/link/link';
-import { envelopeIcon } from '../../../components/icons/envelope';
-import { settingsIcon } from '../../../components/icons/settings';
+import { LinkType } from '../../../utils/types';
+import { NAV_CLASSES } from '../../../utils/consts';
+import { pages } from '../pages';
 
 const tabs: LinkType[] = [
 	{
 		to: '/settings',
 		linkText: 'Profile',
-		linkClass: 'nav__item navRow__item nav__item--accent',
+		linkClass: NAV_CLASSES.ITEM_ACCENT,
 	},
 	{
 		to: '/settings-password',
 		linkText: 'Password',
-		activeClass: 'nav__item--active',
-		linkClass: 'nav__item navRow__item nav__item--accent',
-	},
-];
-
-const pages: LinkType[] = [
-	{
-		to: '/messages',
-		linkText: 'Messages',
-		linkIcon: envelopeIcon,
-		linkClass: 'nav__item',
-		linkIconClass: 'nav__icon',
-	},
-	{
-		to: '/settings',
-		linkText: 'Settings',
-		activeClass: 'nav__item--active',
-		linkIcon: settingsIcon,
-		linkClass: 'nav__item',
-		linkIconClass: 'nav__icon',
+		activeClass: NAV_CLASSES.ITEM_ACTIVE,
+		linkClass: NAV_CLASSES.ITEM_ACCENT,
 	},
 ];
 

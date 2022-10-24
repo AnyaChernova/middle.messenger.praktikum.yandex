@@ -23,8 +23,6 @@ export class Route {
 	render() {
 		if (!this._block) {
 			this._block = new this._blockClass();
-			renderDOM(this._rootQuery, this._block as Block<any>);
-			return;
 		}
 
 		renderDOM(this._rootQuery, this._block as Block<any>);

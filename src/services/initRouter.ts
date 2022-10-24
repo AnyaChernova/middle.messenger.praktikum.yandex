@@ -5,7 +5,7 @@ import { RegisterPage } from '../pages/register/register';
 import { ErrorPage } from '../pages/error/error';
 import { ProfilePage } from '../pages/settings/profile/profile';
 import { PasswordPage } from '../pages/settings/password/password';
-import { Store } from '../core/Store';
+import { store } from '../core/Store';
 
 const routes = [
 	{
@@ -40,12 +40,12 @@ const routes = [
 	},
 ];
 
-export const initRouter = (store: typeof Store) => {
+export const initRouter = (storage: typeof store) => {
 	const router = new Router('.app');
 	routes.forEach(route => {
 		router.use(route.path, () => {
-			const appInit = store.getState().appInit;
-			const isAuthorized = Boolean(store.getState().user);
+			const appInit = storage.getState().appInit;
+			const isAuthorized = Boolean(storage.getState().user);
 
 			if (!appInit) {
 				return null;

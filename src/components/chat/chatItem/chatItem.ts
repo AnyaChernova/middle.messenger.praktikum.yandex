@@ -1,7 +1,7 @@
 import { Block } from '../../../core/Block';
 import { template } from './chatItem.tmpl';
 import { Avatar } from '../../avatar/avatar';
-import { Store } from '../../../core/Store';
+import { store } from '../../../core/Store';
 import { setActiveChat } from '../../../services/chats';
 import { withStore } from '../../../utils/withStore';
 
@@ -35,7 +35,7 @@ export class ChatItemClass extends Block<Indexed> {
 			events: {
 				click: {
 					handler: async () => {
-						await Store.dispatch(setActiveChat, this.props.id);
+						await store.dispatch(setActiveChat, this.props.id);
 					},
 				},
 			},

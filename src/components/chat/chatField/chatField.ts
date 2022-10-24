@@ -5,7 +5,7 @@ import { Button } from '../../button/button';
 import { FileUploader } from '../../fileUploader/fileUploader';
 import { fileSize } from '../../../utils/file';
 import { clipIcon } from '../../icons/clip';
-import { Store } from '../../../core/Store';
+import { store } from '../../../core/Store';
 import { sendMessage, sendMessageFile } from '../../../services/messages';
 
 export class ChatField extends Form {
@@ -51,7 +51,7 @@ export class ChatField extends Form {
 	}
 
 	onSubmit() {
-		Store.dispatch(sendMessage, this._input!.value);
+		store.dispatch(sendMessage, this._input!.value);
 		this._input!.value = '';
 	}
 
@@ -59,7 +59,7 @@ export class ChatField extends Form {
 		this._initValidate();
 		const fileUploader = this.children.fileUploader as FileUploader;
 		fileUploader.onSubmit = () => {
-			Store.dispatch(sendMessageFile, fileUploader.files[0]);
+			store.dispatch(sendMessageFile, fileUploader.files[0]);
 		};
 
 		(this.children.fileBtn as Button).setClick(() => {

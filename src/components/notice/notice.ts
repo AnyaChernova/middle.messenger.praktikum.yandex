@@ -1,7 +1,7 @@
 import { Block } from '../../core/Block';
 import { withStore } from '../../utils/withStore';
 import { template } from './notice.tmpl';
-import { Store } from '../../core/Store';
+import { store } from '../../core/Store';
 
 type NoticeType = {
 	noticeError?: string,
@@ -26,12 +26,7 @@ class NoticeClass extends Block<NoticeType> {
 	}
 
 	hide() {
-		this.setProps({
-			noticeError: '',
-			noticeSuccess: '',
-		});
-
-		Store.dispatch({
+		store.dispatch({
 			noticeError: '',
 			noticeSuccess: '',
 		});

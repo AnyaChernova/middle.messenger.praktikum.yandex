@@ -1,7 +1,7 @@
 import { Block } from '../../core/Block';
 import { template } from './fileUploader.tmpl';
 import { fileExtension, humanFileSize } from '../../utils/file';
-import { Store } from '../../core/Store';
+import { store } from '../../core/Store';
 
 type uploaderType = {
 	multiple?: boolean,
@@ -71,7 +71,7 @@ export class FileUploader extends Block<uploaderType> {
 			const isValidSize = file.size <= this.fileMaxSize;
 			if (!isValidSize) {
 				const error = `${file.name}\nПревышает максимальный размер (${humanFileSize(this.fileMaxSize)})`;
-				Store.dispatch({ noticeError: error });
+				store.dispatch({ noticeError: error });
 			}
 			return isValidSize;
 		});
@@ -84,7 +84,7 @@ export class FileUploader extends Block<uploaderType> {
 			const isValidFormat = this.fileFormats.includes(ext.toLocaleLowerCase());
 			if (!isValidFormat) {
 				const error = `${file.name}\nФормат файла не разрешен`;
-				Store.dispatch({ noticeError: error });
+				store.dispatch({ noticeError: error });
 			}
 			return isValidFormat;
 		});

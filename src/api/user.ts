@@ -1,31 +1,29 @@
 import { UserDTO } from './types';
 import { HTTPTransport } from '../core/HTTPTransport';
 
-export class UserApi {
-	private _api: HTTPTransport;
-
+export class UserApi extends HTTPTransport {
 	constructor() {
-		this._api = new HTTPTransport('/user');
+		super('/user');
 	}
 
 	profile(data: UserDTO) {
-		return this._api.put('/profile', {
+		return this.put('/profile', {
 			data: JSON.stringify(data),
-			headers: { 'Content-Type': 'application/json' },
+			headers: this._headers,
 		});
 	}
 
 	password(data: UserDTO) {
-		return this._api.put('/password', {
+		return this.put('/password', {
 			data: JSON.stringify(data),
-			headers: { 'Content-Type': 'application/json' },
+			headers: this._headers,
 		});
 	}
 
 	search(data: { login: string }) {
-		return this._api.post('/search', {
+		return this.post('/search', {
 			data: JSON.stringify(data),
-			headers: { 'Content-Type': 'application/json' },
+			headers: this._headers,
 		});
 	}
 
@@ -33,7 +31,7 @@ export class UserApi {
 		const formData = new FormData();
 		formData.append('avatar', file);
 
-		return this._api.put('/profile/avatar', {
+		return this.put('/profile/avatar', {
 			data: formData,
 		});
 	}

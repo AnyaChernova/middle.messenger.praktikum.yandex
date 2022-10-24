@@ -7,7 +7,7 @@ import { removeIcon } from '../../icons/remove';
 import { usersIcon } from '../../icons/users';
 import { Modal } from '../../modal/modal';
 import { ChatUsersForm } from '../chatUsersForm/chatUsersForm';
-import { Store } from '../../../core/Store';
+import { store } from '../../../core/Store';
 import { ChatDeleteForm } from '../chatDeleteForm/chatDeleteForm';
 
 class ChatHeaderClass extends Block<Indexed> {
@@ -45,17 +45,17 @@ class ChatHeaderClass extends Block<Indexed> {
 
 	private _openDropdown() {
 		this.setProps({ isOpenDropdown: true });
-		document.body.addEventListener('click', this._closeDropdown.bind(this));
+		document.body.addEventListener('click', this._closeDropdown);
 	}
 
-	private _closeDropdown(e: Event) {
+	private _closeDropdown = (e: Event) => {
 		const target = e.target;
 		if (target && (target as HTMLElement).closest('.dropdown__open')) {
 			return;
 		}
 		this.setProps({ isOpenDropdown: false });
-		document.body.removeEventListener('click', this._closeDropdown.bind(this));
-	}
+		document.body.removeEventListener('click', this._closeDropdown);
+	};
 
 	private _initProps() {
 		this.setProps({
@@ -70,11 +70,11 @@ class ChatHeaderClass extends Block<Indexed> {
 		});
 
 		(this.children.usersBtn as Button).setClick(() => {
-			Store.dispatch({ activeModal: (this.children.usersModal as Block<Indexed>).id });
+			store.dispatch({ activeModal: (this.children.usersModal as Block<Indexed>).id });
 		});
 
 		(this.children.deleteChatBtn as Button).setClick(() => {
-			Store.dispatch({ activeModal: (this.children.chatDeleteModal as Block<Indexed>).id });
+			store.dispatch({ activeModal: (this.children.chatDeleteModal as Block<Indexed>).id });
 		});
 
 		(this.children.usersModal as Block<Indexed>).setProps({
@@ -97,7 +97,7 @@ class ChatHeaderClass extends Block<Indexed> {
 }
 
 export const ChatHeader = withStore(ChatHeaderClass as typeof Block, (state) => ({
-		title: state.activeChat?.title ?? '',
-		chatId: state.activeChat?.id ?? 0,
-		activeChatUsers: state.activeChatUsers,
-	}));
+	title: state.activeChat?.title ?? '',
+	chatId: state.activeChat?.id ?? 0,
+	activeChatUsers: state.activeChatUsers,
+}));

@@ -6,7 +6,7 @@ import { template } from './settingsProfile.tmpl';
 import { fieldsProfileData } from './fields';
 import { withStore } from '../../../utils/withStore';
 import { updateProfile } from '../../../services/user';
-import { Store } from '../../../core/Store';
+import { store } from '../../../core/Store';
 import { AvatarUser } from '../../avatar/avatarUser';
 
 export class SettingsProfileClass extends Form {
@@ -31,7 +31,7 @@ export class SettingsProfileClass extends Form {
 
 	async onSubmit() {
 		(this.children.button as Button).setLoading(true);
-		await Store.dispatch(updateProfile, this.formData);
+		await store.dispatch(updateProfile, this.formData);
 		(this.children.button as Button).setLoading(false);
 	}
 

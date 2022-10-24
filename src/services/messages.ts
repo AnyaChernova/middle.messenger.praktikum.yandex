@@ -1,18 +1,22 @@
-import { AppState, ChatMessageType, UserType } from '../utils/types';
+import { ChatMessageType, UserType } from '../utils/types';
 import { Message } from '../components/message/message';
 import { Avatar } from '../components/avatar/avatar';
 import {
- diffDays, getDayFull, getDayStringFull, getTime, isSameDay,
+ diffDays,
+	getDayFull,
+	getDayStringFull,
+	getTime,
+	isSameDay,
 } from '../utils/time';
 import { RESOURCES_URL } from '../utils/consts';
-import { Dispatch } from '../core/Store';
 import { ResourcesApi } from '../api/resources';
+import { StateFunction } from '../core/Store';
 
 const api = new ResourcesApi();
 
-export const sendMessage = (
-	_dispatch: Dispatch<AppState>,
-	state: AppState,
+export const sendMessage: StateFunction = (
+	_dispatch,
+	state,
 	data: string,
 ) => {
 	state.activeChat!.ws!.send({
@@ -21,9 +25,9 @@ export const sendMessage = (
 	});
 };
 
-export const sendMessageFile = async (
-	_dispatch: Dispatch<AppState>,
-	state: AppState,
+export const sendMessageFile: StateFunction = async (
+	_dispatch,
+	state,
 	data: File,
 ) => {
 	try {

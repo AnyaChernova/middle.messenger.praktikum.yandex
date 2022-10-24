@@ -6,29 +6,31 @@ export const dayFull = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 
 
 export const day = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-export const getTime = (date: string): string => {
+type DateFunction = (date: string) => string;
+
+export const getTime: DateFunction = (date) => {
 	const dateObj = new Date(date);
 	const hours = dateObj.getHours();
 	const minutes = dateObj.getMinutes();
 	return `${hours}:${minutes < 10 ? `0${minutes}` : minutes}`;
 };
 
-export const getDay = (date: string): string => {
+export const getDay: DateFunction = (date) => {
 	const dateObj = new Date(date);
 	return day[dateObj.getDay()];
 };
 
-export const getDayFull = (date: string): string => {
+export const getDayFull: DateFunction = (date) => {
 	const dateObj = new Date(date);
 	return dayFull[dateObj.getDay()];
 };
 
-export const getDayStringFull = (date: string): string => {
+export const getDayStringFull: DateFunction = (date) => {
 	const dateObj = new Date(date);
 	return `The ${dateObj.getDate()}th of ${monthFull[dateObj.getMonth()]}`;
 };
 
-export const getDayString = (date: string): string => {
+export const getDayString: DateFunction = (date) => {
 	const dateObj = new Date(date);
 	return `${dateObj.getDate()} ${month[dateObj.getMonth()]}`;
 };

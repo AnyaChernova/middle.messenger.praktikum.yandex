@@ -1,16 +1,16 @@
 export const template: string = `
 	<div class="chatPanel__item chatPanel__item--bottom {{itemClass}}">
 		{{#if day}}
-		<div class="chatPanel__day">{{day}}</div>
+		<p class="chatPanel__day">{{day}}</p>
 		{{/if}}
-		<div class="media {{mediaClass}}">
+		<article class="media {{mediaClass}}">
 			{{#if avatar}}
-				<div class="media__aside">{{{avatar}}}</div>
+				<aside class="media__aside">{{{avatar}}}</aside>
 			{{/if}}
-			<div class="media__main {{mainClass}}">
+			<main class="media__main {{mainClass}}">
 				<div class="message {{messageClass}}">
 				{{#if title}}
-					<div class="text-mid">{{title}}</div>
+					<h3 class="title title--text">{{title}}</h3>
 				{{/if}}
 				{{#if file}}
 					{{#if isImg}}
@@ -19,10 +19,10 @@ export const template: string = `
 					<a class="link message__link" href="{{file.path}}" target="_blank">{{file.filename}}</a>
 					{{/if}}
 				{{else }}
-				{{content}}
+				<p class="message__content">{{content}}</p>
 				{{/if}}
 				<span class="message__time message__caption">{{time}}</span>
 				</div>
-			</div>
-		</div>
+			</main>
+		</article>
 	</div>`;

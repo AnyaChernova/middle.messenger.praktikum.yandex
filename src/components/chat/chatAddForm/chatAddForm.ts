@@ -2,7 +2,7 @@ import { Form } from '../../form/form';
 import { Button } from '../../button/button';
 import { FieldValidate } from '../../field/fieldValidate';
 import { template } from './chatAddForm.tmpl';
-import { Store } from '../../../core/Store';
+import { store } from '../../../core/Store';
 import { createChat, initChat, setActiveChat } from '../../../services/chats';
 import { withStore } from '../../../utils/withStore';
 import { Block } from '../../../core/Block';
@@ -26,10 +26,10 @@ export class ChatAddFormClass extends Form {
 
 	async onSubmit() {
 		(this.children.button as Button).setLoading(true);
-		await Store.dispatch(createChat, this.formData);
-		await Store.dispatch(setActiveChat);
-		await Store.dispatch(initChat.bind(this), this.props.chatList[0]);
-		Store.dispatch({ activeModal: '' });
+		await store.dispatch(createChat, this.formData);
+		await store.dispatch(setActiveChat);
+		await store.dispatch(initChat.bind(this), this.props.chatList[0]);
+		store.dispatch({ activeModal: '' });
 	}
 
 	render() {

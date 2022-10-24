@@ -6,7 +6,7 @@ import { Modal } from '../modal/modal';
 import { ChatAddForm } from './chatAddForm/chatAddForm';
 import { pencilIcon } from '../icons/pencil';
 import { ChatList } from './chatList/chatList';
-import { Store } from '../../core/Store';
+import { store } from '../../core/Store';
 import { ChatHeader } from './chatHeader/chatHeader';
 import { ChatMessages } from './chatMessages/chatMessages';
 import { withStore } from '../../utils/withStore';
@@ -30,7 +30,7 @@ export class ChatClass extends Block<Indexed> {
 		});
 
 		(this.children.btnAdd as Button).setClick(() => {
-			Store.dispatch({ activeModal: (this.children.modalAdd as Block<Indexed>).id });
+			store.dispatch({ activeModal: (this.children.modalAdd as Block<Indexed>).id });
 		});
 	}
 

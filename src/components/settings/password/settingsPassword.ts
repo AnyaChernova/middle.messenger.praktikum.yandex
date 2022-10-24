@@ -4,7 +4,7 @@ import { Form } from '../../form/form';
 import { template } from './settingsPassword.tmpl';
 import { fieldsPasswordData } from './fields';
 import { updatePassword } from '../../../services/user';
-import { Store } from '../../../core/Store';
+import { store } from '../../../core/Store';
 
 export class SettingsPassword extends Form {
 	constructor() {
@@ -19,7 +19,7 @@ export class SettingsPassword extends Form {
 
 	async onSubmit() {
 		(this.children.button as Button).setLoading(true);
-		await Store.dispatch(updatePassword, this.formData);
+		await store.dispatch(updatePassword, this.formData);
 		(this.children.button as Button).setLoading(false);
 	}
 

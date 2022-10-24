@@ -73,15 +73,6 @@ type UserMediaType = {
 	events?: Record<string, object>;
 };
 
-type TabType = {
-	user: UserType | Block<UserType>;
-	time: string;
-	tabClass?: string;
-	userClass?: string;
-	titleClass?: string;
-	newCounter?: number;
-};
-
 type BtnType = {
 	btnClass?: string;
 	btnText?: string;
@@ -132,11 +123,6 @@ type ChatItemType = {
 	ws?: WS;
 };
 
-type SocketMessageType = {
-	content?: string;
-	type: string;
-};
-
 export {
 	AppState,
 	AvatarType,
@@ -144,11 +130,9 @@ export {
 	MessageType,
 	UserType,
 	UserMediaType,
-	TabType,
 	BtnType,
 	LinkType,
 	ChatItemType,
 	ChatMessageType,
 	ChatFileType,
-	SocketMessageType,
 };

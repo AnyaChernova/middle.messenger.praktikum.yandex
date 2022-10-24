@@ -25,8 +25,11 @@ export class HTTPTransport {
 
 	private readonly _apiURL: string;
 
+	protected _headers: Record<string, string>;
+
 	constructor(pathname: string) {
 		this._apiURL = HTTPTransport.BASE_URL + pathname;
+		this._headers = { 'Content-Type': 'application/json' };
 	}
 
 	public get = (url: string, options: RequestOptions = {}): Promise<RequestResponse> => {

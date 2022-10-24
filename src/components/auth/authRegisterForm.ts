@@ -4,7 +4,7 @@ import { Link } from '../link/link';
 import { Button } from '../button/button';
 import { FieldValidate } from '../field/fieldValidate';
 import { registerFields } from './fields';
-import { Store } from '../../core/Store';
+import { store } from '../../core/Store';
 
 export class AuthRegisterForm extends AuthForm {
 	constructor() {
@@ -29,7 +29,7 @@ export class AuthRegisterForm extends AuthForm {
 
 	async onSubmit() {
 		(this.children.button as Button).setLoading(true);
-		await Store.dispatch(register, this.formData);
+		await store.dispatch(register, this.formData);
 		(this.children.button as Button).setLoading(false);
 	}
 }

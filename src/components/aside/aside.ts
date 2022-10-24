@@ -3,7 +3,7 @@ import { template } from './aside.tmpl';
 import { Button } from '../button/button';
 import { exitIcon } from '../icons/exit';
 import { logout } from '../../services/auth';
-import { Store } from '../../core/Store';
+import { store } from '../../core/Store';
 
 export class Aside extends Block<Indexed> {
 	constructor(props: Indexed) {
@@ -15,7 +15,7 @@ export class Aside extends Block<Indexed> {
 			events: {
 				click: {
 					handler: () => {
-						Store.dispatch(logout);
+						store.dispatch(logout);
 					},
 				},
 			},

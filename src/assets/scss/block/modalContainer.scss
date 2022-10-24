@@ -48,6 +48,7 @@
 .modalContainer__close {
 	@include btn;
 
+	height: 24px;
 	cursor: pointer;
 	padding: var(--d-gap-m);
 	position: absolute;

@@ -1,32 +1,30 @@
 import { AuthDTO } from './types';
 import { HTTPTransport } from '../core/HTTPTransport';
 
-export class AuthApi {
-	private _api: HTTPTransport;
-
+export class AuthApi extends HTTPTransport {
 	constructor() {
-		this._api = new HTTPTransport('/auth');
+		super('/auth');
 	}
 
 	user() {
-		return this._api.get('/user');
+		return this.get('/user');
 	}
 
 	logout() {
-		return this._api.post('/logout');
+		return this.post('/logout');
 	}
 
 	signup(data: AuthDTO) {
-		return this._api.post('/signup', {
+		return this.post('/signup', {
 			data: JSON.stringify(data),
-			headers: { 'Content-Type': 'application/json' },
+			headers: this._headers,
 		});
 	}
 
 	signin(data: AuthDTO) {
-		return this._api.post('/signin', {
+		return this.post('/signin', {
 			data: JSON.stringify(data),
-			headers: { 'Content-Type': 'application/json' },
+			headers: this._headers,
 		});
 	}
 }

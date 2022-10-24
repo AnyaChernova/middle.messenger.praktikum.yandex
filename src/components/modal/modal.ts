@@ -3,7 +3,7 @@ import { template } from './modal.tmpl';
 import { Button } from '../button/button';
 import { closeIcon } from '../icons/close';
 import { withStore } from '../../utils/withStore';
-import { Store } from '../../core/Store';
+import { store } from '../../core/Store';
 
 type ModalPropsType = {
 	content: () => typeof Block;
@@ -23,8 +23,23 @@ class ModalClass extends Block<Indexed> {
 		});
 
 		(this.children.closeBtn as Button).setClick(() => {
-			Store.dispatch({ activeModal: '' });
+			this._closeModal();
 		});
+	}
+
+	private _closeModal = () => {
+		store.dispatch({ activeModal: '' });
+	};
+
+	private _setOverlayClick() {
+		const overlay = this.element!.querySelector('.modalContainer__overlay');
+		if (overlay) {
+			overlay.addEventListener('click', this._closeModal);
+		}
+	}
+
+	componentDidMount() {
+		this._setOverlayClick();
 	}
 
 	render() {
@@ -36,4 +51,4 @@ class ModalClass extends Block<Indexed> {
 
 export const Modal = withStore(ModalClass as typeof Block, (state) => ({
 		activeModal: state.activeModal,
-	}));
+}));

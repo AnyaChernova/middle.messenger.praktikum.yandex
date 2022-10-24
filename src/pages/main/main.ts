@@ -4,22 +4,23 @@ import { LinkType } from '../../utils/types';
 import { Link } from '../../components/link/link';
 import { envelopeIcon } from '../../components/icons/envelope';
 import { settingsIcon } from '../../components/icons/settings';
+import { NAV_CLASSES } from '../../utils/consts';
 
 const pages: LinkType[] = [
 	{
 		to: '/messages',
 		linkText: 'Messages',
-		activeClass: 'nav__item--active',
+		activeClass: NAV_CLASSES.ITEM_ACTIVE,
 		linkIcon: envelopeIcon,
-		linkClass: 'nav__item',
-		linkIconClass: 'nav__icon',
+		linkClass: NAV_CLASSES.ITEM,
+		linkIconClass: NAV_CLASSES.ICON,
 	},
 	{
 		to: '/settings',
 		linkText: 'Settings',
 		linkIcon: settingsIcon,
-		linkClass: 'nav__item',
-		linkIconClass: 'nav__icon',
+		linkClass: NAV_CLASSES.ITEM,
+		linkIconClass: NAV_CLASSES.ICON,
 	},
 ];
 

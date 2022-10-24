@@ -2,7 +2,7 @@ import { Block } from '../../../core/Block';
 import { template } from './settingsAvatarForm.tmpl';
 import { Button } from '../../button/button';
 import { FileUploader } from '../../fileUploader/fileUploader';
-import { Store } from '../../../core/Store';
+import { store } from '../../../core/Store';
 import { updateAvatar } from '../../../services/user';
 import { fileSize } from '../../../utils/file';
 
@@ -28,7 +28,7 @@ export class SettingsAvatarForm extends Block<Indexed> {
 	componentDidMount() {
 		const fileUploader = this.children.fileUploader as FileUploader;
 		fileUploader.onSubmit = () => {
-			Store.dispatch(updateAvatar, fileUploader.files[0]);
+			store.dispatch(updateAvatar, fileUploader.files[0]);
 		};
 
 		(this.children.updateBtn as Button).setClick(() => {

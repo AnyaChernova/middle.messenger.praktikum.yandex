@@ -7,7 +7,7 @@ export const template: string = `
 		<div class="content__main">
 			{{{header}}}
 			<main class="content__wrap">
-				<div class="content__inner {{innerClass}}">
+				<section class="content__inner {{innerClass}}">
 					{{#if title}}
 						<div class="content__header">
 							<div class="content__title">
@@ -17,7 +17,7 @@ export const template: string = `
 						</div>
 					{{/if}}
 					{{{body}}}
-				</div>
+				</section>
 			</main>
 		</div>
 	</div>`;

@@ -1,4 +1,4 @@
-import { Store } from '../../../core/Store';
+import { store } from '../../../core/Store';
 import { template } from './chatUsersForm.tmpl';
 import { Block } from '../../../core/Block';
 import { Button } from '../../button/button';
@@ -53,7 +53,7 @@ export class ChatUsersForm extends Block<Indexed> {
 	async searchUsers() {
 		this._searchString = this._searchInput!.value;
 		this.setProps({ searchLoading: true });
-		const users = await Store.dispatch(searchUsers, { login: this._searchString });
+		const users = await store.dispatch(searchUsers, { login: this._searchString });
 		this.setProps({ searchLoading: false, users });
 	}
 
@@ -141,11 +141,11 @@ export class ChatUsersForm extends Block<Indexed> {
 	private async _onSubmit(e: Event) {
 		e.preventDefault();
 		(this.children.button as Button).setLoading(true);
-		await Store.dispatch(
+		await store.dispatch(
 			updateUsers,
 			this.props.selectedUsers.map((user: UserMediaType) => user.id),
 		);
-		Store.dispatch({ activeModal: '' });
+		store.dispatch({ activeModal: '' });
 	}
 
 	componentDidMount() {

@@ -1,10 +1,10 @@
-import { Store, StoreEvents } from './core/Store';
+import { store, StoreEvents } from './core/Store';
 import { AppState } from './utils/types';
 import { initApp } from './services/initApp';
 import { initRouter } from './services/initRouter';
 import { Router } from './core/Router';
 
-Store.on(StoreEvents.Updated, (_prevState: AppState, nextState: AppState) => {
+store.on(StoreEvents.Updated, (_prevState: AppState, nextState: AppState) => {
 	console.log(
 		'%cstore updated',
 		'background: #222; color: #bada55',
@@ -20,5 +20,5 @@ Store.on(StoreEvents.Updated, (_prevState: AppState, nextState: AppState) => {
 	}
 });
 
-Store.dispatch(initApp);
-initRouter(Store);
+store.dispatch(initApp);
+initRouter(store);

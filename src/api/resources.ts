@@ -1,17 +1,15 @@
 import { HTTPTransport } from '../core/HTTPTransport';
 
-export class ResourcesApi {
-	private _api: HTTPTransport;
-
+export class ResourcesApi extends HTTPTransport {
 	constructor() {
-		this._api = new HTTPTransport('/resources');
+		super('/resources');
 	}
 
 	create(file: File) {
 		const formData = new FormData();
 		formData.append('resource', file);
 
-		return this._api.post('', {
+		return this.post('', {
 			data: formData,
 		});
 	}

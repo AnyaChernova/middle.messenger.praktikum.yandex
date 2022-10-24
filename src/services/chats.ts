@@ -1,7 +1,10 @@
 import {
-	ChatDTO, ChatItemDTO, ChatMessageSocket, UserDTO,
+	ChatDTO,
+	ChatItemDTO,
+	ChatMessageSocket,
+	UserDTO,
 } from '../api/types';
-import { Dispatch } from '../core/Store';
+import { Dispatch, StateFunction } from '../core/Store';
 import { AppState, ChatItemType } from '../utils/types';
 import { ChatsApi } from '../api/chats';
 import { transformChatItem, transformSocketMessage, transformUser } from '../utils/apiTransformers';
@@ -36,10 +39,10 @@ export const getChatToken = async (chatId: number = 0) => {
 	}
 };
 
-export const setActiveChat = async (
-	dispatch: Dispatch<AppState>,
-	state: AppState,
-	chatId: number = 0,
+export const setActiveChat: StateFunction = async (
+	dispatch,
+	state,
+	chatId = 0,
 ) => {
 	let chat: Nullable<ChatItemType> = null;
 
@@ -89,7 +92,11 @@ export const setSocketChat = async (
 	}
 };
 
-export function initChat(dispatch: Dispatch<AppState>, _state: AppState, chat: ChatItemType) {
+export function initChat(
+	dispatch: Dispatch<AppState>,
+	_state: AppState,
+	chat: ChatItemType,
+) {
 	if (chat.ws) {
 		chat.ws.onMessage = (data: ChatMessageSocket | ChatMessageSocket[]) => {
 			// @ts-expect-error this is not typed
@@ -122,7 +129,7 @@ export function initChat(dispatch: Dispatch<AppState>, _state: AppState, chat: C
 	}
 }
 
-export const getChats = async (dispatch: Dispatch<AppState>, state: AppState) => {
+export const getChats: StateFunction = async (dispatch, state) => {
 	dispatch({ chatLoading: true });
 	try {
 		const response = await api.list();
@@ -141,9 +148,9 @@ export const getChats = async (dispatch: Dispatch<AppState>, state: AppState) =>
 	dispatch({ chatLoading: false });
 };
 
-export const updateUsers = async (
-	dispatch: Dispatch<AppState>,
-	state: AppState,
+export const updateUsers: StateFunction = async (
+	dispatch,
+	state,
 	data: number[],
 ) => {
 	const users = state.activeChatUsers.map(({ id }) => id);
@@ -177,14 +184,14 @@ export const updateUsers = async (
 	}
 };
 
-export const createChat = async (
-	dispatch: Dispatch<AppState>,
-	state: AppState,
+export const createChat: StateFunction = async (
+	dispatch,
+	state,
 	data: ChatDTO,
 ) => {
 	try {
 		await api.create(data);
-		const response = await api.get(data);
+		const response = await api.getChat(data);
 		if (response.data) {
 			const chats = [...state.chatList];
 			const newChat = transformChatItem(response.data[0] as ChatItemDTO);
@@ -199,13 +206,13 @@ export const createChat = async (
 	}
 };
 
-export const deleteChat = async (
-	dispatch: Dispatch<AppState>,
-	state: AppState,
+export const deleteChat: StateFunction = async (
+	dispatch,
+	state,
 	chatId: number = 0,
 ) => {
 	try {
-		await api.delete(chatId);
+		await api.deleteChat(chatId);
 		const chats = [...state.chatList];
 		const index = chats.findIndex(({ id }) => id === chatId);
 		if (index !== -1) {

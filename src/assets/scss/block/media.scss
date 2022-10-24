@@ -42,6 +42,7 @@
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
+	margin: 0;
 }
 
 .media__title--l {
@@ -50,13 +51,18 @@
 }
 
 .media__caption {
+	display: block;
 	color: var(--color-text-gray);
 	font-size: 12px;
-	margin-top: 6px;
+	margin: 6px 0 0;
 	white-space: nowrap;
 	max-width: 100%;
 	text-overflow: ellipsis;
 	overflow: hidden;
+}
+
+.media__caption--m {
+	font-size: 14px;
 }
 
 .mediaWrap {

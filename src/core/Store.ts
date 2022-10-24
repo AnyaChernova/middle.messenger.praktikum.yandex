@@ -17,6 +17,12 @@ export type Action<State> = (
 	payload: any,
 ) => void;
 
+export type StateFunction = (
+	dispatch: Dispatch<AppState>,
+	state: AppState,
+	data?: any
+) => Promise<void> | void;
+
 class Storage extends EventBus {
 	private _state: AppState = {} as AppState;
 
@@ -49,4 +55,4 @@ class Storage extends EventBus {
 	}
 }
 
-export const Store = new Storage();
+export const store = new Storage();

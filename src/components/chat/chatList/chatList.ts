@@ -4,7 +4,7 @@ import { withStore } from '../../../utils/withStore';
 import { ChatItem } from '../chatItem/chatItem';
 import { ChatItemType } from '../../../utils/types';
 import { getChats, initChat, setActiveChat } from '../../../services/chats';
-import { Store } from '../../../core/Store';
+import { store } from '../../../core/Store';
 
 class ChatListClass extends Block<Indexed> {
 	constructor(props: Indexed) {
@@ -15,11 +15,11 @@ class ChatListClass extends Block<Indexed> {
 	}
 
 	async getChats() {
-		await Store.dispatch(getChats);
+		await store.dispatch(getChats);
 		this.props.chatList.forEach((chat: ChatItemType) => {
-			Store.dispatch(initChat.bind(this), chat);
+			store.dispatch(initChat.bind(this), chat);
 		});
-		await Store.dispatch(setActiveChat);
+		await store.dispatch(setActiveChat);
 	}
 
 	render() {
