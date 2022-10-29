@@ -1,67 +1,138 @@
-import Block from '../modules/Block';
+import { Block } from '../core/Block';
+import { WS } from '../core/WS';
 
-type AvatarType = {
-	class?: string,
-	url: string,
-	size: number,
+type AppState = {
+	appInit: boolean,
+	chatInit: boolean,
+	noticeError: string,
+	noticeSuccess: string,
+	user: Nullable<UserType>,
+	avatar: string,
+	chatList: ChatItemType[],
+	activeChat: Nullable<ChatItemType>,
+	activeChatUsers: UserType[],
+	activeChatMessages: ChatMessageType[],
+	activeModal: string,
+	chatLoading: boolean,
+	errorCode?: number,
 };
 
-type PageType = {
-	main?: boolean,
-	settings?: boolean,
-	profile?: boolean,
-	password?: boolean,
-	title?: string,
+type AvatarType = {
+	class?: string;
+	title?: string;
+	url: string;
+	size: number;
 };
 
 type FieldType = {
-	fieldClass?: string,
-	inputClass?: string,
-	labelClass?: string,
-	name?: string,
-	title?: string,
-	type?: string,
-	minLength?: number,
-	maxLength?: number,
-	events?: Record<string, object>,
+	fieldClass?: string;
+	inputClass?: string;
+	labelClass?: string;
+	id?: string;
+	name?: string;
+	value?: string;
+	title?: string;
+	type?: string;
+	minLength?: number;
+	maxLength?: number;
+	events?: Record<string, object>;
 };
 
 type MessageType = {
-	text: string,
-	itemClass?: string,
-	mainClass?: string,
-	mediaClass?: string,
-	messageClass?: string,
-	user?: AvatarType | Block<AvatarType>,
-	avatar?: AvatarType | Block<AvatarType>,
+	content: string;
+	time: string;
+	title?: string;
+	itemClass?: string;
+	mainClass?: string;
+	mediaClass?: string;
+	messageClass?: string;
+	day?: string;
+	isImg?: boolean;
+	avatar?: AvatarType | Block<AvatarType>;
 };
 
 type UserType = {
-	name: string,
-	caption: string,
-	avatar: AvatarType | Block<AvatarType>,
+	id: number;
+	login: string;
+	firstName: string;
+	secondName: string;
+	displayName: string;
+	avatar: string;
+	phone: string;
+	email: string;
+	role?: string;
 };
 
-type TabType = {
-	user: UserType | Block<UserType>,
-	time: string,
-	tabClass?: string,
-	userClass?: string,
-	titleClass?: string,
-	newCounter?: number,
+type UserMediaType = {
+	name?: string;
+	userClass?: string;
+	caption?: string;
+	isRemove?: boolean;
+	id?: number;
+	avatar?: AvatarType | Block<AvatarType> | string;
+	events?: Record<string, object>;
 };
 
 type BtnType = {
-	btnClass?: string,
-	btnText: string,
+	btnClass?: string;
+	btnText?: string;
+	btnTextClass?: string;
+	btnIcon?: string;
+	btnIconClass?: string;
+	btnType?: string;
+	asLink?: boolean;
+	isLoading?: boolean;
+	events?: Record<string, object>;
+};
+
+type LinkType = {
+	to?: string;
+	linkClass?: string;
+	activeClass?: string;
+	linkText: string;
+	linkIcon?: string;
+	linkIconClass?: string;
+	events?: Record<string, object>;
+};
+
+type ChatFileType = {
+	id: number;
+	userId: number;
+	path: string;
+	filename: string;
+	contentType: string;
+	contentSize: string;
+	uploadDate: string;
+};
+
+type ChatMessageType = {
+	userId?: number,
+	user?: UserType;
+	time: string;
+	content: string;
+	file?: ChatFileType;
+};
+
+type ChatItemType = {
+	id: number;
+	title: string;
+	avatar: string | null;
+	unreadCount: number;
+	lastMessage: Nullable<ChatMessageType>;
+	isActive?: boolean;
+	ws?: WS;
 };
 
 export {
+	AppState,
 	AvatarType,
-	PageType,
 	FieldType,
 	MessageType,
 	UserType,
-	TabType,
+	UserMediaType,
 	BtnType,
+	LinkType,
+	ChatItemType,
+	ChatMessageType,
+	ChatFileType,
 };

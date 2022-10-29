@@ -11,20 +11,23 @@
 		"no-underscore-dangle": "off",
 		"class-methods-use-this": "off",
 		"no-param-reassign": "off",
+		"no-constructor-return": "off",
 		"arrow-parens": "off",
 		"new-parens": "off",
 		"func-names": "off",
 		"no-console": "off",
+		"no-continue": "off",
 		"no-useless-escape": "off",
 		"prefer-destructuring": "off",
 		"prefer-promise-reject-errors": "off",
 		"import/prefer-default-export": "off",
+		"no-restricted-syntax": ["error", "ForInStatement", "LabeledStatement", "WithStatement"],
 		"@typescript-eslint/no-useless-constructor": "off",
 		"@typescript-eslint/naming-convention": [
 			"warn",
 			{
 				"selector": "variable",
-				"format": ["camelCase"]
+				"format": ["camelCase", "PascalCase", "UPPER_CASE"]
 			}
 		]
 	}

@@ -1,25 +1,43 @@
-import Block from '../../modules/Block';
-import { ChatField } from '../chatField/chatField';
+import { Block } from '../../core/Block';
+import { ChatField } from './chatField/chatField';
 import { template } from './chat.tmpl';
-import {
-	FieldType,
-	MessageType,
-	TabType,
-	UserType,
-} from '../../utils/types';
+import { Button } from '../button/button';
+import { Modal } from '../modal/modal';
+import { ChatAddForm } from './chatAddForm/chatAddForm';
+import { pencilIcon } from '../icons/pencil';
+import { ChatList } from './chatList/chatList';
+import { store } from '../../core/Store';
+import { ChatHeader } from './chatHeader/chatHeader';
+import { ChatMessages } from './chatMessages/chatMessages';
+import { withStore } from '../../utils/withStore';
 
-type ChatProps = {
-	user: Block<UserType>,
-	messages: Block<MessageType>[],
-	tabs: Block<TabType>[],
-	field?: Block<FieldType>,
-};
+export class ChatClass extends Block<Indexed> {
+	constructor(props: Indexed) {
+		const btnAddChat = new Button({
+			btnClass: 'btn--icon btn--primary',
+			btnIcon: pencilIcon,
+		});
+		const modalAddChat = new Modal({ content: () => new ChatAddForm() });
 
-export class Chat extends Block<ChatProps> {
-	constructor(props: ChatProps) {
 		super({
 			...props,
-			field: new ChatField({ name: 'message', type: 'text' }),
+			btnAdd: btnAddChat,
+			modalAdd: modalAddChat,
+			field: new ChatField(),
+			header: new ChatHeader(),
+			chats: new ChatList(),
+			messages: new ChatMessages(),
+		});
+
+		(this.children.btnAdd as Button).setClick(() => {
+			store.dispatch({ activeModal: (this.children.modalAdd as Block<Indexed>).id });
+		});
+	}
+
+	componentDidMount() {
+		this.setProps({
+			isInit: this.props.chatInit,
+			isEmpty: this.props.chatInit && this.props.chatList.length === 0,
 		});
 	}
 
@@ -27,3 +45,8 @@ export class Chat extends Block<ChatProps> {
 		return this.compile(template, { ...this.props });
 	}
 }
+
+export const Chat = withStore(ChatClass as typeof Block, (state) => ({
+	chatList: state.chatList,
+	chatInit: state.chatInit,
+}));

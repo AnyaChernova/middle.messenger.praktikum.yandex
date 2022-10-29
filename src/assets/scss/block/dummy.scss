@@ -14,3 +14,12 @@
 .dummy__link {
 	margin-top: 60px;
 }
+
+.dummy__icon {
+	color: var(--color-text-light);
+
+	svg {
+		width: 48px;
+		height: 48px;
+	}
+}

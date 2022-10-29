@@ -1,5 +1,5 @@
-import Block from '../../modules/Block';
-import Validator from '../../modules/Validator';
+import { Block } from '../../core/Block';
+import { Validator } from '../../core/Validator';
 import { template } from './field.tmpl';
 import { FieldType } from '../../utils/types';
 
@@ -22,6 +22,7 @@ export class FieldValidate extends Block<FieldType> {
 			},
 		});
 
+		this.uniqueName = this.props.id;
 		this.validator = null;
 		this.initValidate();
 	}
@@ -42,11 +43,19 @@ export class FieldValidate extends Block<FieldType> {
 		);
 	}
 
+	setValue(value: string) {
+		this.setProps({ value });
+	}
+
 	validate() {
-		this.validator!.validate();
+		return this.validator!.validate();
 	}
 
 	render() {
 		return this.compile(template, { ...this.props });
+	}
+
+	componentDidMount() {
+		this.initValidate();
 	}
 }

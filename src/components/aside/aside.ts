@@ -1,12 +1,27 @@
-import Block from '../../modules/Block';
+import { Block } from '../../core/Block';
 import { template } from './aside.tmpl';
-import { PageType } from '../../utils/types';
+import { Button } from '../button/button';
+import { exitIcon } from '../icons/exit';
+import { logout } from '../../services/auth';
+import { store } from '../../core/Store';
 
-type AsideProps = { page: PageType };
+export class Aside extends Block<Indexed> {
+	constructor(props: Indexed) {
+		const logoutBtn = new Button({
+			btnClass: 'nav__item nav__item--bottom',
+			btnText: 'Log out',
+			btnIcon: exitIcon,
+			btnIconClass: 'nav__icon',
+			events: {
+				click: {
+					handler: () => {
+						store.dispatch(logout);
+					},
+				},
+			},
+		});
 
-export class Aside extends Block<AsideProps> {
-	constructor(props: AsideProps) {
-		super(props);
+		super({ ...props, logoutBtn });
 	}
 
 	render() {

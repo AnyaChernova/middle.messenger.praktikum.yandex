@@ -8,6 +8,10 @@
 	margin-bottom: 40px;
 }
 
+.formBox__list {
+	margin: 16px 0;
+}
+
 .formBox__caption {
 	margin-top: 16px;
 	font-size: 18px;
@@ -15,4 +19,13 @@
 
 .formBox__footer {
 	margin-top: 30px;
+}
+
+.formBox--modal {
+	display: flex;
+	flex-direction: column;
+
+	.formBox__footer {
+		margin-top: auto;
+	}
 }

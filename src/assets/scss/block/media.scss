@@ -7,11 +7,13 @@
 	vertical-align: middle;
 	text-align: left;
 	max-width: 100%;
+	align-self: flex-start;
 }
 
 .media--reverse {
 	grid-template-areas: "main aside";
 	grid-template-columns: minmax(0, 1fr) auto;
+	align-self: flex-end;
 }
 
 .media__aside {
@@ -40,6 +42,7 @@
 	white-space: nowrap;
 	text-overflow: ellipsis;
 	overflow: hidden;
+	margin: 0;
 }
 
 .media__title--l {
@@ -48,7 +51,27 @@
 }
 
 .media__caption {
+	display: block;
 	color: var(--color-text-gray);
 	font-size: 12px;
-	margin-top: 6px;
+	margin: 6px 0 0;
+	white-space: nowrap;
+	max-width: 100%;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+.media__caption--m {
+	font-size: 14px;
+}
+
+.mediaWrap {
+	@include btn;
+
+	padding: 0;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	color: var(--color-text-main);
 }

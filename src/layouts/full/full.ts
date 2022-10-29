@@ -1,11 +1,10 @@
-import Block from '../../modules/Block';
+import { Block } from '../../core/Block';
+import { Notice } from '../../components/notice/notice';
 import { template } from './full.tmpl';
 
-type layoutProps = { body: Block<any> };
-
-export class FullLayout extends Block<layoutProps> {
-	constructor(props: layoutProps) {
-		super(props);
+export class FullLayout extends Block<Indexed> {
+	constructor(props: Indexed) {
+		super({ ...props, notice: new Notice() });
 	}
 
 	render() {

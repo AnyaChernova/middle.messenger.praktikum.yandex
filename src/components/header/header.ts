@@ -1,14 +1,33 @@
-import Block from '../../modules/Block';
+import { Block } from '../../core/Block';
 import { template } from './header.tmpl';
-import { Avatar } from '../avatar/avatar';
+import { AvatarUser } from '../avatar/avatarUser';
+import { Button } from '../button/button';
+import { moonIcon } from '../icons/moon';
+import { sunIcon } from '../icons/sun';
 
-type HeaderProps = {
-	avatar: Avatar
-};
-
-export class Header extends Block<HeaderProps> {
-	constructor(props: HeaderProps) {
-		super(props);
+export class Header extends Block<Indexed> {
+	constructor() {
+		super({
+			avatar: new AvatarUser(),
+			btnLeft: new Button({
+				btnClass: 'btn--icon btn--headerLeft mr-16',
+				btnIcon: moonIcon,
+				events: {
+					click: {
+						handler: () => document.querySelector('.page')!.classList.add('page--dark'),
+					},
+				},
+			}),
+			btnRight: new Button({
+				btnClass: 'btn--icon btn--headerRight',
+				btnIcon: sunIcon,
+				events: {
+					click: {
+						handler: () => document.querySelector('.page')!.classList.remove('page--dark'),
+					},
+				},
+			}),
+		});
 	}
 
 	render() {

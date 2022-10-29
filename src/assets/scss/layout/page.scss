@@ -3,3 +3,46 @@
 	overflow: auto;
 	background-color: var(--color-page);
 }
+
+.page--dark {
+	--color-page: #1F2128;
+	--color-bg: #1F2128;
+	--color-bg-secondary: #2B2E38;
+	--color-bg-btn: #2C303D;
+	--color-text-main: #FFFFFF;
+	--color-text-secondary: #808191;
+	--color-light: #242731;
+	--color-field: #E0E4E7;
+	--color-field-border: #323745;
+	--color-plate: #292E3D;
+	--color-border: #323745;
+	--color-gray-light: #2C303D;
+
+	.nav__item--active {
+		color: var(--color-text-main);
+	}
+
+	.formField__label {
+		color: var(--color-field);
+	}
+
+	.chatField__icon {
+		color: var(--color-field);
+	}
+
+	.chatField__icon--primary {
+		color: var(--color-primary);
+	}
+
+	.btn--round {
+		color: var(--color-field);
+	}
+
+	.btn--headerLeft {
+		color: var(--color-primary);
+	}
+
+	.btn--headerRight {
+		color: var(--color-gray);
+	}
+}

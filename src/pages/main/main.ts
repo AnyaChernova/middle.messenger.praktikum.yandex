@@ -1,31 +1,34 @@
-import { avatarData, tabs, messages } from './mocks';
-import { Avatar } from '../../components/avatar/avatar';
-import { User } from '../../components/user/user';
-import { Message } from '../../components/message/message';
-import { MessageTab } from '../../components/messageTab/messageTab';
 import { Chat } from '../../components/chat/chat';
 import { MainLayout } from '../../layouts/main/main';
-import { AvatarType, UserType } from '../../utils/types';
+import { LinkType } from '../../utils/types';
+import { Link } from '../../components/link/link';
+import { envelopeIcon } from '../../components/icons/envelope';
+import { settingsIcon } from '../../components/icons/settings';
+import { NAV_CLASSES } from '../../utils/consts';
 
-const userBlock = new User({ name: 'User name', caption: 'Active Now', avatar: new Avatar(avatarData) });
-const messagesList = messages.map((message) => new Message({
-	...message,
-	avatar: message.user ? new Avatar(message.user as AvatarType) : undefined,
-}));
-const tabsList = tabs.map((tab) => {
-	let user: User | UserType = tab.user;
-	if (!(tab.user instanceof User)) {
-		const userData = { ...tab.user as UserType };
-		user = new User({
-			...userData,
-			avatar: new Avatar(userData.avatar as AvatarType),
-		});
+const pages: LinkType[] = [
+	{
+		to: '/messages',
+		linkText: 'Messages',
+		activeClass: NAV_CLASSES.ITEM_ACTIVE,
+		linkIcon: envelopeIcon,
+		linkClass: NAV_CLASSES.ITEM,
+		linkIconClass: NAV_CLASSES.ICON,
+	},
+	{
+		to: '/settings',
+		linkText: 'Settings',
+		linkIcon: settingsIcon,
+		linkClass: NAV_CLASSES.ITEM,
+		linkIconClass: NAV_CLASSES.ICON,
+	},
+];
+
+export class MainPage extends MainLayout {
+	constructor() {
+		const chatBlock = new Chat();
+		const links: Link[] = pages.map(item => new Link(item));
+
+		super({ innerClass: 'content__inner--full', body: chatBlock, links });
 	}
-	return new MessageTab({ ...tab, user });
-});
-const chatBlock = new Chat({ user: userBlock, messages: messagesList, tabs: tabsList });
-
-export const mainPage = new MainLayout({
-	innerClass: 'content__inner--full',
-	body: chatBlock,
-});
+}
