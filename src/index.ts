@@ -1,3 +1,4 @@
+import './assets/scss/style.scss';
 import { store, StoreEvents } from './core/Store';
 import { AppState } from './utils/types';
 import { initApp } from './services/initApp';

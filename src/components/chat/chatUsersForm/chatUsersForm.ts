@@ -47,7 +47,7 @@ export class ChatUsersForm extends Block<Indexed> {
 		clearTimeout(this._timeout);
 		this._timeout = setTimeout(() => {
 			this.searchUsers();
-		}, 300);
+		}, 300) as unknown as number;
 	}
 
 	async searchUsers() {
