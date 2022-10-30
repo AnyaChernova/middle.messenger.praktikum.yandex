@@ -35,6 +35,10 @@ npm run build
 
 https://gentle-axolotl-171506.netlify.app
 
+### Ссылка на Heroku
+
+https://frozen-island-79621.herokuapp.com
+
 ### Используемые технологии
 
 #### Server
@@ -49,7 +53,7 @@ https://gentle-axolotl-171506.netlify.app
 
 #### Tools
 
-- Parcel
+- Webpack
 - Sass
 - Handlebars
 - ESLint
