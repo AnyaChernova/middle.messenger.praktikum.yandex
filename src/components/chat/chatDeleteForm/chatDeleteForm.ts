@@ -13,7 +13,7 @@ export class ChatDeleteForm extends Form {
 			...props,
 			button: new Button({
 				btnClass: 'w-full',
-				btnText: 'Delete',
+				btnText: 'Delete'
 			}),
 		});
 	}
