@@ -13,7 +13,7 @@ export class ChatDeleteForm extends Form {
 			...props,
 			button: new Button({
 				btnClass: 'w-full',
-				btnText: 'Delete'
+				btnText: 'Delete',
 			}),
 		});
 	}
@@ -22,7 +22,7 @@ export class ChatDeleteForm extends Form {
 		(this.children.button as Button).setLoading(true);
 		await store.dispatch(deleteChat, this.props.chatId);
 		await store.dispatch(setActiveChat);
-		store.dispatch({ activeModal: '' });
+		store.dispatch({ activeModal: '' })
 	}
 
 	render() {
