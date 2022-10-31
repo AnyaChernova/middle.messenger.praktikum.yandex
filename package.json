@@ -7,7 +7,9 @@
 		"serve": "webpack serve --open --config webpack.dev.js",
 		"build": "webpack --config webpack.prod.js",
 		"lint": "eslint --ext .js,.ts --fix src/**",
-		"stylelint": "stylelint src/assets/**"
+		"stylelint": "stylelint src/assets/**",
+		"validate": "npm-run-all lint stylelint",
+		"precommit": "npm run validate"
 	},
 	"author": "Anna Chernova",
 	"license": "ISC",
@@ -40,10 +42,5 @@
 	"dependencies": {
 		"handlebars": "4.7.7",
 		"nanoid": "4.0.0"
-	},
-	"husky": {
-		"hooks": {
-			"pre-commit": "npm-run-all lint stylelint"
-		}
 	}
 }
