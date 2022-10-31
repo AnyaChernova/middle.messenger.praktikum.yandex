@@ -9,7 +9,8 @@
 		"lint": "eslint --ext .js,.ts --fix src/**",
 		"stylelint": "stylelint src/assets/**",
 		"validate": "npm-run-all lint stylelint",
-		"precommit": "npm run validate"
+		"precommit": "npm run validate",
+		"prepare": "husky install"
 	},
 	"author": "Anna Chernova",
 	"license": "ISC",
