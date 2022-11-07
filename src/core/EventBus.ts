@@ -22,7 +22,9 @@ export default class EventBus {
 	}
 
 	emit(event: string, ...args: unknown[]) {
-		this._listeners[event].forEach((listener) => listener(...args));
+		if (this._listeners[event]) {
+			this._listeners[event].forEach((listener) => listener(...args));
+		}
 	}
 
 	destroy() {

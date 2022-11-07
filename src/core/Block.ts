@@ -97,7 +97,7 @@ export class Block<Props extends Indexed> {
 		this.componentWillUnmount();
 	}
 
-	componentWillUnmount() {}
+	public componentWillUnmount() {}
 
 	public dispatchComponentDidMount() {
 		this.eventBus().emit(Block.EVENTS.FLOW_CDM);
