@@ -21,26 +21,28 @@ export const transformUser = (data: UserDTO): UserType => ({
 	role: data.role === 'admin' ? 'admin' : 'user',
 });
 
-export const transformChatMessage = (data: ChatMessageDTO): ChatMessageType => {
-	const diff = diffDays(data.time, new Date().toDateString());
-	let dayTitle = getTime(data.time);
+export const transformChatTime = (time: string): string => {
+	const diff = diffDays(time, new Date().toDateString());
+	let dayTitle = getTime(time);
 
-	if (!isSameDay(data.time, new Date().toDateString())) {
+	if (!isSameDay(time, new Date().toDateString())) {
 		if (diff === 1) {
 			dayTitle = 'yesterday';
 		} else if (diff < 4) {
-			dayTitle = getDay(data.time);
+			dayTitle = getDay(time);
 		} else {
-			dayTitle = getDayString(data.time);
+			dayTitle = getDayString(time);
 		}
 	}
 
-	return {
-		user: transformUser(data.user),
-		time: dayTitle,
-		content: data.content,
-	};
+	return dayTitle;
 };
+
+export const transformChatMessage = (data: ChatMessageDTO): ChatMessageType => ({
+		user: transformUser(data.user),
+		time: transformChatTime(data.time),
+		content: data.content,
+	});
 
 export const transformSocketMessageFile = (data: ChatMessageFileSocket): ChatFileType => ({
 	id: data.id,

@@ -85,7 +85,7 @@ export const setMessage = (
 		time: getTime(message.time),
 		avatar: !isMy ? new Avatar({
 			class: 'avatar--m',
-			url: (user && user.avatar) ? `${RESOURCES_URL}${user.avatar}` : 'avatar.svg',
+			url: (user && user.avatar) ? `${RESOURCES_URL}${user.avatar}` : require('/static/avatar.svg'),
 			title: user ? (user.displayName || user.firstName) : '',
 			size: 50,
 		}) : undefined,

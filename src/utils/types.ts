@@ -108,6 +108,7 @@ type ChatFileType = {
 type ChatMessageType = {
 	userId?: number,
 	user?: UserType;
+	name?: string;
 	time: string;
 	content: string;
 	file?: ChatFileType;

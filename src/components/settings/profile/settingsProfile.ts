@@ -16,7 +16,7 @@ export class SettingsProfileClass extends Form {
 		const avatarFormBlock = new SettingsAvatarForm({
 			avatar: new AvatarUser({
 				class: 'avatar--l',
-				url: 'avatar.svg',
+				url: require('/static/avatar.svg'),
 				size: 64,
 			}),
 		});

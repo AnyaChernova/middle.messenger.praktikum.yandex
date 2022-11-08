@@ -30,7 +30,7 @@ export const login: StateFunction = async (
 		if (user) {
 			dispatch({
 				user: transformUser(user),
-				avatar: user.avatar ? `${RESOURCES_URL}${user.avatar}` : 'avatar.svg',
+				avatar: user.avatar ? `${RESOURCES_URL}${user.avatar}` : require('/static/avatar.svg'),
 			});
 		}
 		new Router().go('/messages');

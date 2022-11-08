@@ -48,7 +48,7 @@ export const updateAvatar = async (
 		const response = await api.avatar(data);
 		if (response.data) {
 			dispatch({
-				avatar: response.data.avatar ? `${RESOURCES_URL}${response.data.avatar}` : 'avatar.svg',
+				avatar: response.data.avatar ? `${RESOURCES_URL}${response.data.avatar}` : require('/static/avatar.svg'),
 				noticeSuccess: 'Avatar updated successfully',
 			});
 		}
@@ -66,7 +66,7 @@ export const searchUsers = async (
 		const response = await api.search(data);
 		return response.data.map((user: UserDTO) => ({
 				id: user.id,
-				avatar: user.avatar ? `${RESOURCES_URL}${user.avatar}` : 'avatar.svg',
+				avatar: user.avatar ? `${RESOURCES_URL}${user.avatar}` : require('/static/avatar.svg'),
 				name: user.display_name || user.first_name,
 			}));
 	} catch (e) {

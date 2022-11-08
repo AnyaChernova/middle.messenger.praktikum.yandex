@@ -104,7 +104,7 @@ export class ChatUsersForm extends Block<Indexed> {
 					isRemove: true,
 					caption: (user as UserType).role ?? '',
 					avatar: new Avatar({
-						url: user.avatar ? `${RESOURCES_URL}${user.avatar}` : 'avatar.svg',
+						url: user.avatar ? `${RESOURCES_URL}${user.avatar}` : require('/static/avatar.svg'),
 						class: 'avatar--s',
 						size: 40,
 					}),

@@ -7,7 +7,12 @@ import {
 import { Dispatch, StateFunction } from '../core/Store';
 import { AppState, ChatItemType } from '../utils/types';
 import { ChatsApi } from '../api/chats';
-import { transformChatItem, transformSocketMessage, transformUser } from '../utils/apiTransformers';
+import {
+	transformChatItem,
+	transformChatTime,
+	transformSocketMessage,
+	transformUser,
+} from '../utils/apiTransformers';
 import { WS } from '../core/WS';
 import { setError } from './setError';
 
@@ -108,6 +113,7 @@ export function initChat(
 
 			if (Array.isArray(data)) {
 				const messages = data.reverse().map((message) => transformSocketMessage(message));
+
 				dispatch({ activeChatMessages: messages, chatLoading: false });
 			} else if (data.type === 'message' || data.type === 'file') {
 				if (chat.id !== activeChat!.id) {
@@ -118,11 +124,33 @@ export function initChat(
 					const chatsSorted = chats.sort((a: ChatItemType, b: ChatItemType) => (
 						(b.id === activeChat.id) ? 1 : b.unreadCount - a.unreadCount
 					));
+
 					dispatch({ chatList: chatsSorted });
 				}
 				if (data.chat_id === activeChat!.id) {
 					const message = transformSocketMessage(data);
-					dispatch({ activeChatMessages: [...activeChatMessages, message] });
+					const activeChatIndex = chatList.findIndex((c: ChatItemType) => c.id === data.chat_id);
+					const lastMessage = {
+						content: data.content,
+						userId: data.user_id,
+						time: transformChatTime(data.time),
+					};
+					const activeChatNew = {
+						...activeChat,
+						lastMessage,
+					};
+					let chats = [...chatList];
+
+					if (activeChatIndex !== 0) {
+						chats.splice(activeChatIndex, 1);
+						chats = [activeChatNew, ...chats];
+					}
+
+					dispatch({
+						activeChatMessages: [...activeChatMessages, message],
+						chatList: chats,
+						activeChat: activeChatNew,
+					});
 				}
 			}
 		};

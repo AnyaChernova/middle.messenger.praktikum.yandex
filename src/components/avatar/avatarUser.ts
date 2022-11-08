@@ -5,7 +5,7 @@ import { Block } from '../../core/Block';
 class AvatarUserClass extends Avatar {
 	constructor(props: Indexed) {
 		super({
-			url: 'avatar.svg',
+			url: require('/static/avatar.svg'),
 			...props,
 			size: props.size ?? 40,
 		});
