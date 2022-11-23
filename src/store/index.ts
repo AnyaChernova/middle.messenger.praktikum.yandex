@@ -6,7 +6,7 @@ export const defaultState: AppState = {
 	noticeError: '',
 	noticeSuccess: '',
 	user: null,
-	avatar: 'avatar.svg',
+	avatar: '',
 	chatList: [],
 	activeChat: null,
 	activeChatUsers: [],

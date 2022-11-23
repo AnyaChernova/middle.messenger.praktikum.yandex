@@ -4,6 +4,7 @@ import { Avatar } from '../../avatar/avatar';
 import { store } from '../../../core/Store';
 import { setActiveChat } from '../../../services/chats';
 import { withStore } from '../../../utils/withStore';
+import { ChatMessageType, UserType } from '../../../utils/types';
 
 export class ChatItemClass extends Block<Indexed> {
 	constructor(props: Indexed) {
@@ -17,21 +18,8 @@ export class ChatItemClass extends Block<Indexed> {
 			}),
 		});
 
-		let lastMessage = null;
-
-		if (this.props.lastMessage) {
-			lastMessage = { ...this.props.lastMessage };
-
-			const login = this.props.lastMessage.user?.login;
-			if (login === this.props.user?.login) {
-				lastMessage.name = 'You';
-			} else {
-				lastMessage.name = lastMessage.user.displayName || lastMessage.user.firstName;
-			}
-		}
-
 		this.setProps({
-			lastMessage,
+			lastMessage: this.setLastMessage(this.props.lastMessage),
 			events: {
 				click: {
 					handler: async () => {
@@ -42,12 +30,37 @@ export class ChatItemClass extends Block<Indexed> {
 		});
 	}
 
+	setLastMessage(message: ChatMessageType) {
+		let lastMessage: Nullable<ChatMessageType> = null;
+
+		if (message) {
+			lastMessage = { ...message };
+
+			let user = lastMessage.user;
+			if (!user) {
+				user = this.props.activeChatUsers.find((item: UserType) => item.id === lastMessage!.userId);
+			}
+			const login = user?.login;
+			if (login === this.props.user?.login) {
+				lastMessage.name = 'You';
+			} else {
+				lastMessage.name = lastMessage.user!.displayName || lastMessage.user!.firstName;
+			}
+		}
+
+		return lastMessage;
+	}
+
 	render() {
+		if (this.props.id === this.props.activeChat?.id) {
+			this.setProps({ lastMessage: this.setLastMessage(this.props.activeChat.lastMessage) });
+		}
 		return this.compile(template, { ...this.props });
 	}
 }
 
 export const ChatItem = withStore(ChatItemClass as typeof Block, (state) => ({
 	user: state.user,
-	activeChatMessages: state.activeChatMessages,
+	activeChat: state.activeChat,
+	activeChatUsers: state.activeChatUsers,
 }));

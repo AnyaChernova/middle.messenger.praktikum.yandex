@@ -12,7 +12,7 @@ export const initApp = async (dispatch: Dispatch<AppState>) => {
 			dispatch({
 				appInit: true,
 				user: transformUser(user),
-				avatar: user.avatar ? `${RESOURCES_URL}${user.avatar}` : 'avatar.svg',
+				avatar: user.avatar ? `${RESOURCES_URL}${user.avatar}` : require('/static/avatar.svg'),
 			});
 			if (document.location.pathname === '/') {
 				new Router().go('/messages');

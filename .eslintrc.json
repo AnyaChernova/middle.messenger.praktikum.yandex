@@ -18,9 +18,12 @@
 		"no-console": "off",
 		"no-continue": "off",
 		"no-useless-escape": "off",
+		"global-require": "off",
+		"max-classes-per-file": "off",
 		"prefer-destructuring": "off",
 		"prefer-promise-reject-errors": "off",
 		"import/prefer-default-export": "off",
+		"import/no-absolute-path": "off",
 		"no-restricted-syntax": ["error", "ForInStatement", "LabeledStatement", "WithStatement"],
 		"@typescript-eslint/no-useless-constructor": "off",
 		"@typescript-eslint/naming-convention": [
